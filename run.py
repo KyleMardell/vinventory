@@ -1,6 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
+from prettytable import PrettyTable
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -13,7 +15,16 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vinventory')
 
 stock = SHEET.worksheet('stock')
-
 data = stock.get_all_values()
 
-print(data)
+
+table = PrettyTable()
+table_headings = data[0]
+table.field_names = table_headings
+
+for car in data[1:]:
+    table.add_row(car)
+
+print(table)
+
+#print(data)
