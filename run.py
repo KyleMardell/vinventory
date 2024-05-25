@@ -1,30 +1,7 @@
-import gspread
-from google.oauth2.service_account import Credentials
+from sheets_utils import connect_to_sheet, display_sheet_as_table, display_car_info
 
-from prettytable import PrettyTable
+SHEET = connect_to_sheet()
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+display_sheet_as_table(SHEET, "stock")
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('vinventory')
-
-stock = SHEET.worksheet('stock')
-data = stock.get_all_values()
-
-
-table = PrettyTable()
-table_headings = data[0]
-table.field_names = table_headings
-
-for car in data[1:]:
-    table.add_row(car)
-
-print(table)
-
-#print(data)
+display_car_info(SHEET, "stock", "12")
