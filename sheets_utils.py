@@ -3,11 +3,11 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 
 def connect_to_sheet():
-    """_summary_
+    """
     Connects to google sheet via api, using gspread.
-    Can be made to accept any creds and sheet by adding parameters.
+    Could be made to accept any creds file and sheet name by adding parameters.
     Not used here as I am only connecting to 1 sheet.
-    Returns SHEET, sheet data.
+    Returns SHEET, open sheet data.
     """
     SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -39,6 +39,11 @@ def display_sheet_as_table(SHEET, sheet_name):
     print(table)
     
 def display_car_info(SHEET, sheet_name, id):
+    """ 
+    Displays a single cars info.
+    Loops through all cars in the sheet to check for ID and
+    prints an error message if ID does not exist.
+    """
     current_sheet = SHEET.worksheet(sheet_name)
     sheet_data = current_sheet.get_all_values()
     
