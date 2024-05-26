@@ -41,7 +41,7 @@ def display_sheet_as_table(sheet_name):
 
     print(table)
     
-def display_car_info(sheet_name, id):
+def display_car_by_id(sheet_name, id):
     """ 
     Displays a single cars info.
     Loops through all cars in the sheet to check for ID and
