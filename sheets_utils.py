@@ -21,12 +21,13 @@ def connect_to_sheet():
     SHEET = GSPREAD_CLIENT.open('vinventory')
     return SHEET
 
-def display_sheet_as_table(SHEET, sheet_name):
+def display_sheet_as_table(sheet_name):
     """
     Displays a worksheet as a table.
     Requires sheet data from connect_to_sheet method and
     worksheet name.
     """
+    SHEET = connect_to_sheet()
     current_sheet = SHEET.worksheet(sheet_name)
     sheet_data = current_sheet.get_all_values()
 
@@ -38,12 +39,13 @@ def display_sheet_as_table(SHEET, sheet_name):
 
     print(table)
     
-def display_car_info(SHEET, sheet_name, id):
+def display_car_info(sheet_name, id):
     """ 
     Displays a single cars info.
     Loops through all cars in the sheet to check for ID and
     prints an error message if ID does not exist.
     """
+    SHEET = connect_to_sheet()
     current_sheet = SHEET.worksheet(sheet_name)
     sheet_data = current_sheet.get_all_values()
     
@@ -51,11 +53,12 @@ def display_car_info(SHEET, sheet_name, id):
         table = PrettyTable()
         table.field_names = sheet_data[0]
         
-        if row[0] == id:
+        if int(row[0]) == id:
             table.add_row(row)
             print("Chosen car - ")
             print(table)
-            return
+            return True
 
     print(f"ID number {id} not found.")
+    return False
         

@@ -1,23 +1,32 @@
 import sheets_utils
-from sheets_utils import display_sheet_as_table, display_car_info, connect_to_sheet
+from sheets_utils import display_sheet_as_table, display_car_info
+from input_validation import get_integer_input
 
 def stock_menu():
     print("Current Stock Menu")
-    print("Please select one of the following options (1/2)")
+    print("Please select one of the following options (1-3)")
     print("1 - All Stock")
-    print("2 - Search Stock")
+    print("2 - Find By ID")
+    print("3 - Search Stock")
     
     while True:
-        selected_option = input("Select an option (1/2): ")
+        selected_option = input("Select an option (1-3): ")
         
         match selected_option:
             case "1":
                 print("All Stock selected...")
-                SHEET = connect_to_sheet()
-                display_sheet_as_table(SHEET, "stock")
+                display_sheet_as_table("stock")
                 return_to_main_menu()
                 break
             case "2":
+                found_id = False
+                print("Find By ID selected...")
+                while not found_id:
+                    input_id = get_integer_input("Please enter a valid ID number: ")
+                    found_id = display_car_info("stock", input_id)
+                return_to_main_menu()
+                break
+            case "3":
                 print("Search Stock selected...")
                 return_to_main_menu()
                 break
