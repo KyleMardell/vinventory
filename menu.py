@@ -68,6 +68,7 @@ def sales_menu():
             case 3:
                 clear_terminal()
                 print("Sales History: Sales Lists")
+                generate_new_id()
                 break
             case 4:
                 clear_terminal()

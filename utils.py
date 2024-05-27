@@ -45,7 +45,7 @@ def search_car_by_criteria():
         for car in stock_cars:
             term_found = False
             for term in search_terms:
-                if term in [str(value).lower() for value in car.car_as_list()] and car.status.lower() != "reserved":
+                if term in [str(value).lower() for value in car.car_as_list()]:
                     term_found = True
                     break
             if term_found:
