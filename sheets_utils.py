@@ -60,8 +60,6 @@ def display_sheet_table(sheet_name, columns):
             print(table)
         except Exception as e:
             print("An error has occurred: {e}")
-    else:
-        print("Error: No worksheet data found.")
 
 def display_car_by_id(sheet_name, id):
     """ 
@@ -81,6 +79,7 @@ def display_car_by_id(sheet_name, id):
     except Exception as e:
         print("An error occurred: {e}")
         
+    print("ID not found.")
     return False
 
 def get_worksheet_names():

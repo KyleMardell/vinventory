@@ -122,7 +122,6 @@ def get_current_sales_sheet_name():
     current_year = current_date.year
     current_month = current_date.month
     sheet_name = f"sold-{current_month}-{current_year}"
-    print(sheet_name)
     return sheet_name
 
 def create_sheet_name():
@@ -140,5 +139,4 @@ def create_sheet_name():
             continue
         break
     
-    print(f"sold-{user_month}-{user_year}")
     return f"sold-{user_month}-{user_year}"

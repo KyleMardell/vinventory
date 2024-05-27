@@ -21,7 +21,7 @@ def stock_menu():
         match selected_option:
             case 1:
                 clear_terminal()
-                print("All Stock selected...")
+                print("Retrieving current stock sheet...")
                 display_sheet_table("stock", 9)
                 break
             case 2:
@@ -38,7 +38,6 @@ def stock_menu():
                 print("Please enter a valid number.")
 
     return_to_main_menu()
-
 
 def sales_menu():
     """ 
@@ -70,12 +69,20 @@ def sales_menu():
             case 3:
                 clear_terminal()
                 print("Sales History: Sales Lists")
-                create_sheet_name()
-                #generate_unique_id()
+                print("Enter a year and month to display past sales data list")
+                sheet_name = create_sheet_name()
+                clear_terminal()
+                print(f"Searching for sheet name: {sheet_name}...")
+                display_sheet_table(sheet_name, 11)
                 break
             case 4:
                 clear_terminal()
                 print("Sales History: Sales Reports")
+                print("Enter a year and month to display past sales data list")
+                sheet_name = create_sheet_name()
+                clear_terminal()
+                print(f"Searching for sheet name: {sheet_name}...")
+                generate_sales_report(sheet_name)
                 break
             case _:
                 print("Not a valid entry. Please try again.")
