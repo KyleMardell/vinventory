@@ -95,3 +95,18 @@ def get_worksheet_names():
         return worksheet_names
     except Exception as e:
         print(f"An error occurred retrieving worksheet name data: {e}")
+        
+def generate_unique_id():
+    unique_id = 1
+    cars = []
+    worksheet_names = get_worksheet_names()
+    for name in worksheet_names:
+        if name != "deliveries":
+            car_data = connect_to_sheet(name)
+            current_cars = create_car_instances(car_data[1:])
+            cars.extend(current_cars)
+    
+    for car in cars:
+        if int(car.id) >= unique_id:
+            unique_id = int(car.id) + 1
+    print(unique_id)
