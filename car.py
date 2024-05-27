@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 class Car:
 
     def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs, 
-                 sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
+                sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
@@ -41,6 +41,16 @@ class Car:
         table.field_names = table_fields[:fields]
         table.add_row(self.car_as_list()[:fields])
         print(table)
+        
+    def calculate_profit(self):
+        """ 
+        Calculates profit if car has been sold
+        """
+        try:
+            profit = int(self.sold_price) - (int(self.cost) + int(self.repairs))
+            return profit
+        except ValueError as e:
+            print(f"Error converting to int: {e}")
 
 def create_car_instances(car_data):
     """ 

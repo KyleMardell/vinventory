@@ -50,7 +50,7 @@ def sales_menu():
     print("4 - Sales History: Sales Reports")
     
     while True:
-        selected_option = get_integer_input("Select an option (1 or 2): ")
+        selected_option = get_integer_input("Select an option (1 - 4): ")
         
         match (selected_option):
             case 1:
@@ -61,6 +61,7 @@ def sales_menu():
             case 2:
                 clear_terminal()
                 print("Current Month: Sales Report")
+                generate_sales_report("sold-current")
                 break
             case 3:
                 clear_terminal()
@@ -117,6 +118,7 @@ def return_to_main_menu():
     while True:
         answer = input('Type "m" to return to the menu or "q" to quit.').lower()
         if answer == "q":
+            clear_terminal()
             quit()
         elif answer == "m":
             clear_terminal()

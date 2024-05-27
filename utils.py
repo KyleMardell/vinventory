@@ -1,5 +1,6 @@
 from sheets_utils import *
 from input_validation import *
+from car import *
 from prettytable import PrettyTable
 import os
 import platform
@@ -17,10 +18,11 @@ def find_car_by_id():
     """ 
     Search for a car by ID number
     """
-    found_id = False
-    while not found_id:
+    car_found = False
+    while not car_found:
         input_id = get_integer_input("Please enter a valid ID number: ")
-        found_id = display_car_by_id("stock", input_id)
+        car_found = display_car_by_id("stock", input_id)
+    return car_found
         
 def search_car_by_criteria():
     """ 
@@ -54,3 +56,46 @@ def search_car_by_criteria():
             for car in matching_cars:
                 table.add_row(car.car_as_list()[:11])
             print(table)
+            
+def generate_sales_report(sheet_name):
+    data = connect_to_sheet(sheet_name)
+    sold_cars = create_car_instances(data[1:])
+    
+    number_of_car_sold = len(sold_cars)
+    total_profit = 0
+    total_repairs = 0
+    total_takings = 0
+    purchase_costs = 0
+    highest_profit = (0,0)
+    lowest_profit = (sold_cars[0].id, sold_cars[0].calculate_profit())
+    
+    for car in sold_cars:
+        total_profit += car.calculate_profit()
+        total_repairs += int(car.repairs)
+        purchase_costs += int(car.cost)
+        total_takings += int(car.sold_price)
+        
+        if int(car.calculate_profit()) > highest_profit[1]:
+            highest_profit = (car.id, int(car.calculate_profit()))
+        if int(car.calculate_profit()) < lowest_profit[1]:
+            lowest_profit = (car.id, int(car.calculate_profit()))
+            
+    average_profit = int(total_profit / number_of_car_sold)
+    gross_profit = total_takings - purchase_costs
+    net_profit = total_takings - (purchase_costs + total_repairs)
+    
+    print(f"Sales Report for {sheet_name}")
+    print("----------")
+    print(f"Number of car sold: {number_of_car_sold}")
+    print(f"Total Months Profit to date: £{total_profit}")
+    print("")
+    print(f"Average Profit: £{average_profit} per car")
+    print(f"Highest Profit Car: ID - {highest_profit[0]}, Profit - £{highest_profit[1]}")
+    print(f"Lowest Profit Car: ID - {lowest_profit[0]}, Profit - £{lowest_profit[1]}")
+    print("")
+    print(f"Total Takings: £{total_takings}")
+    print(f"Total car purchase costs: £{purchase_costs}")
+    print(f"Total Repair Costs: £{total_repairs}")
+    print("")
+    print(f"Gross Profit: £{gross_profit}")
+    print(f"Net Profit (after repairs): £{net_profit}")
