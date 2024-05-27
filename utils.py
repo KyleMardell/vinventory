@@ -4,6 +4,7 @@ from car import *
 from prettytable import PrettyTable
 import os
 import platform
+from datetime import datetime
 
 
 def clear_terminal():
@@ -111,3 +112,33 @@ def generate_sales_report(sheet_name):
     print("")
     print(f"Gross Profit: £{gross_profit}")
     print(f"Net Profit (gross minus repairs): £{net_profit}")
+    
+
+def get_current_sales_sheet_name():
+    """ 
+    Returns the current months sales sheet name
+    """
+    current_date = datetime.now()
+    current_year = current_date.year
+    current_month = current_date.month
+    sheet_name = f"sold-{current_month}-{current_year}"
+    print(sheet_name)
+    return sheet_name
+
+def create_sheet_name():
+    while True:
+        current_year = datetime.now().year
+        user_year = get_integer_input("Enter the year number (e.g. 2024): ")
+        
+        if not (2022 < user_year <= current_year):
+            print("Invalid year.")
+            continue
+        
+        user_month = get_integer_input("Enter the month number (e.g. '2' for feb): ")
+        if not (1 <= user_month <= 12):
+            print("Invalid month.")
+            continue
+        break
+    
+    print(f"sold-{user_month}-{user_year}")
+    return f"sold-{user_month}-{user_year}"

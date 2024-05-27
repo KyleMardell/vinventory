@@ -53,22 +53,25 @@ def sales_menu():
 
     while True:
         selected_option = get_integer_input("Select an option (1 - 4): ")
-
+        
         match (selected_option):
             case 1:
                 clear_terminal()
                 print("Current Month: Sales List")
-                display_sheet_table("sold-current", 12)
+                current_sheet_name = get_current_sales_sheet_name()
+                display_sheet_table(current_sheet_name, 12)
                 break
             case 2:
                 clear_terminal()
                 print("Current Month: Sales Report")
-                generate_sales_report("sold-current")
+                current_sheet_name = get_current_sales_sheet_name()
+                generate_sales_report(current_sheet_name)
                 break
             case 3:
                 clear_terminal()
                 print("Sales History: Sales Lists")
-                generate_unique_id()
+                create_sheet_name()
+                #generate_unique_id()
                 break
             case 4:
                 clear_terminal()
