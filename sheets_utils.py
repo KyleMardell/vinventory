@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from car import Car, create_car_instances
 
+
 def connect_to_sheet(sheet_name):
     """
     Connects to google sheet via api, using gspread.
@@ -14,15 +15,20 @@ def connect_to_sheet(sheet_name):
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
-        ]
+    ]
 
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('vinventory')
-    current_sheet = SHEET.worksheet(sheet_name)
-    sheet_data = current_sheet.get_all_values()
-    return sheet_data
+    try:
+        CREDS = Credentials.from_service_account_file('creds.json')
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open('vinventory')
+        current_sheet = SHEET.worksheet(sheet_name)
+        sheet_data = current_sheet.get_all_values()
+        return sheet_data
+    except Exception as e:
+        print(
+            f"An error occurred while connecting to the Google Sheets API: {e}")
+
 
 def display_sheet_table(sheet_name, columns):
     """
@@ -30,10 +36,10 @@ def display_sheet_table(sheet_name, columns):
     Requires worksheet name.
     """
     sheet_data = connect_to_sheet(sheet_name)
-    
+
     headers = sheet_data[0]
     data_rows = sheet_data[1:]
-    
+
     table = PrettyTable()
     table.field_names = headers[:columns]
 
@@ -43,7 +49,8 @@ def display_sheet_table(sheet_name, columns):
         table.add_row(car_to_add)
 
     print(table)
-    
+
+
 def display_car_by_id(sheet_name, id):
     """ 
     Displays a single cars info.
@@ -52,12 +59,11 @@ def display_car_by_id(sheet_name, id):
     """
     sheet_data = connect_to_sheet(sheet_name)
     cars_in_stock = create_car_instances(sheet_data[1:])
-    
-    for car in cars_in_stock:     
+
+    for car in cars_in_stock:
         if int(car.id) == id:
             car.display_info(9)
-            return True
+            return car
 
     print(f"ID number {id} not found.")
     return False
-        

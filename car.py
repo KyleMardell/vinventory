@@ -3,7 +3,7 @@ from prettytable import PrettyTable
 
 class Car:
 
-    def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs, 
+    def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs,
                 sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
@@ -27,8 +27,8 @@ class Car:
         """ 
         Returns car object data values as a list
         """
-        return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour, 
-                self.status, self.price, self.cost, self.repairs, self.sold_price, self.deposit, self.payment_method, 
+        return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour,
+                self.status, self.price, self.cost, self.repairs, self.sold_price, self.deposit, self.payment_method,
                 self.buyer_name, self.buyer_contact, self.sale_date]
 
     def display_info(self, fields):
@@ -36,21 +36,23 @@ class Car:
         Prints a table containing all car data
         """
         table_fields = ["ID", "Make", "Model", "Year", "Milage", "Engine",
-                            "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Deposit Paid", "Payment Method", "Buyer Name", "Buyer Contact", "Sale Date"]
+                        "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Deposit Paid", "Payment Method", "Buyer Name", "Buyer Contact", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
         table.add_row(self.car_as_list()[:fields])
         print(table)
-        
+
     def calculate_profit(self):
         """ 
         Calculates profit if car has been sold
         """
         try:
-            profit = int(self.sold_price) - (int(self.cost) + int(self.repairs))
+            profit = int(self.sold_price) - \
+                (int(self.cost) + int(self.repairs))
             return profit
         except ValueError as e:
             print(f"Error converting to int: {e}")
+
 
 def create_car_instances(car_data):
     """ 

@@ -3,7 +3,8 @@ from utils import *
 from input_validation import get_integer_input, get_list_input
 from car import create_car_instances
 from prettytable import PrettyTable
-        
+
+
 def stock_menu():
     """ 
     Displays stock menu and runs menu option functions.
@@ -13,10 +14,10 @@ def stock_menu():
     print("1 - All Stock")
     print("2 - Find By ID")
     print("3 - Search Stock")
-    
+
     while True:
         selected_option = get_integer_input("Select an option (1-3): ")
-        
+
         match selected_option:
             case 1:
                 clear_terminal()
@@ -35,8 +36,9 @@ def stock_menu():
                 break
             case _:
                 print("Please enter a valid number.")
-                
+
     return_to_main_menu()
+
 
 def sales_menu():
     """ 
@@ -48,10 +50,10 @@ def sales_menu():
     print("2 - Current Month: sales Report")
     print("3 - Sales History: Sales Lists")
     print("4 - Sales History: Sales Reports")
-    
+
     while True:
         selected_option = get_integer_input("Select an option (1 - 4): ")
-        
+
         match (selected_option):
             case 1:
                 clear_terminal()
@@ -73,9 +75,10 @@ def sales_menu():
                 break
             case _:
                 print("Not a valid entry. Please try again.")
-            
+
     return_to_main_menu()
-        
+
+
 def main_menu():
     """ 
     Display welcome message and menu options
@@ -89,7 +92,7 @@ def main_menu():
 
     while True:
         selected_option = get_integer_input("Select an option (1-4): ")
-        
+
         match selected_option:
             case 1:
                 clear_terminal()
@@ -110,13 +113,15 @@ def main_menu():
                 break
             case _:
                 print("Not a valid entry, please try again.")
-                
+
+
 def return_to_main_menu():
     """ 
     Returns to main menu or quits on user input.
     """
     while True:
-        answer = input('Type "m" to return to the menu or "q" to quit.').lower()
+        answer = input(
+            'Type "m" to return to the menu or "q" to quit.').lower()
         if answer == "q":
             clear_terminal()
             quit()
