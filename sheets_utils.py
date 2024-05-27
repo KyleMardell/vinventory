@@ -24,20 +24,23 @@ def connect_to_sheet(sheet_name):
     sheet_data = current_sheet.get_all_values()
     return sheet_data
 
-def display_sheet_as_table(sheet_name):
+def display_sheet_table(sheet_name, columns):
     """
     Displays a worksheet as a table.
-    Requires sheet data from connect_to_sheet method and
-    worksheet name.
+    Requires worksheet name.
     """
     sheet_data = connect_to_sheet(sheet_name)
-
+    
+    headers = sheet_data[0]
+    data_rows = sheet_data[1:]
+    
     table = PrettyTable()
-    table.field_names = sheet_data[0]
+    table.field_names = headers[:columns]
 
-    cars_in_stock = create_car_instances(sheet_data[1:])
+    cars_in_stock = create_car_instances(data_rows)
     for car in cars_in_stock:
-        table.add_row(car.car_as_list())
+        car_to_add = car.car_as_list()[:columns]
+        table.add_row(car_to_add)
 
     print(table)
     
@@ -50,10 +53,9 @@ def display_car_by_id(sheet_name, id):
     sheet_data = connect_to_sheet(sheet_name)
     cars_in_stock = create_car_instances(sheet_data[1:])
     
-    for car in cars_in_stock:
-        
+    for car in cars_in_stock:     
         if int(car.id) == id:
-            car.display_info()
+            car.display_info(9)
             return True
 
     print(f"ID number {id} not found.")

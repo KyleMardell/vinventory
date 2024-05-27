@@ -9,7 +9,10 @@ def get_integer_input(message):
             print("Please enter a valid number.")
 
 def get_list_input(message):
-    user_input = input(message).lower()
-    input_list = [word.strip() for word in user_input.split(",")]
-    print(input_list)
-    return input_list
+    while True:
+        user_input = input(message).lower()
+        if user_input == "":
+            print("No value entered")
+            continue
+        input_list = [word.strip() for word in user_input.split(",")]
+        return input_list
