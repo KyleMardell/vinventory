@@ -112,7 +112,7 @@ def generate_sales_report(sheet_name):
     print("")
     print(f"Gross Profit: £{gross_profit}")
     print(f"Net Profit (gross minus repairs): £{net_profit}")
-    
+
 
 def get_current_sales_sheet_name():
     """ 
@@ -124,19 +124,33 @@ def get_current_sales_sheet_name():
     sheet_name = f"sold-{current_month}-{current_year}"
     return sheet_name
 
+
 def create_sheet_name():
     while True:
         current_year = datetime.now().year
         user_year = get_integer_input("Enter the year number (e.g. 2024): ")
-        
+
         if not (2022 < user_year <= current_year):
             print("Invalid year.")
             continue
-        
-        user_month = get_integer_input("Enter the month number (e.g. '2' for feb): ")
+
+        user_month = get_integer_input(
+            "Enter the month number (e.g. '2' for feb): ")
         if not (1 <= user_month <= 12):
             print("Invalid month.")
             continue
         break
-    
+
     return f"sold-{user_month}-{user_year}"
+
+def display_deliveries_table():
+    """ 
+    Displays full deliveries sheet as a table
+    """
+    sheet_data = connect_to_sheet("deliveries")
+    table = PrettyTable()
+    table.field_names = sheet_data[0]
+    for data in sheet_data[1:]:
+        table.add_row(data)
+    print(table)
+    

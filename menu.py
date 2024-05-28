@@ -39,6 +39,7 @@ def stock_menu():
 
     return_to_main_menu()
 
+
 def sales_menu():
     """ 
     Displays Sales Menu
@@ -52,7 +53,7 @@ def sales_menu():
 
     while True:
         selected_option = get_integer_input("Select an option (1 - 4): ")
-        
+
         match (selected_option):
             case 1:
                 clear_terminal()
@@ -89,6 +90,47 @@ def sales_menu():
 
     return_to_main_menu()
 
+def deliveries_menu():
+    """ 
+    Displays deliveries options
+    """
+    print("Deliveries Options")
+    print("Please select one of the following options (1-4)")
+    print("1 - Full Delivery Report")
+    print("2 - Requested Deliveries")
+    print("3 - Scheduled Deliveries")
+    print("4 - Completed Deliveries.")
+    print("5 - Create Delivery Request (Car ID Required)")
+    
+    while True:
+        selected_option = get_integer_input("Select an option (1-5): ")
+
+        match selected_option:
+            case 1:
+                clear_terminal()
+                print("Full Delivery Report")
+                display_deliveries_table()
+                break
+            case 2:
+                clear_terminal()
+                print("Requested Deliveries")
+                break
+            case 3:
+                clear_terminal()
+                print("Scheduled Deliveries")
+                break
+            case 4:
+                clear_terminal()
+                print("Completed Deliveries")
+                break
+            case 5:
+                clear_terminal()
+                print("Create Delivery Request")
+                break
+            case _:
+                print("Not a valid entry, please try again.")
+    
+    return_to_main_menu()
 
 def main_menu():
     """ 
@@ -99,7 +141,7 @@ def main_menu():
     print("1 - Current Stock")
     print("2 - Add/Edit Vehicle Info")
     print("3 - Sales Reports")
-    print("4 - Delivery Reports")
+    print("4 - Deliveries")
 
     while True:
         selected_option = get_integer_input("Select an option (1-4): ")
@@ -120,7 +162,7 @@ def main_menu():
                 break
             case 4:
                 clear_terminal()
-                print("Delivery Reports")
+                deliveries_menu()
                 break
             case _:
                 print("Not a valid entry, please try again.")
