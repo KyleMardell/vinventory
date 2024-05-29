@@ -143,14 +143,18 @@ def create_sheet_name():
 
     return f"sold-{user_month}-{user_year}"
 
-def display_deliveries_table():
+def display_deliveries_table(delivery_status=["scheduled", "requested", "delivered"]):
     """ 
-    Displays full deliveries sheet as a table
+    Displays deliveries sheet as a table with provided delivery status,
+    requires list of delivery status (can contain only 1 element).
     """
     sheet_data = connect_to_sheet("deliveries")
     table = PrettyTable()
     table.field_names = sheet_data[0]
     for data in sheet_data[1:]:
-        table.add_row(data)
+        for status in delivery_status:
+            if status in data:
+                table.add_row(data)
+            
     print(table)
     

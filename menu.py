@@ -114,14 +114,17 @@ def deliveries_menu():
             case 2:
                 clear_terminal()
                 print("Requested Deliveries")
+                display_deliveries_table(["requested"])
                 break
             case 3:
                 clear_terminal()
                 print("Scheduled Deliveries")
+                display_deliveries_table(["scheduled"])
                 break
             case 4:
                 clear_terminal()
                 print("Completed Deliveries")
+                display_deliveries_table(["delivered"])
                 break
             case 5:
                 clear_terminal()
