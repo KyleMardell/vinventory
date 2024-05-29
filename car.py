@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-
+from input_validation import get_site_input
 
 class Car:
 
@@ -53,6 +53,10 @@ class Car:
         except ValueError as e:
             print(f"Error converting to int: {e}")
 
+    def request_delivery(self):
+        print(f"Creating delivery request for car ID: {self.id} ({self.colour} {self.make} {self.model})")
+        print(f"Current site: {self.status}")
+        destination_site = get_site_input()
 
 def create_car_instances(car_data):
     """ 

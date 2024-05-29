@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from car import Car, create_car_instances
+from datetime import datetime, timedelta
+
 
 def open_google_sheet():
     """
@@ -28,7 +30,20 @@ def open_google_sheet():
 
 def connect_to_sheet(sheet_name):
     """ 
+    Connect to sheet within Google Sheets using provided name,
+    for editing sheet.
+    """
+    SHEET = open_google_sheet()
+    try:
+        current_sheet = SHEET.worksheet(sheet_name)
+        return current_sheet
+    except Exception as e:
+        print(f"Error, sheet not found: {e}")
+
+def get_sheet_data(sheet_name):
+    """ 
     Connect to worksheet within Google Sheets using provided sheet name
+    get all sheet data values and return sheet data
     """
     SHEET = open_google_sheet()
     try:
@@ -38,12 +53,13 @@ def connect_to_sheet(sheet_name):
     except Exception as e:
         print(f"Error, sheet not found: {e}")
 
+
 def display_sheet_table(sheet_name, columns):
     """
     Displays a worksheet as a table.
     Requires worksheet name.
     """
-    sheet_data = connect_to_sheet(sheet_name)
+    sheet_data = get_sheet_data(sheet_name)
     if sheet_data:
         try:
             headers = sheet_data[0]
@@ -61,6 +77,7 @@ def display_sheet_table(sheet_name, columns):
         except Exception as e:
             print("An error has occurred: {e}")
 
+
 def display_car_by_id(sheet_name, id):
     """ 
     Displays a single cars info.
@@ -68,7 +85,7 @@ def display_car_by_id(sheet_name, id):
     prints an error message if ID does not exist.
     """
     try:
-        sheet_data = connect_to_sheet(sheet_name)
+        sheet_data = get_sheet_data(sheet_name)
         cars_in_stock = create_car_instances(sheet_data[1:])
 
         for car in cars_in_stock:
@@ -78,9 +95,10 @@ def display_car_by_id(sheet_name, id):
 
     except Exception as e:
         print("An error occurred: {e}")
-        
+
     print("ID not found.")
     return False
+
 
 def get_worksheet_names():
     """ 
@@ -93,7 +111,8 @@ def get_worksheet_names():
         return worksheet_names
     except Exception as e:
         print(f"An error occurred retrieving worksheet name data: {e}")
-        
+
+
 def generate_unique_id():
     """ 
     Checks all current stock and sold cars and generates
@@ -106,15 +125,31 @@ def generate_unique_id():
         worksheet_names = get_worksheet_names()
         for name in worksheet_names:
             if name != "deliveries":
-                car_data = connect_to_sheet(name)
+                car_data = get_sheet_data(name)
                 current_cars = create_car_instances(car_data[1:])
                 cars.extend(current_cars)
-        
+
         for car in cars:
             if int(car.id) >= unique_id:
                 unique_id = int(car.id) + 1
-        
+
         return unique_id
-    
+
     except Exception as e:
         print(f"An error has occurred: {e}")
+
+def create_delivery_request(id, make, model, year, milage, site_from, site_to):
+    """ 
+    Creates a delivery request in the deliveries sheet
+    Requires car data as parameters, auto generates
+    """
+    delivery_sheet = connect_to_sheet("deliveries")
+    current_date =  datetime.now()
+    request_date = str(current_date)[:10]
+    schedule_date = current_date + timedelta(days=3)
+    schedule_date = str(schedule_date)[:10]
+    delivery_request = [id, make, model, year, milage, site_from, site_to, "requested", request_date, schedule_date]
+    
+    delivery_sheet.append_row(delivery_request)
+    print("Request added to deliveries sheet")
+    print(f"Expected delivery date (upon approval): {schedule_date}")

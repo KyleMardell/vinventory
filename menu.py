@@ -129,7 +129,8 @@ def deliveries_menu():
             case 5:
                 clear_terminal()
                 print("Create Delivery Request")
-                get_site_input()
+                id = generate_unique_id()
+                create_delivery_request(id, "ford", "ka", "2012", "68,000", "leeds", "liverpool")
                 break
             case _:
                 print("Not a valid entry, please try again.")

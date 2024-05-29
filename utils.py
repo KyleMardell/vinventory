@@ -34,7 +34,7 @@ def search_car_by_criteria():
     Gets the list of cars in stock and asks the user to input a list of desired criteria. 
     Creates a table of cars with matching criteria.
     """
-    data = connect_to_sheet("stock")
+    data = get_sheet_data("stock")
     stock_cars = create_car_instances(data[1:])
     matching_cars = []
 
@@ -69,7 +69,7 @@ def generate_sales_report(sheet_name):
     Calculates all relevant sales data and
     displays in a report.
     """
-    data = connect_to_sheet(sheet_name)
+    data = get_sheet_data(sheet_name)
     sold_cars = create_car_instances(data[1:])
 
     number_of_car_sold = len(sold_cars)
@@ -148,7 +148,7 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
     Displays deliveries sheet as a table with provided delivery status,
     requires list of delivery status (can contain only 1 element).
     """
-    sheet_data = connect_to_sheet("deliveries")
+    sheet_data = get_sheet_data("deliveries")
     table = PrettyTable()
     table.field_names = sheet_data[0]
     for data in sheet_data[1:]:
