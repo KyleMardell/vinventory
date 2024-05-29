@@ -1,6 +1,5 @@
 from sheets_utils import *
 from input_validation import *
-from car import *
 from prettytable import PrettyTable
 import os
 import platform
@@ -15,17 +14,6 @@ def clear_terminal():
         os.system("cls")
     else:
         os.system("clear")
-
-
-def find_car_by_id():
-    """ 
-    Search for a car by ID number
-    """
-    car_found = False
-    while not car_found:
-        input_id = get_integer_input("Please enter a valid ID number: ")
-        car_found = display_car_by_id("stock", input_id)
-    return car_found
 
 
 def search_car_by_criteria():
@@ -143,6 +131,7 @@ def create_sheet_name():
 
     return f"sold-{user_month}-{user_year}"
 
+
 def display_deliveries_table(delivery_status=["scheduled", "requested", "delivered"]):
     """ 
     Displays deliveries sheet as a table with provided delivery status,
@@ -155,6 +144,5 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
         for status in delivery_status:
             if status in data:
                 table.add_row(data)
-            
+
     print(table)
-    

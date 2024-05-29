@@ -11,8 +11,8 @@ def get_integer_input(message):
         user_input = input(message)
         try:
             return int(user_input)
-        except ValueError:
-            print("Please enter a valid number.")
+        except ValueError as e:
+            print("Not a valid number.")
 
 
 def get_list_input(message):
@@ -26,6 +26,7 @@ def get_list_input(message):
             continue
         input_list = [word.strip() for word in user_input.split(",")]
         return input_list
+
 
 def get_site_input():
     sites = ["liverpool", "leeds", "manchester", "preston", "york"]

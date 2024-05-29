@@ -1,7 +1,6 @@
 from sheets_utils import *
 from utils import *
 from input_validation import get_integer_input, get_list_input
-from car import create_car_instances
 from prettytable import PrettyTable
 
 
@@ -27,7 +26,7 @@ def stock_menu():
             case 2:
                 clear_terminal()
                 print("Find By ID selected...")
-                find_car_by_id()
+                find_car_by_id("stock")
                 break
             case 3:
                 clear_terminal()
@@ -90,6 +89,7 @@ def sales_menu():
 
     return_to_main_menu()
 
+
 def deliveries_menu():
     """ 
     Displays deliveries options
@@ -101,7 +101,7 @@ def deliveries_menu():
     print("3 - Scheduled Deliveries")
     print("4 - Completed Deliveries.")
     print("5 - Create Delivery Request (Car ID Required)")
-    
+
     while True:
         selected_option = get_integer_input("Select an option (1-5): ")
 
@@ -130,12 +130,14 @@ def deliveries_menu():
                 clear_terminal()
                 print("Create Delivery Request")
                 id = generate_unique_id()
-                create_delivery_request(id, "ford", "ka", "2012", "68,000", "leeds", "liverpool")
+                create_delivery_request(
+                    id, "ford", "ka", "2012", "68,000", "leeds", "liverpool")
                 break
             case _:
                 print("Not a valid entry, please try again.")
-    
+
     return_to_main_menu()
+
 
 def main_menu():
     """ 
