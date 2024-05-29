@@ -26,3 +26,16 @@ def get_list_input(message):
             continue
         input_list = [word.strip() for word in user_input.split(",")]
         return input_list
+
+def get_site_input():
+    sites = ["liverpool", "leeds", "manchester", "preston", "york"]
+    sites_string = f"Available sites: "
+    for site in sites:
+        sites_string += site + " "
+    while True:
+        print(sites_string)
+        site = input("Please enter a site: ").lower()
+        if site in sites:
+            print(site)
+            return site
+        print("Site not found: please enter a valid site name.")

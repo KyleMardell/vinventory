@@ -129,6 +129,7 @@ def deliveries_menu():
             case 5:
                 clear_terminal()
                 print("Create Delivery Request")
+                get_site_input()
                 break
             case _:
                 print("Not a valid entry, please try again.")
