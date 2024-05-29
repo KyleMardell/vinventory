@@ -128,10 +128,9 @@ def deliveries_menu():
                 break
             case 5:
                 clear_terminal()
-                print("Create Delivery Request")
-                id = generate_unique_id()
-                create_delivery_request(
-                    id, "ford", "ka", "2012", "68,000", "leeds", "liverpool")
+                print("Creating Delivery Request")
+                car_to_deliver = find_car_by_id("stock")
+                car_to_deliver.request_delivery()
                 break
             case _:
                 print("Not a valid entry, please try again.")

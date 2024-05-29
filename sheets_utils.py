@@ -2,13 +2,14 @@ import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
-from input_validation import get_integer_input
+from input_validation import get_integer_input, get_site_input
 
+# Car class and functions
 
 class Car:
 
     def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs,
-                 sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
+                sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
@@ -59,8 +60,11 @@ class Car:
 
     def request_delivery(self):
         print(f"Creating delivery request for car ID: {
-              self.id} ({self.colour} {self.make} {self.model})")
+            self.id} ({self.colour} {self.make} {self.model})")
         print(f"Current site: {self.status}")
+        print("What is the destination site?")
+        destination = get_site_input()
+        create_delivery_request(self.id, self.make, self.model, self.year, self.milage, self.status, destination)
 
 
 def create_car_instances(car_data):
@@ -70,10 +74,11 @@ def create_car_instances(car_data):
     cars = []
     for data in car_data:
         car = Car(data[0], data[1], data[2], data[3], data[4],
-                  data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16])
+                data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16])
         cars.append(car)
     return cars
 
+# Sheets functions
 
 def open_google_sheet():
     """
@@ -165,7 +170,9 @@ def find_car_by_id(sheet_name):
             for car in cars_in_stock:
                 if int(car.id) == input_id:
                     car.display_info(9)
+                    car_found = True
                     return car
+            print(f"Car ID: {input_id} not found.")
 
     except Exception as e:
         print("An error occurred: {e}")
