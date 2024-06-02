@@ -144,17 +144,18 @@ def deliveries_menu():
 
 def art():
     art = ['    .---------------.',
-    '   /                 \\      - KM car sales - ',
-    ' O/_____/________/____\O      Liverpool',
-    ' /__________+__________\\      Leeds',
-    '/    (#############)   \\      Manchester',
-    '|[**](#############)[**]|     Preson',
-    '\_______________________/     York',
-    '|_""__|_,------,__|__""_|',
-    "|_|     '.VinV.'      |_|  www.kmcarsales.co.uk",'']
-    
+           '   /                 \\      - KM Car Sales - ',
+           ' O/_____/________/____\O      Liverpool',
+           ' /__________+__________\\      Leeds',
+           '/    (#############)   \\      Manchester',
+           '|[**](#############)[**]|     Preston',
+           '\_______________________/     York',
+           '|_""__|_,------,__|__""_|',
+           "|_|     '.VinV.'      |_|  www.kmcarsales.co.uk", '']
+
     for line in art:
         print(line)
+
 
 def main_menu():
     """
@@ -180,6 +181,7 @@ def main_menu():
             case 2:
                 clear_terminal()
                 print("Add/Edit Vehicle Info")
+                get_new_car_details()
                 break
             case 3:
                 clear_terminal()

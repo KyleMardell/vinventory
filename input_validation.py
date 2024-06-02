@@ -14,6 +14,19 @@ def get_integer_input(message):
         except ValueError as e:
             print("Not a valid number.")
 
+def get_string_input(message):
+    """ 
+    Checks that the user entered characters only. No numbers.
+    """
+    numbers = r'\d'
+    while True:
+        user_input = input(message)
+        
+        if re.search(numbers, user_input):
+            print("Error: Input must not contain numbers.")
+            continue
+        
+        return user_input
 
 def get_list_input(message):
     """ 
@@ -49,6 +62,7 @@ def get_site_input(current_site):
             return site.capitalize()
         print("Site not found: please enter a valid site name.")
 
+
 def get_continue(clear_terminal, return_to_main_menu):
     """ 
     Asks the user if they want to continue y/n input
@@ -68,4 +82,3 @@ def get_continue(clear_terminal, return_to_main_menu):
                 break
             case _:
                 print("Not a valid entry, please try again.")
-        

@@ -27,7 +27,6 @@ def search_car_by_criteria():
     matching_cars = []
 
     while matching_cars == []:
-        clear_terminal()
         search_terms = get_list_input(
             "Enter search terms separated by comma's (E.g. 'Red, Ford,' or '2020, white, volvo'): ")
 
@@ -41,7 +40,7 @@ def search_car_by_criteria():
                 matching_cars.append(car)
 
         if matching_cars == []:
-            print("No matches found.")
+            print(f"No Matches found for: {search_terms}")
             continue
         else:
             table = PrettyTable()
@@ -50,7 +49,7 @@ def search_car_by_criteria():
             for car in matching_cars:
                 table.add_row(car.car_as_list()[:11])
             print(table)
-
+        
 
 def generate_sales_report(sheet_name):
     """ 
@@ -106,6 +105,7 @@ def generate_sales_report(sheet_name):
         # This stops the full error details being displayed to the user.
         return None
 
+
 def get_current_sales_sheet_name():
     """ 
     Returns the current months sales sheet name
@@ -150,3 +150,7 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
                 table.add_row(data)
 
     print(table)
+
+def get_new_car_details():
+    id = generate_unique_id()
+    make = get_string_input("Enter Vehicle Make (e.g. Ford, Volvo): ")
