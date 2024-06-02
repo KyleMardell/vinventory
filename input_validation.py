@@ -28,15 +28,44 @@ def get_list_input(message):
         return input_list
 
 
-def get_site_input():
-    sites = ["liverpool", "leeds", "manchester", "preston", "york"]
+def get_site_input(current_site):
+    """ 
+    Gets the site input from the user, checks that the input is not
+    the same as the current site, and exists in a list of all sites.
+    """
+    all_sites = ["liverpool", "leeds", "manchester", "preston", "york"]
     sites_string = f"Available sites: "
-    for site in sites:
-        sites_string += site + " "
+    for site in all_sites:
+        if not site in current_site.lower():
+            sites_string += site.capitalize() + " "
     while True:
         print(sites_string)
         site = input("Please enter a site: ").lower()
-        if site in sites:
-            print(site)
-            return site
+        if site in current_site.lower():
+            print(f"Error: {site.capitalize()} is the current site.")
+            print("Please enter a different site.")
+            continue
+        if site in all_sites:
+            return site.capitalize()
         print("Site not found: please enter a valid site name.")
+
+def get_continue(clear_terminal, return_to_main_menu):
+    """ 
+    Asks the user if they want to continue y/n input
+    if 'n' the user is asked to return to menu or quit.
+    """
+    while True:
+        answer = input("Would you like to continue (y/n)? ").lower()
+        match answer:
+            case "y":
+                print("Continuing")
+                clear_terminal()
+                break
+            case "n":
+                print("Exiting")
+                clear_terminal()
+                return_to_main_menu()
+                break
+            case _:
+                print("Not a valid entry, please try again.")
+        

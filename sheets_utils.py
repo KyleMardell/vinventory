@@ -63,7 +63,7 @@ class Car:
             self.id} ({self.colour} {self.make} {self.model})")
         print(f"Current site: {self.status}")
         print("What is the destination site?")
-        destination = get_site_input()
+        destination = get_site_input(self.status)
         create_delivery_request(self.id, self.make, self.model, self.year, self.milage, self.status, destination)
 
 
@@ -136,6 +136,7 @@ def display_sheet_table(sheet_name, columns):
     Displays a worksheet as a table.
     Requires worksheet name.
     """
+    
     sheet_data = get_sheet_data(sheet_name)
     if sheet_data:
         try:

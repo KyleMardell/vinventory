@@ -5,17 +5,17 @@ from prettytable import PrettyTable
 
 
 def stock_menu():
-    """ 
+    """
     Displays stock menu and runs menu option functions.
     """
-    print("- Current Stock Menu -")
-    print("Please select one of the following options (1-3).")
+    print("- Current Stock Menu -\n")
+    print("Please select one of the following options:")
     print("1 - All Stock")
     print("2 - Find By ID")
     print("3 - Search Stock")
 
     while True:
-        selected_option = get_integer_input("Select an option (1-3): ")
+        selected_option = get_integer_input("\nSelect an option (1-3): ")
 
         match selected_option:
             case 1:
@@ -43,18 +43,18 @@ def stock_menu():
 
 
 def sales_menu():
-    """ 
+    """
     Displays Sales Menu
     """
-    print("- Sales Reports -")
-    print("Choose one of the following options (1-4).")
+    print("- Sales Reports -\n")
+    print("Choose one of the following options:")
     print("1 - Current Month: Sales List")
     print("2 - Current Month: sales Report")
     print("3 - Sales History: Sales Lists")
     print("4 - Sales History: Sales Reports")
 
     while True:
-        selected_option = get_integer_input("Select an option (1 - 4): ")
+        selected_option = get_integer_input("\nSelect an option (1 - 4): ")
 
         match (selected_option):
             case 1:
@@ -94,11 +94,11 @@ def sales_menu():
 
 
 def deliveries_menu():
-    """ 
+    """
     Displays deliveries options
     """
-    print("- Deliveries Options -")
-    print("Please select one of the following options (1-4).")
+    print("- Deliveries Options -\n")
+    print("Please select one of the following options:")
     print("1 - Full Delivery Report")
     print("2 - Requested Deliveries")
     print("3 - Scheduled Deliveries")
@@ -106,7 +106,7 @@ def deliveries_menu():
     print("5 - Create Delivery Request (Car ID Required)")
 
     while True:
-        selected_option = get_integer_input("Select an option (1-5): ")
+        selected_option = get_integer_input("\nSelect an option (1-5): ")
 
         match selected_option:
             case 1:
@@ -133,6 +133,7 @@ def deliveries_menu():
                 clear_terminal()
                 print("- Creating Delivery Request -")
                 car_to_deliver = find_car_by_id("stock")
+                get_continue(clear_terminal, return_to_main_menu)
                 car_to_deliver.request_delivery()
                 break
             case _:
@@ -141,20 +142,35 @@ def deliveries_menu():
     return_to_main_menu()
 
 
+def art():
+    art = ['    .---------------.',
+    '   /                 \\      - KM car sales - ',
+    ' O/_____/________/____\O      Liverpool',
+    ' /__________+__________\\      Leeds',
+    '/    (#############)   \\      Manchester',
+    '|[**](#############)[**]|     Preson',
+    '\_______________________/     York',
+    '|_""__|_,------,__|__""_|',
+    "|_|     '.VinV.'      |_|  www.kmcarsales.co.uk",'']
+    
+    for line in art:
+        print(line)
+
 def main_menu():
-    """ 
+    """
     Display welcome message and menu options
     """
     clear_terminal()
-    print("- Welcome to VinVentory, used car management system -")
-    print("Please select one of the following options (1-4).")
+    print("- Welcome to VinVentory car management system -\n")
+    art()
+    print("Please select one of the following options:")
     print("1 - Current Stock")
     print("2 - Add/Edit Vehicle Info")
     print("3 - Sales Reports")
     print("4 - Deliveries")
 
     while True:
-        selected_option = get_integer_input("Select an option (1-4): ")
+        selected_option = get_integer_input("\nSelect an option (1-4): ")
 
         match selected_option:
             case 1:
@@ -178,7 +194,7 @@ def main_menu():
 
 
 def return_to_main_menu():
-    """ 
+    """
     Returns to main menu or quits on user input.
     """
     while True:
