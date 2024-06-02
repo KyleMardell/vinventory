@@ -8,8 +8,8 @@ def stock_menu():
     """ 
     Displays stock menu and runs menu option functions.
     """
-    print("Current Stock Menu")
-    print("Please select one of the following options (1-3)")
+    print("- Current Stock Menu -")
+    print("Please select one of the following options (1-3).")
     print("1 - All Stock")
     print("2 - Find By ID")
     print("3 - Search Stock")
@@ -20,17 +20,20 @@ def stock_menu():
         match selected_option:
             case 1:
                 clear_terminal()
-                print("Retrieving current stock sheet...")
+                print("- All Stock selected -")
+                print("Retrieving vehicle information...")
                 display_sheet_table("stock", 9)
                 break
             case 2:
                 clear_terminal()
-                print("Find By ID selected...")
+                print("- Find By ID selected -")
+                print("Retrieving vehicle information...")
                 find_car_by_id("stock")
                 break
             case 3:
                 clear_terminal()
-                print("Search Stock selected...")
+                print("- Search Stock selected -")
+                print("Retrieving vehicle information...")
                 search_car_by_criteria()
                 break
             case _:
@@ -43,8 +46,8 @@ def sales_menu():
     """ 
     Displays Sales Menu
     """
-    print("Sales Reports")
-    print("Choose one of the following options (1-2)")
+    print("- Sales Reports -")
+    print("Choose one of the following options (1-4).")
     print("1 - Current Month: Sales List")
     print("2 - Current Month: sales Report")
     print("3 - Sales History: Sales Lists")
@@ -56,20 +59,20 @@ def sales_menu():
         match (selected_option):
             case 1:
                 clear_terminal()
-                print("Current Month: Sales List")
+                print("- Current Month: Sales List -")
                 current_sheet_name = get_current_sales_sheet_name()
                 display_sheet_table(current_sheet_name, 12)
                 break
             case 2:
                 clear_terminal()
-                print("Current Month: Sales Report")
+                print("- Current Month: Sales Report -")
                 current_sheet_name = get_current_sales_sheet_name()
                 generate_sales_report(current_sheet_name)
                 break
             case 3:
                 clear_terminal()
-                print("Sales History: Sales Lists")
-                print("Enter a year and month to display past sales data list")
+                print("- Sales History: Sales Lists -")
+                print("Enter a year and month to display past sales data list.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
@@ -77,8 +80,8 @@ def sales_menu():
                 break
             case 4:
                 clear_terminal()
-                print("Sales History: Sales Reports")
-                print("Enter a year and month to display past sales data list")
+                print("- Sales History: Sales Reports -")
+                print("Enter a year and month to display past sales data list.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
@@ -94,12 +97,12 @@ def deliveries_menu():
     """ 
     Displays deliveries options
     """
-    print("Deliveries Options")
-    print("Please select one of the following options (1-4)")
+    print("- Deliveries Options -")
+    print("Please select one of the following options (1-4).")
     print("1 - Full Delivery Report")
     print("2 - Requested Deliveries")
     print("3 - Scheduled Deliveries")
-    print("4 - Completed Deliveries.")
+    print("4 - Completed Deliveries")
     print("5 - Create Delivery Request (Car ID Required)")
 
     while True:
@@ -108,27 +111,27 @@ def deliveries_menu():
         match selected_option:
             case 1:
                 clear_terminal()
-                print("Full Delivery Report")
+                print("- Full Delivery Report -")
                 display_deliveries_table()
                 break
             case 2:
                 clear_terminal()
-                print("Requested Deliveries")
+                print("- Requested Deliveries -")
                 display_deliveries_table(["requested"])
                 break
             case 3:
                 clear_terminal()
-                print("Scheduled Deliveries")
+                print("- Scheduled Deliveries -")
                 display_deliveries_table(["scheduled"])
                 break
             case 4:
                 clear_terminal()
-                print("Completed Deliveries")
+                print("- Completed Deliveries -")
                 display_deliveries_table(["delivered"])
                 break
             case 5:
                 clear_terminal()
-                print("Creating Delivery Request")
+                print("- Creating Delivery Request -")
                 car_to_deliver = find_car_by_id("stock")
                 car_to_deliver.request_delivery()
                 break
@@ -142,8 +145,9 @@ def main_menu():
     """ 
     Display welcome message and menu options
     """
-    print("Welcome to VinVentory, used car management system.")
-    print("Please select one of the following options (1-4)")
+    clear_terminal()
+    print("- Welcome to VinVentory, used car management system -")
+    print("Please select one of the following options (1-4).")
     print("1 - Current Stock")
     print("2 - Add/Edit Vehicle Info")
     print("3 - Sales Reports")
@@ -163,7 +167,6 @@ def main_menu():
                 break
             case 3:
                 clear_terminal()
-                print("Sales Reports")
                 sales_menu()
                 break
             case 4:

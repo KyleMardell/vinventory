@@ -27,9 +27,9 @@ def search_car_by_criteria():
     matching_cars = []
 
     while matching_cars == []:
-
+        clear_terminal()
         search_terms = get_list_input(
-            "Enter search terms / desired features separated by comma's. (E.g. 'Red, Ford,' or '2020, white, volvo') ")
+            "Enter search terms separated by comma's (E.g. 'Red, Ford,' or '2020, white, volvo'): ")
 
         for car in stock_cars:
             term_found = False
@@ -57,50 +57,54 @@ def generate_sales_report(sheet_name):
     Calculates all relevant sales data and
     displays in a report.
     """
-    data = get_sheet_data(sheet_name)
-    sold_cars = create_car_instances(data[1:])
+    try:
+        data = get_sheet_data(sheet_name)
+        sold_cars = create_car_instances(data[1:])
 
-    number_of_car_sold = len(sold_cars)
-    total_profit = 0
-    total_repairs = 0
-    total_takings = 0
-    total_purchase_costs = 0
-    highest_profit = (0, 0)
-    lowest_profit = (sold_cars[0].id, sold_cars[0].calculate_profit())
+        number_of_car_sold = len(sold_cars)
+        total_profit = 0
+        total_repairs = 0
+        total_takings = 0
+        total_purchase_costs = 0
+        highest_profit = (0, 0)
+        lowest_profit = (sold_cars[0].id, sold_cars[0].calculate_profit())
 
-    for car in sold_cars:
-        total_profit += car.calculate_profit()
-        total_repairs += int(car.repairs)
-        total_purchase_costs += int(car.cost)
-        total_takings += int(car.sold_price)
+        for car in sold_cars:
+            total_profit += car.calculate_profit()
+            total_repairs += int(car.repairs)
+            total_purchase_costs += int(car.cost)
+            total_takings += int(car.sold_price)
 
-        if int(car.calculate_profit()) > highest_profit[1]:
-            highest_profit = (car.id, int(car.calculate_profit()))
-        if int(car.calculate_profit()) < lowest_profit[1]:
-            lowest_profit = (car.id, int(car.calculate_profit()))
+            if int(car.calculate_profit()) > highest_profit[1]:
+                highest_profit = (car.id, int(car.calculate_profit()))
+            if int(car.calculate_profit()) < lowest_profit[1]:
+                lowest_profit = (car.id, int(car.calculate_profit()))
 
-    average_profit = int(total_profit / number_of_car_sold)
-    gross_profit = total_takings - total_purchase_costs
-    net_profit = total_takings - (total_purchase_costs + total_repairs)
+        average_profit = int(total_profit / number_of_car_sold)
+        gross_profit = total_takings - total_purchase_costs
+        net_profit = total_takings - (total_purchase_costs + total_repairs)
 
-    print(f"Sales Report for {sheet_name}")
-    print("----------")
-    print(f"Number of car sold: {number_of_car_sold}")
-    print(f"Total Months Profit: £{total_profit}")
-    print("")
-    print(f"Average Profit: £{average_profit} per car")
-    print(
-        f"Highest Profit Car: ID - {highest_profit[0]}, Profit - £{highest_profit[1]}")
-    print(
-        f"Lowest Profit Car: ID - {lowest_profit[0]}, Profit - £{lowest_profit[1]}")
-    print("")
-    print(f"Total Takings: £{total_takings}")
-    print(f"Total car purchase costs: £{total_purchase_costs}")
-    print(f"Total Repair Costs: £{total_repairs}")
-    print("")
-    print(f"Gross Profit: £{gross_profit}")
-    print(f"Net Profit (gross minus repairs): £{net_profit}")
-
+        print(f"Sales Report for {sheet_name}")
+        print("----------")
+        print(f"Number of car sold: {number_of_car_sold}")
+        print(f"Total Months Profit: £{total_profit}")
+        print("")
+        print(f"Average Profit: £{average_profit} per car")
+        print(
+            f"Highest Profit Car: ID - {highest_profit[0]}, Profit - £{highest_profit[1]}")
+        print(
+            f"Lowest Profit Car: ID - {lowest_profit[0]}, Profit - £{lowest_profit[1]}")
+        print("")
+        print(f"Total Takings: £{total_takings}")
+        print(f"Total car purchase costs: £{total_purchase_costs}")
+        print(f"Total Repair Costs: £{total_repairs}")
+        print("")
+        print(f"Gross Profit: £{gross_profit}")
+        print(f"Net Profit (gross minus repairs): £{net_profit}")
+    except:
+        # Return None, as missing sheet error handled inside get_sheet_data function.
+        # This stops the full error details being displayed to the user.
+        return None
 
 def get_current_sales_sheet_name():
     """ 
