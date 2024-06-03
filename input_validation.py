@@ -120,3 +120,24 @@ def get_engine_input(message):
             return "Electric"
         else:
             print("Error: Incorrect input.")
+            
+def get_colour_input(message):
+    """ 
+    Returns a colour, checks for most common colours.
+    If user input colour is not in the list, they are asked to confirm.
+    """
+    
+    car_colours = ["black", "white", "grey", "silver", "red", "pink", "orange", "blue", "purple", "green", "yellow"]
+    
+    while True:
+        user_input = input(message).lower()
+        
+        if user_input in car_colours:
+            return user_input.capitalize()
+        else:
+            print(f"{user_input}, is not in our common colour list.")
+            answer = input("Would you like to continue (y/n): ").lower()
+            if answer == "y":
+                return user_input.capitalize()
+            else:
+                continue

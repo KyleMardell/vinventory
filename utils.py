@@ -157,7 +157,8 @@ def get_new_car_details():
     # Model may contain letters, numbers and special characters. No validation required.
     model = input("Enter the vehicle's Model (e.g. focus, C40): ").capitalize()
     year = get_year_input("Enter the vehicle's Year of production (e.g. 2017, 1999): ")
-    engine = get_engine_input("Enter vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
+    engine = get_engine_input("Enter the vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
+    colour = get_colour_input("Enter the vehicle's colour (e.g. black, orange): ")
     
-    print(id, make, model, year, engine)
-    return [id, make, model, year, engine]
+    print(id, make, model, year, engine, colour)
+    return [id, make, model, year, engine, colour]
