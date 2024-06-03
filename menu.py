@@ -15,9 +15,12 @@ def stock_menu():
     print("3 - Search Stock")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-3): ")
+        selected_option = get_integer_input("\nSelect an option (1-3, 0 to quit): ")
 
         match selected_option:
+            case 0:
+                clear_terminal()
+                quit()
             case 1:
                 clear_terminal()
                 print("- All Stock selected -")
@@ -54,9 +57,12 @@ def sales_menu():
     print("4 - Sales History: Sales Reports")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1 - 4): ")
+        selected_option = get_integer_input("\nSelect an option (1-4, 0 to quit): ")
 
         match (selected_option):
+            case 0:
+                clear_terminal()
+                quit()
             case 1:
                 clear_terminal()
                 print("- Current Month: Sales List -")
@@ -106,9 +112,12 @@ def deliveries_menu():
     print("5 - Create Delivery Request (Car ID Required)")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-5): ")
+        selected_option = get_integer_input("\nSelect an option (1-5, 0 to quit): ")
 
         match selected_option:
+            case 0:
+                clear_terminal()
+                quit()
             case 1:
                 clear_terminal()
                 print("- Full Delivery Report -")
@@ -171,9 +180,12 @@ def main_menu():
     print("4 - Deliveries")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-4): ")
+        selected_option = get_integer_input("\nSelect an option (1-4, 0 to quit): ")
 
         match selected_option:
+            case 0:
+                clear_terminal()
+                quit()
             case 1:
                 clear_terminal()
                 stock_menu()
@@ -201,8 +213,8 @@ def return_to_main_menu():
     """
     while True:
         answer = input(
-            'Type "m" to return to the menu or "q" to quit.').lower()
-        if answer == "q":
+            'Type "m" to return to the menu or "0" to quit.').lower()
+        if answer == "0":
             clear_terminal()
             quit()
         elif answer == "m":

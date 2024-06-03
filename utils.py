@@ -153,4 +153,11 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
 
 def get_new_car_details():
     id = generate_unique_id()
-    make = get_string_input("Enter Vehicle Make (e.g. Ford, Volvo): ")
+    make = get_string_input("Enter the vehicle's Make (e.g. Ford, Volvo): ")
+    # Model may contain letters, numbers and special characters. No validation required.
+    model = input("Enter the vehicle's Model (e.g. focus, C40): ")
+    year = get_year_input("Enter the vehicle's Year of production (e.g. 2017, 1999): ")
+    
+    
+    print(id, make, model, year)
+    return [id, make, model, year]

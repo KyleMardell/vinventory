@@ -1,5 +1,5 @@
 import re
-
+from datetime import datetime
 
 def get_integer_input(message):
     """ 
@@ -16,17 +16,30 @@ def get_integer_input(message):
 
 def get_string_input(message):
     """ 
-    Checks that the user entered characters only. No numbers.
+    Checks that the user entered characters only. No numbers or special characters.
+    Returns input capitalized if true, otherwise repeatedly asks for correct input.
     """
-    numbers = r'\d'
+    letters = r'^[a-z,A-Z]+$'
     while True:
         user_input = input(message)
         
-        if re.search(numbers, user_input):
-            print("Error: Input must not contain numbers.")
-            continue
+        if re.fullmatch(letters, user_input):
+            return user_input.capitalize()
+        else:
+            print("Error: Input must not contain numbers, or special characters.")
         
-        return user_input
+def get_year_input(message):
+    """ 
+    Returns a year as a 4 digit number if user input is in range
+    """
+    current_date = datetime.now()
+    current_year = current_date.year
+    while True:
+        user_input = get_integer_input(message)
+        if 1910 <= user_input <= current_year:
+            return user_input
+        else:
+            print("Error: Date is out of range.")
 
 def get_list_input(message):
     """ 
