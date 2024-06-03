@@ -155,9 +155,9 @@ def get_new_car_details():
     id = generate_unique_id()
     make = get_string_input("Enter the vehicle's Make (e.g. Ford, Volvo): ")
     # Model may contain letters, numbers and special characters. No validation required.
-    model = input("Enter the vehicle's Model (e.g. focus, C40): ")
+    model = input("Enter the vehicle's Model (e.g. focus, C40): ").capitalize()
     year = get_year_input("Enter the vehicle's Year of production (e.g. 2017, 1999): ")
-    engine = get_engine_input("Enter vehicle's engine size in Litres (e.g. 1.2, 2.0): ")
+    engine = get_engine_input("Enter vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
     
     print(id, make, model, year, engine)
     return [id, make, model, year, engine]

@@ -116,5 +116,7 @@ def get_engine_input(message):
                 return str(user_input) + "L" 
             else:
                 print("Error: Engine size is out of range.")
+        elif user_input.lower() == "e":
+            return "Electric"
         else:
             print("Error: Incorrect input.")
