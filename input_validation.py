@@ -123,8 +123,8 @@ def get_engine_input(message):
             
 def get_colour_input(message):
     """ 
-    Returns a colour, checks for most common colours.
-    If user input colour is not in the list, they are asked to confirm.
+    Returns a colour, checks is user input is in a list of common colours.
+    If user input colour is not in the list, they are asked to confirm the input.
     """
     
     car_colours = ["black", "white", "grey", "silver", "red", "pink", "orange", "blue", "purple", "green", "yellow"]
@@ -141,3 +141,18 @@ def get_colour_input(message):
                 return user_input.capitalize()
             else:
                 continue
+            
+def get_location_input(message):
+    """ 
+    Returns a location, confirms user input is a valid location.
+    """
+    locations = ["leeds", "liverpool", "manchester", "preston", "york"]
+    
+    while True:
+        user_input = input(message).lower()
+        
+        if user_input in locations:
+            return user_input.capitalize()
+        else:
+            print("Error: Location is invalid.")
+        
