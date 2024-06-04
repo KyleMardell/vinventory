@@ -11,11 +11,14 @@ def get_integer_input(message):
     while True:
         user_input = input(message)
         try:
-            return int(user_input)
+            number = int(user_input)
+            if number >= 0:
+                return number
+            else:
+                print("Error: Must be a positive number.")
         except ValueError as e:
-            print("Not a valid number.")
-
-
+            print("Error: Not a valid number.")
+            
 def get_string_input(message):
     """ 
     Checks that the user entered characters only. No numbers or special characters.
@@ -140,6 +143,7 @@ def get_colour_input(message):
             if answer == "y":
                 return user_input.capitalize()
             else:
+                print("Cancelled.")
                 continue
             
 def get_location_input(message):
@@ -156,7 +160,7 @@ def get_location_input(message):
         else:
             print("Error: Location is invalid.")
         
-def get_price_input(message, cost):
+def get_price_input(message, cost, repairs):
     """ 
     Returns the price of a vehicle.
     Checks the input is a whole number.
@@ -164,13 +168,14 @@ def get_price_input(message, cost):
     while True:
         user_input = get_integer_input(message)
         
-        if user_input > (cost * 1.2):
+        if user_input > (cost + repairs) * 1.2:
             return user_input
-        elif cost <= user_input <= (cost * 1.2):
-            answer = input(f"The price of {user_input} is less than %20 calculated profit. Is this correct? (y/n): ").lower()
+        elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
+            answer = input(f"The price of £{user_input} is less than 20% calculated profit. Is this correct? (y/n): ").lower()
             if answer == "y":
                 return user_input
             else:
+                print("Cancelled.")
                 continue
         else:
-            print("Error: Price must be larger than cost.")
+            print("Error: Price must be larger than total cost including repairs.")
