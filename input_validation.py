@@ -156,3 +156,21 @@ def get_location_input(message):
         else:
             print("Error: Location is invalid.")
         
+def get_price_input(message, cost):
+    """ 
+    Returns the price of a vehicle.
+    Checks the input is a whole number.
+    """
+    while True:
+        user_input = get_integer_input(message)
+        
+        if user_input > (cost * 1.2):
+            return user_input
+        elif cost <= user_input <= (cost * 1.2):
+            answer = input(f"The price of {user_input} is less than %20 calculated profit. Is this correct? (y/n): ").lower()
+            if answer == "y":
+                return user_input
+            else:
+                continue
+        else:
+            print("Error: Price must be larger than cost.")

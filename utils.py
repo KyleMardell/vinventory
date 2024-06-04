@@ -153,13 +153,15 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
 
 def get_new_car_details():
     id = 999 #generate_unique_id()
-    make = get_string_input("Enter the vehicle's Make (e.g. Ford, Volvo): ")
+    make = get_string_input("Enter the vehicle's make (e.g. Ford, Volvo): ")
     # Model may contain letters, numbers and special characters. No validation required.
-    model = input("Enter the vehicle's Model (e.g. focus, C40): ").capitalize()
-    year = get_year_input("Enter the vehicle's Year of production (e.g. 2017, 1999): ")
+    model = input("Enter the vehicle's model (e.g. focus, C40): ").capitalize()
+    year = get_year_input("Enter the vehicle's year of production (e.g. 2017, 1999): ")
     engine = get_engine_input("Enter the vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
     colour = get_colour_input("Enter the vehicle's colour (e.g. black, orange): ")
     status = get_location_input("Enter the vehicle's current location (leeds, liverpool, manchester, preston, york): ")
+    cost = get_integer_input("Enter the vehicle's cost / price paid (whole numbers only, e.g. 15000, 7500): ")
+    price = get_price_input("Enter the vehicle's list price (whole numbers only, e.g. 22000, 12500): ", cost)
     
-    print(id, make, model, year, engine, colour, status)
-    return [id, make, model, year, engine, colour, status]
+    print(id, make, model, year, engine, colour, status, cost, price)
+    return [id, make, model, year, engine, colour, status, cost, price]
