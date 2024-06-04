@@ -6,10 +6,11 @@ from input_validation import get_integer_input, get_site_input
 
 # Car class and functions
 
+
 class Car:
 
     def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs,
-                sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
+                 sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
@@ -64,7 +65,8 @@ class Car:
         print(f"Current site: {self.status}")
         print("What is the destination site?")
         destination = get_site_input(self.status)
-        create_delivery_request(self.id, self.make, self.model, self.year, self.milage, self.status, destination)
+        create_delivery_request(
+            self.id, self.make, self.model, self.year, self.milage, self.status, destination)
 
 
 def create_car_instances(car_data):
@@ -74,11 +76,12 @@ def create_car_instances(car_data):
     cars = []
     for data in car_data:
         car = Car(data[0], data[1], data[2], data[3], data[4],
-                data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16])
+                  data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16])
         cars.append(car)
     return cars
 
 # Sheets functions
+
 
 def open_google_sheet():
     """
@@ -136,7 +139,6 @@ def display_sheet_table(sheet_name, columns):
     Displays a worksheet as a table.
     Requires worksheet name.
     """
-    
     sheet_data = get_sheet_data(sheet_name)
     if sheet_data:
         try:
@@ -237,3 +239,16 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     delivery_sheet.append_row(delivery_request)
     print("Request added to deliveries sheet")
     print(f"Expected delivery date (upon approval): {schedule_date}")
+
+def add_car_to_stock(car_as_list):
+    """ 
+    Adds a car to the stock list.
+    Requires a list of car details in correct order as per stock sheet.
+    [ID, Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs]
+    """
+    try:
+        stock_sheet = connect_to_sheet("stock")
+        stock_sheet.append_row(car_as_list)
+        print(f"Vehicle ({car_as_list[1]} {car_as_list[2]}) successfully added to stock sheet.")
+    except:
+        print("Error: Could not add vehicle to sheet.")
