@@ -18,7 +18,8 @@ def get_integer_input(message):
                 print("Error: Must be a positive number.")
         except ValueError as e:
             print("Error: Not a valid number.")
-            
+
+
 def get_string_input(message):
     """ 
     Checks that the user entered characters only. No numbers or special characters.
@@ -112,29 +113,31 @@ def get_engine_input(message):
     pattern = '\d.\d'
     while True:
         user_input = input(message)
-        
+
         if re.match(pattern, user_input):
             user_input = float(user_input)
             if 0.1 <= user_input <= 8.0:
-                return str(user_input) + "L" 
+                return str(user_input) + "L"
             else:
                 print("Error: Engine size is out of range.")
         elif user_input.lower() == "e":
             return "Electric"
         else:
             print("Error: Incorrect input.")
-            
+
+
 def get_colour_input(message):
     """ 
     Returns a colour, checks is user input is in a list of common colours.
     If user input colour is not in the list, they are asked to confirm the input.
     """
-    
-    car_colours = ["black", "white", "grey", "silver", "red", "pink", "orange", "blue", "purple", "green", "yellow"]
-    
+
+    car_colours = ["black", "white", "grey", "silver", "red",
+                   "pink", "orange", "blue", "purple", "green", "yellow"]
+
     while True:
         user_input = input(message).lower()
-        
+
         if user_input in car_colours:
             return user_input.capitalize()
         else:
@@ -145,21 +148,23 @@ def get_colour_input(message):
             else:
                 print("Cancelled.")
                 continue
-            
+
+
 def get_location_input(message):
     """ 
     Returns a location, confirms user input is a valid location.
     """
     locations = ["leeds", "liverpool", "manchester", "preston", "york"]
-    
+
     while True:
         user_input = input(message).lower()
-        
+
         if user_input in locations:
             return user_input.capitalize()
         else:
             print("Error: Location is invalid.")
-        
+
+
 def get_price_input(message, cost, repairs):
     """ 
     Returns the price of a vehicle.
@@ -167,11 +172,12 @@ def get_price_input(message, cost, repairs):
     """
     while True:
         user_input = get_integer_input(message)
-        
+
         if user_input > (cost + repairs) * 1.2:
             return user_input
         elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
-            answer = input(f"The price of £{user_input} is less than 20% calculated profit. Is this correct? (y/n): ").lower()
+            answer = input(f"The price of £{
+                           user_input} is less than 20% calculated profit. Is this correct? (y/n): ").lower()
             if answer == "y":
                 return user_input
             else:

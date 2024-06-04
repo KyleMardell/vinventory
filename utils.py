@@ -49,7 +49,7 @@ def search_car_by_criteria():
             for car in matching_cars:
                 table.add_row(car.car_as_list()[:11])
             print(table)
-        
+
 
 def generate_sales_report(sheet_name):
     """ 
@@ -151,19 +151,29 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
 
     print(table)
 
+
 def get_new_car_details():
     id = generate_unique_id()
     make = get_string_input("Enter the vehicle's make (e.g. Ford, Volvo): ")
     # Vehicles models can contain letters, numbers and special characters. No validation required.
     model = input("Enter the vehicle's model (e.g. focus, C40): ").capitalize()
-    year = get_year_input("Enter the vehicle's year of production (e.g. 2017, 1999): ")
-    milage = get_integer_input("Enter the vehicles current milage (whole numbers only, e.g. 22500, 45000): ")
-    engine = get_engine_input("Enter the vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
-    colour = get_colour_input("Enter the vehicle's colour (e.g. black, orange): ")
-    status = get_location_input("Enter the vehicle's current location (leeds, liverpool, manchester, preston, york): ")
-    cost = get_integer_input("Enter the vehicle's cost / price paid (whole numbers only, e.g. 15000, 7500): £ ")
-    repairs = get_integer_input("Enter the vehicle's cost of repairs, 0 if none (whole numbers only, e.g. 250, 400): £ ")
-    price = get_price_input("Enter the vehicle's list price (whole numbers only, e.g. 22000, 12500): £ ", cost, repairs)
-    
-    print(id, make, model, year, milage, engine, colour, status, price, cost, repairs)
+    year = get_year_input(
+        "Enter the vehicle's year of production (e.g. 2017, 1999): ")
+    milage = get_integer_input(
+        "Enter the vehicles current milage (whole numbers only, e.g. 22500, 45000): ")
+    engine = get_engine_input(
+        "Enter the vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
+    colour = get_colour_input(
+        "Enter the vehicle's colour (e.g. black, orange): ")
+    status = get_location_input(
+        "Enter the vehicle's current location (leeds, liverpool, manchester, preston, york): ")
+    cost = get_integer_input(
+        "Enter the vehicle's cost / price paid (whole numbers only, e.g. 15000, 7500): £ ")
+    repairs = get_integer_input(
+        "Enter the vehicle's cost of repairs, 0 if none (whole numbers only, e.g. 250, 400): £ ")
+    price = get_price_input(
+        "Enter the vehicle's list price (whole numbers only, e.g. 22000, 12500): £ ", cost, repairs)
+
+    print(id, make, model, year, milage, engine,
+          colour, status, price, cost, repairs)
     return [id, make, model, year, milage, engine, colour, status, price, cost, repairs]

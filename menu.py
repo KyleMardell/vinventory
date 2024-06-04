@@ -15,7 +15,8 @@ def stock_menu():
     print("3 - Search Stock")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-3, 0 to quit): ")
+        selected_option = get_integer_input(
+            "\nSelect an option (1-3, 0 to quit): ")
 
         match selected_option:
             case 0:
@@ -57,7 +58,8 @@ def sales_menu():
     print("4 - Sales History: Sales Reports")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-4, 0 to quit): ")
+        selected_option = get_integer_input(
+            "\nSelect an option (1-4, 0 to quit): ")
 
         match (selected_option):
             case 0:
@@ -112,7 +114,8 @@ def deliveries_menu():
     print("5 - Create Delivery Request (Car ID Required)")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-5, 0 to quit): ")
+        selected_option = get_integer_input(
+            "\nSelect an option (1-5, 0 to quit): ")
 
         match selected_option:
             case 0:
@@ -180,7 +183,8 @@ def main_menu():
     print("4 - Deliveries")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-4, 0 to quit): ")
+        selected_option = get_integer_input(
+            "\nSelect an option (1-4, 0 to quit): ")
 
         match selected_option:
             case 0:
