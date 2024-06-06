@@ -24,27 +24,75 @@ def stock_menu():
                 quit()
             case 1:
                 clear_terminal()
-                print("- All Stock selected -")
-                print("Retrieving vehicle information...")
+                print("- All Stock selected -\n")
+                print("Retrieving vehicle information...\n")
                 display_sheet_table("stock", 9)
                 break
             case 2:
                 clear_terminal()
-                print("- Find By ID selected -")
-                print("Retrieving vehicle information...")
+                print("- Find By ID selected -\n")
+                print("Retrieving vehicle information...\n")
                 find_car_by_id("stock")
                 break
             case 3:
                 clear_terminal()
-                print("- Search Stock selected -")
-                print("Retrieving vehicle information...")
+                print("- Search Stock selected -\n")
+                print("Retrieving vehicle information...\n")
                 search_car_by_criteria()
                 break
             case _:
-                print("Please enter a valid number.")
+                print("Not a valid entry. Please try again.\n")
 
     return_to_main_menu()
 
+
+def edit_menu():
+    """ 
+    Displays edit menu
+    """
+    print("- Add/Edit Vehicle Information -\n")
+    print("Choose one of the following options:")
+    print("1 - Add a new car to the stock sheet")
+    print("2 - Edit a car currently in stock (Car ID Required)")
+    print("3 - Mark a car as sold (Car ID Required)")
+    print("4 - Create Delivery Request (Car ID Required)")
+    print("5 - Delete a car from the stock sheet (Car ID Required)")
+
+
+    while True:
+        selected_option = get_integer_input(
+            "\nSelect an option (1-4, 0 to quit): ")
+
+        match (selected_option):
+            case 0:
+                clear_terminal()
+                quit()
+            case 1:
+                clear_terminal()
+                print("- Add A New Car To The Stock Sheet -\n")
+                new_car_details = get_new_car_details()
+                add_car_to_stock(new_car_details)
+                break
+            case 2:
+                clear_terminal()
+                print("- Edit A Car Currently In Stock-\n")
+                break
+            case 3:
+                clear_terminal()
+                print("- Mark A Car As Sold -\n")
+                break
+            case 4:
+                clear_terminal()
+                print("- Request A Delivery -\n")
+                delivery_request()
+                break
+            case 5:
+                clear_terminal()
+                print("- Dele A Car From The Stock Sheet -\n")
+            case _:
+                print("Not a valid entry. Please try again.\n")
+
+    return_to_main_menu()
 
 def sales_menu():
     """
@@ -67,19 +115,19 @@ def sales_menu():
                 quit()
             case 1:
                 clear_terminal()
-                print("- Current Month: Sales List -")
+                print("- Current Month: Sales List -\n")
                 current_sheet_name = get_current_sales_sheet_name()
                 display_sheet_table(current_sheet_name, 12)
                 break
             case 2:
                 clear_terminal()
-                print("- Current Month: Sales Report -")
+                print("- Current Month: Sales Report -\n")
                 current_sheet_name = get_current_sales_sheet_name()
                 generate_sales_report(current_sheet_name)
                 break
             case 3:
                 clear_terminal()
-                print("- Sales History: Sales Lists -")
+                print("- Sales History: Sales Lists -\n")
                 print("Enter a year and month to display past sales data list.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
@@ -88,7 +136,7 @@ def sales_menu():
                 break
             case 4:
                 clear_terminal()
-                print("- Sales History: Sales Reports -")
+                print("- Sales History: Sales Reports -\n")
                 print("Enter a year and month to display past sales data list.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
@@ -123,30 +171,28 @@ def deliveries_menu():
                 quit()
             case 1:
                 clear_terminal()
-                print("- Full Delivery Report -")
+                print("- Full Delivery Report -\n")
                 display_deliveries_table()
                 break
             case 2:
                 clear_terminal()
-                print("- Requested Deliveries -")
+                print("- Requested Deliveries -\n")
                 display_deliveries_table(["requested"])
                 break
             case 3:
                 clear_terminal()
-                print("- Scheduled Deliveries -")
+                print("- Scheduled Deliveries -\n")
                 display_deliveries_table(["scheduled"])
                 break
             case 4:
                 clear_terminal()
-                print("- Completed Deliveries -")
+                print("- Completed Deliveries -\n")
                 display_deliveries_table(["delivered"])
                 break
             case 5:
                 clear_terminal()
-                print("- Creating Delivery Request -")
-                car_to_deliver = find_car_by_id("stock")
-                get_continue(clear_terminal, return_to_main_menu)
-                car_to_deliver.request_delivery()
+                print("- Creating Delivery Request -\n")
+                delivery_request()
                 break
             case _:
                 print("Not a valid entry, please try again.")
@@ -196,9 +242,7 @@ def main_menu():
                 break
             case 2:
                 clear_terminal()
-                print("Add/Edit Vehicle Info")
-                new_car_details = get_new_car_details()
-                add_car_to_stock(new_car_details)
+                edit_menu()
                 break
             case 3:
                 clear_terminal()

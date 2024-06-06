@@ -152,6 +152,23 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
     print(table)
 
 
+def delivery_request():
+    answer = "n"
+    while True:
+        if answer == "n":
+            car_to_deliver = find_car_by_id("stock")
+        
+        answer = input("Would you like to continue? (y/n): ")
+        if answer == "y":
+            car_to_deliver.request_delivery()
+            return
+        elif answer == "n":
+            clear_terminal()
+            print("Cancelled.")
+            continue
+        else:
+            print("Not a valid entry, please try again.")
+
 def get_new_car_details():
     """ 
     Returns car information as a list. In the same order as the Google Sheet.
@@ -194,6 +211,7 @@ def get_new_car_details():
             table.add_row(car)
             print(table)
 
+        # Asks the user to confirm the input
         answer = input("Confirm details are correct (y/n): ").lower()
         if answer == "y":
             return car
