@@ -240,7 +240,7 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     print("Request added to deliveries sheet")
     print(f"Expected delivery date (upon approval): {schedule_date}")
 
-  
+
 def add_car_to_stock(car_as_list):
     """ 
     Adds a car to the stock list.
@@ -254,3 +254,16 @@ def add_car_to_stock(car_as_list):
             car_as_list[2]}) successfully added to stock sheet.")
     except:
         print("Error: Could not add vehicle to sheet.")
+        
+def delete_car_from_stock():
+    """ 
+    Deletes a car from the stock list.
+    """
+    
+    stock_sheet = connect_to_sheet("stock")
+    car_to_delete = find_car_by_id("stock")
+    car_id = car_to_delete.id
+    id_cell = stock_sheet.find(car_id)
+    print(id_cell)
+    stock_sheet.delete_rows(63)
+    

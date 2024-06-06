@@ -88,7 +88,8 @@ def edit_menu():
                 break
             case 5:
                 clear_terminal()
-                print("- Dele A Car From The Stock Sheet -\n")
+                print("- Delete A Car From The Stock Sheet -\n")
+                delete_car_from_stock()
             case _:
                 print("Not a valid entry. Please try again.\n")
 
