@@ -197,8 +197,8 @@ def main_menu():
             case 2:
                 clear_terminal()
                 print("Add/Edit Vehicle Info")
-                new_car = get_new_car_details()
-                add_car_to_stock(new_car)
+                new_car_details = get_new_car_details()
+                add_car_to_stock(new_car_details)
                 break
             case 3:
                 clear_terminal()

@@ -240,7 +240,7 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     print("Request added to deliveries sheet")
     print(f"Expected delivery date (upon approval): {schedule_date}")
 
-
+  
 def add_car_to_stock(car_as_list):
     """ 
     Adds a car to the stock list.
@@ -251,6 +251,6 @@ def add_car_to_stock(car_as_list):
         stock_sheet = connect_to_sheet("stock")
         stock_sheet.append_row(car_as_list)
         print(f"Vehicle ({car_as_list[1]} {
-              car_as_list[2]}) successfully added to stock sheet.")
+            car_as_list[2]}) successfully added to stock sheet.")
     except:
         print("Error: Could not add vehicle to sheet.")
