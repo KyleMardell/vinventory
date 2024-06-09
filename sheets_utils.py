@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
 from input_validation import get_integer_input, get_site_input
+from input_validation import *
 
 # Car class and functions
 
@@ -295,38 +296,54 @@ def edit_car_in_stock():
                 "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or 0 to finish editing.: ").lower()
             match (changes):
                 case "make":
-                    car_to_edit.make = input(
-                        "Enter new details: ").capitalize()
+                    car_to_edit.make = get_string_input(
+                        "Enter new make details: ").capitalize()
+                    print("Confirmed.\n")
                     continue
                 case "model":
                     car_to_edit.model = input(
-                        "Enter new details: ").capitalize()
+                        "Enter new model details: ").capitalize()
+                    print("Confirmed.\n")
                     continue
                 case "year":
-                    car_to_edit.year = input("Enter new details: ")
+                    car_to_edit.year = get_year_input(
+                        "Enter new year details: ")
+                    print("Confirmed.\n")
                     continue
                 case "milage":
-                    car_to_edit.milage = input("Enter new details: ")
+                    car_to_edit.milage = get_integer_input(
+                        "Enter new milage details: ")
+                    print("Confirmed.\n")
                     continue
                 case "engine":
-                    car_to_edit.engine = input("Enter new details: ")
+                    car_to_edit.engine = get_engine_input(
+                        "Enter new engine details: ")
+                    print("Confirmed.\n")
                     continue
                 case "colour":
-                    car_to_edit.colour = input(
-                        "Enter new details: ").capitalize()
+                    car_to_edit.colour = get_colour_input(
+                        "Enter new colour details: ")
+                    print("Confirmed.\n")
                     continue
                 case "status":
-                    car_to_edit.status = input(
-                        "Enter new details: ").capitalize()
+                    print("Status, cannot be manually updated.")
+                    print(
+                        "To change location, please request a delivery. To mark as reserved or sold, please user previous menu options.\n")
                     continue
                 case "price":
-                    car_to_edit.price = input("Enter new details: ")
+                    car_to_edit.price = get_price_input(
+                        "Enter new vehicle price details: ")
+                    print("Confirmed.\n")
                     continue
                 case "cost":
-                    car_to_edit.cost = input("Enter new details: ")
+                    car_to_edit.cost = get_integer_input(
+                        "Enter new vehicle cost details: ")
+                    print("Confirmed.\n")
                     continue
                 case "repairs":
-                    car_to_edit.repairs = input("Enter new details: ")
+                    car_to_edit.repairs = get_integer_input(
+                        "Enter new repair cost details: ")
+                    print("Confirmed.\n")
                     continue
                 case "0":
                     return
@@ -340,12 +357,12 @@ def edit_car_in_stock():
     cell = stock_sheet.find(car_id)
 
     while True:
-        answer = input(f"Are you sure you would like to edit the car, ID: {car_to_edit.id}? (y/n): ").lower()
+        answer = input(f"Are you sure you would like to edit the car, ID: {
+                       car_to_edit.id}? (y/n): ").lower()
         if answer == "y":
             # Get the changes to the car
             get_changes()
             car_to_edit.display_info(11)
-            car_as_list = car_to_edit.car_as_list()
             while True:
                 # Ask the user to confirm the changes and save if yes.
                 confirm = input(
@@ -353,9 +370,11 @@ def edit_car_in_stock():
                 if confirm == "y":
                     print("Confirmed...")
                     try:
+                        car_as_list = car_to_edit.car_as_list()
                         stock_sheet.update(
                             f"A{cell.row}:Q{cell.row}", [car_as_list])
-                        print(f"Changes to car ID: {car_to_edit.id} have been saved to the worksheet.\n")
+                        print(f"Changes to car ID: {
+                              car_to_edit.id} have been saved to the worksheet.\n")
                     except:
                         print("Error, changes not saved.")
                         continue
