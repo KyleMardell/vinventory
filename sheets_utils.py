@@ -112,6 +112,7 @@ def connect_to_sheet(sheet_name):
     Connect to sheet within Google Sheets using provided name,
     for editing sheet.
     """
+    print("\nRetrieving Worksheet Information...\n")
     SHEET = open_google_sheet()
     try:
         current_sheet = SHEET.worksheet(sheet_name)
@@ -259,11 +260,22 @@ def delete_car_from_stock():
     """ 
     Deletes a car from the stock list.
     """
-    
     stock_sheet = connect_to_sheet("stock")
     car_to_delete = find_car_by_id("stock")
     car_id = car_to_delete.id
-    id_cell = stock_sheet.find(car_id)
-    print(id_cell)
-    stock_sheet.delete_rows(63)
+    cell = stock_sheet.find(car_id)
+    
+    while True:
+        answer = input("Are you sure you would like to delete this car? (y/n): ").lower()
+        if answer == "y":
+            stock_sheet.delete_rows(cell.row)
+            print(f"Car ID: {car_id} successfully deleted.\n")
+            return
+        elif answer == "n":
+            print("Cancelled\n")
+            return
+        else:
+            print("Invalid input, please try again.\n")
+            continue
+            
     

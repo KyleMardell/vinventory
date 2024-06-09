@@ -61,7 +61,7 @@ def edit_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-4, 0 to quit): ")
+            "\nSelect an option (1-5, 0 to quit): ")
 
         match (selected_option):
             case 0:
@@ -90,6 +90,7 @@ def edit_menu():
                 clear_terminal()
                 print("- Delete A Car From The Stock Sheet -\n")
                 delete_car_from_stock()
+                break
             case _:
                 print("Not a valid entry. Please try again.\n")
 
