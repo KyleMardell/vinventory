@@ -37,7 +37,7 @@ class Car:
                 self.status, self.price, self.cost, self.repairs, self.sold_price, self.deposit, self.payment_method,
                 self.buyer_name, self.buyer_contact, self.sale_date]
 
-    def display_info(self, fields):
+    def display_info(self, fields=17):
         """ 
         Prints a table containing all car data
         """
@@ -173,7 +173,7 @@ def find_car_by_id(sheet_name):
             input_id = get_integer_input("Please enter a valid ID number: ")
             for car in cars_in_stock:
                 if int(car.id) == input_id:
-                    car.display_info(9)
+                    car.display_info(11)
                     car_found = True
                     return car
             print(f"Car ID: {input_id} not found.")
@@ -255,18 +255,21 @@ def add_car_to_stock(car_as_list):
             car_as_list[2]}) successfully added to stock sheet.")
     except:
         print("Error: Could not add vehicle to sheet.")
-        
+
+
 def delete_car_from_stock():
     """ 
     Deletes a car from the stock list.
+    Asks user for a valid car id number and to confirm before deleting.
     """
     stock_sheet = connect_to_sheet("stock")
     car_to_delete = find_car_by_id("stock")
     car_id = car_to_delete.id
     cell = stock_sheet.find(car_id)
-    
+
     while True:
-        answer = input("Are you sure you would like to delete this car? (y/n): ").lower()
+        answer = input(
+            "Are you sure you would like to delete this car? (y/n): ").lower()
         if answer == "y":
             stock_sheet.delete_rows(cell.row)
             print(f"Car ID: {car_id} successfully deleted.\n")
@@ -277,5 +280,96 @@ def delete_car_from_stock():
         else:
             print("Invalid input, please try again.\n")
             continue
-            
-    
+
+
+def edit_car_in_stock():
+    """ 
+    Edits a car in stocks information.
+    """
+
+    # function to get the user input changes to the selected car.
+    def get_changes():
+        changes = None
+        while True:
+            changes = input(
+                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or 0 to finish editing.: ").lower()
+            match (changes):
+                case "make":
+                    car_to_edit.make = input(
+                        "Enter new details: ").capitalize()
+                    continue
+                case "model":
+                    car_to_edit.model = input(
+                        "Enter new details: ").capitalize()
+                    continue
+                case "year":
+                    car_to_edit.year = input("Enter new details: ")
+                    continue
+                case "milage":
+                    car_to_edit.milage = input("Enter new details: ")
+                    continue
+                case "engine":
+                    car_to_edit.engine = input("Enter new details: ")
+                    continue
+                case "colour":
+                    car_to_edit.colour = input(
+                        "Enter new details: ").capitalize()
+                    continue
+                case "status":
+                    car_to_edit.status = input(
+                        "Enter new details: ").capitalize()
+                    continue
+                case "price":
+                    car_to_edit.price = input("Enter new details: ")
+                    continue
+                case "cost":
+                    car_to_edit.cost = input("Enter new details: ")
+                    continue
+                case "repairs":
+                    car_to_edit.repairs = input("Enter new details: ")
+                    continue
+                case "0":
+                    return
+                case _:
+                    print("Not a valid entry. Please try again.")
+
+    # Connect to the sheet and get the car to edit.
+    stock_sheet = connect_to_sheet("stock")
+    car_to_edit = find_car_by_id("stock")
+    car_id = car_to_edit.id
+    cell = stock_sheet.find(car_id)
+
+    while True:
+        answer = input(f"Are you sure you would like to edit the car, ID: {car_to_edit.id}? (y/n): ").lower()
+        if answer == "y":
+            # Get the changes to the car
+            get_changes()
+            car_to_edit.display_info(11)
+            car_as_list = car_to_edit.car_as_list()
+            while True:
+                # Ask the user to confirm the changes and save if yes.
+                confirm = input(
+                    "Do you want to save these changes? (y/n): \n").lower()
+                if confirm == "y":
+                    print("Confirmed...")
+                    try:
+                        stock_sheet.update(
+                            f"A{cell.row}:Q{cell.row}", [car_as_list])
+                        print(f"Changes to car ID: {car_to_edit.id} have been saved to the worksheet.\n")
+                    except:
+                        print("Error, changes not saved.")
+                        continue
+                    return
+                elif confirm == "n":
+                    print("Cancelled.\n")
+                    break
+                else:
+                    print("Invalid input, please try again.\n")
+                    continue
+
+        elif answer == "n":
+            print("Cancelled.\n")
+            return
+        else:
+            print("Invalid input, please try again.\n")
+            continue

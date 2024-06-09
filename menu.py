@@ -76,6 +76,7 @@ def edit_menu():
             case 2:
                 clear_terminal()
                 print("- Edit A Car Currently In Stock-\n")
+                edit_car_in_stock()
                 break
             case 3:
                 clear_terminal()
