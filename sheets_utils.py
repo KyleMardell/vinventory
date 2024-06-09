@@ -68,6 +68,7 @@ class Car:
         destination = get_site_input(self.status)
         create_delivery_request(
             self.id, self.make, self.model, self.year, self.milage, self.status, destination)
+        update_delivery_status_in_stock_sheet(self.id, self.status, delivery=True)
 
 
 def create_car_instances(car_data):
@@ -237,11 +238,32 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     schedule_date = str(schedule_date)[:10]
     delivery_request = [id, make, model, year, milage, site_from,
                         site_to, "requested", request_date, schedule_date]
+    try:
+        delivery_sheet.append_row(delivery_request)
+        print("Request added to deliveries sheet")
+        print(f"Expected delivery date (upon approval): {schedule_date}")
+    except:
+        print("Error: could not add delivery to sheet.")
 
-    delivery_sheet.append_row(delivery_request)
-    print("Request added to deliveries sheet")
-    print(f"Expected delivery date (upon approval): {schedule_date}")
-
+def update_delivery_status_in_stock_sheet(id, status, delivery=False):
+    """ 
+    Updates the delivery status of a car in the stock Google Sheet
+    Requires input of ID, status and delivery(boolean)
+    """
+    print(id, status, delivery)
+    stock_sheet = connect_to_sheet("stock")
+    id_cell = stock_sheet.find(id)
+    status_cell = f"H{id_cell.row}"
+    print(status_cell)
+    suffix = " - Delivery requested"
+    if delivery:
+        new_status = f"{status}{suffix}"
+    else:
+        new_status = status.removesuffix(suffix)
+        
+    print(new_status)
+    stock_sheet.update_acell(status_cell, new_status)
+    print(f"\nStock sheet information for car ID: {id} has been updated.")
 
 def add_car_to_stock(car_as_list):
     """ 
@@ -286,14 +308,21 @@ def delete_car_from_stock():
 def edit_car_in_stock():
     """ 
     Edits a car in stocks information.
+    Asks the user to enter a car ID, once confirmed then asks the user to
+    enter which attribute they would like to edit. Changes are submitted 
+    by entering 0.
     """
 
     # function to get the user input changes to the selected car.
     def get_changes():
+        """ 
+        edit_car_in_stock inner function only.
+        Gets the user input changes and validates each input.
+        """
         changes = None
         while True:
             changes = input(
-                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or 0 to finish editing.: ").lower()
+                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: ").lower()
             match (changes):
                 case "make":
                     car_to_edit.make = get_string_input(
@@ -351,6 +380,7 @@ def edit_car_in_stock():
                     print("Not a valid entry. Please try again.")
 
     # Connect to the sheet and get the car to edit.
+    # Get the cell of the car ID from the sheet to use when editing.
     stock_sheet = connect_to_sheet("stock")
     car_to_edit = find_car_by_id("stock")
     car_id = car_to_edit.id
@@ -370,6 +400,7 @@ def edit_car_in_stock():
                 if confirm == "y":
                     print("Confirmed...")
                     try:
+                        # Get the car as a list and update the Google Sheet
                         car_as_list = car_to_edit.car_as_list()
                         stock_sheet.update(
                             f"A{cell.row}:Q{cell.row}", [car_as_list])
@@ -392,3 +423,7 @@ def edit_car_in_stock():
         else:
             print("Invalid input, please try again.\n")
             continue
+
+
+        
+    
