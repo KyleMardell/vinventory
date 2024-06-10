@@ -279,14 +279,15 @@ def add_car_to_stock(car_as_list):
         print("Error: Could not add vehicle to sheet.")
 
 
-def delete_car_from_sheet(sheet):
+def delete_car_from_sheet(sheet, car_id=None):
     """ 
     Deletes a car from the stock list.
     Asks user for a valid car id number and to confirm before deleting.
     """
     current_sheet = connect_to_sheet(sheet)
-    car_to_delete = find_car_by_id(sheet)
-    car_id = car_to_delete.id
+    if car_id == None:
+        car_to_delete = find_car_by_id(sheet)
+        car_id = car_to_delete.id
     cell = current_sheet.find(car_id)
 
     def remove_delivery(id):
@@ -449,3 +450,50 @@ def create_new_sales_sheet(sheet_name):
         print(f"New sales sheet created named '{sheet_name}'")
     except:
         print("Error: Sheet could not be created.")
+        
+def sell_car():
+    """ 
+    Gets sale deatils from user and moves car from stock sheet to sales sheet.
+    """
+    print("- Sell Car Menu -\n")
+    
+    sold_car = find_car_by_id("stock")
+    
+    def get_sales_details():
+        """ 
+        Gets the sales details from the user and adds them to the current car.
+        """
+        current_date = datetime.now()
+        sale_date = str(current_date)[:10]
+        while True:
+            sold_price = get_integer_input("Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
+            buyer_name = get_string_input("Enter the buyers name: ")
+            buyer_contact = get_integer_input("Enter the buyers phone number: ")
+            
+            while True:
+                confirm = input("Confirm and save new details (y/n): ").lower()
+                if confirm == "y":
+                    sold_car.sold_price = sold_price
+                    sold_car.buyer_name = buyer_name
+                    sold_car.buyer_contact = buyer_contact
+                    sold_car.sale_date = sale_date
+                    return sold_car
+                elif confirm == "n":
+                    print("Cancelled.")
+                    break
+                else:
+                    print("Invalid input, please try again.\n")
+                    continue
+
+    while True:
+        answer = input("Would you like to continue selling this car? (y/n): ").lower()
+        if answer == "y":
+            get_sales_details()
+            sold_car.display_info()
+            return
+        elif answer == "n":
+            print("Cancelled.")
+            break
+        else:
+            print("Invalid input, please try again.\n")
+            continue

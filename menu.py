@@ -81,6 +81,7 @@ def edit_menu():
             case 3:
                 clear_terminal()
                 print("- Mark A Car As Sold -\n")
+                sell_car()
                 break
             case 4:
                 clear_terminal()
