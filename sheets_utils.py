@@ -77,8 +77,7 @@ def create_car_instances(car_data):
     """
     cars = []
     for data in car_data:
-        car = Car(data[0], data[1], data[2], data[3], data[4],
-                  data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16])
+        car = Car(*data)
         cars.append(car)
     return cars
 
@@ -250,18 +249,17 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     Updates the delivery status of a car in the stock Google Sheet
     Requires input of ID, status and delivery(boolean)
     """
-    print(id, status, delivery)
     stock_sheet = connect_to_sheet("stock")
     id_cell = stock_sheet.find(id)
     status_cell = f"H{id_cell.row}"
-    print(status_cell)
+    
     suffix = " - Delivery requested"
+    
     if delivery:
         new_status = f"{status}{suffix}"
     else:
         new_status = status.removesuffix(suffix)
         
-    print(new_status)
     stock_sheet.update_acell(status_cell, new_status)
     print(f"\nStock sheet information for car ID: {id} has been updated.")
 
@@ -280,22 +278,35 @@ def add_car_to_stock(car_as_list):
         print("Error: Could not add vehicle to sheet.")
 
 
-def delete_car_from_stock():
+def delete_car_from_sheet(sheet):
     """ 
     Deletes a car from the stock list.
     Asks user for a valid car id number and to confirm before deleting.
     """
-    stock_sheet = connect_to_sheet("stock")
-    car_to_delete = find_car_by_id("stock")
+    current_sheet = connect_to_sheet(sheet)
+    car_to_delete = find_car_by_id(sheet)
     car_id = car_to_delete.id
-    cell = stock_sheet.find(car_id)
+    cell = current_sheet.find(car_id)
+
+    def remove_delivery(id):
+        """ 
+        Checks if the car id is in the deliveries sheet and remove the entry if found.
+        """
+        deliveries_sheet = connect_to_sheet("deliveries")
+        try:
+            d_cell = deliveries_sheet.find(id)
+            deliveries_sheet.delete_rows(d_cell.row)
+            print("Car found in deliveries sheet. Delivery request deleted.")
+        except:
+            print("Car not found in deliveries sheet. No deliveries to delete.")
 
     while True:
         answer = input(
             "Are you sure you would like to delete this car? (y/n): ").lower()
         if answer == "y":
-            stock_sheet.delete_rows(cell.row)
+            current_sheet.delete_rows(cell.row)
             print(f"Car ID: {car_id} successfully deleted.\n")
+            remove_delivery(car_id)
             return
         elif answer == "n":
             print("Cancelled\n")
