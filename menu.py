@@ -120,13 +120,17 @@ def sales_menu():
                 clear_terminal()
                 print("- Current Month: Sales List -\n")
                 current_sheet_name = get_current_sales_sheet_name()
-                display_sheet_table(current_sheet_name, 12)
+                sheet_exists = display_sheet_table(current_sheet_name, 15)
+                if not sheet_exists:
+                    create_new_sales_sheet(current_sheet_name)
                 break
             case 2:
                 clear_terminal()
                 print("- Current Month: Sales Report -\n")
                 current_sheet_name = get_current_sales_sheet_name()
-                generate_sales_report(current_sheet_name)
+                sheet_exists = generate_sales_report(current_sheet_name)
+                if not sheet_exists:
+                    create_new_sales_sheet(current_sheet_name)
                 break
             case 3:
                 clear_terminal()
@@ -135,7 +139,7 @@ def sales_menu():
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
-                display_sheet_table(sheet_name, 11)
+                display_sheet_table(sheet_name, 15)
                 break
             case 4:
                 clear_terminal()

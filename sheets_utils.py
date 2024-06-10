@@ -156,9 +156,10 @@ def display_sheet_table(sheet_name, columns):
                 table.add_row(car_to_add)
 
             print(table)
+            return True
         except Exception as e:
-            print("An error has occurred: {e}")
-
+            print("Error: Cannot display table.")
+            return False
 
 def find_car_by_id(sheet_name):
     """ 
@@ -435,6 +436,16 @@ def edit_car_in_stock():
             print("Invalid input, please try again.\n")
             continue
 
-
-        
+def create_new_sales_sheet(sheet_name):
+    """ 
+    Creates a new sales sheet.
+    """
+    headings = ["ID", "Make", "Model", "Year", "Milage", "Engine", "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
     
+    try:
+        vinv_sheet = open_google_sheet()
+        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=15)
+        new_sheet.append_row(headings)
+        print(f"New sales sheet created named '{sheet_name}'")
+    except:
+        print("Error: Sheet could not be created.")

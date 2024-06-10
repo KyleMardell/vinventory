@@ -100,10 +100,11 @@ def generate_sales_report(sheet_name):
         print("")
         print(f"Gross Profit: £{gross_profit}")
         print(f"Net Profit (gross minus repairs): £{net_profit}")
+        return True
     except:
-        # Return None, as missing sheet error handled inside get_sheet_data function.
-        # This stops the full error details being displayed to the user.
-        return None
+        # False return is handled when the function is called.
+        print("Error: Missing Data")
+        return False
 
 
 def get_current_sales_sheet_name():
