@@ -71,7 +71,7 @@ def edit_menu():
                 clear_terminal()
                 print("- Add A New Car To The Stock Sheet -\n")
                 new_car_details = get_new_car_details()
-                add_car_to_stock(new_car_details)
+                add_car_to_sheet(new_car_details, "stock")
                 break
             case 2:
                 clear_terminal()
@@ -81,7 +81,8 @@ def edit_menu():
             case 3:
                 clear_terminal()
                 print("- Mark A Car As Sold -\n")
-                sell_car()
+                current_sales_sheet = get_current_sales_sheet_name()
+                sell_car(current_sales_sheet)
                 break
             case 4:
                 clear_terminal()

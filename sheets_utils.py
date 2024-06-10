@@ -35,15 +35,15 @@ class Car:
         Returns car object data values as a list
         """
         return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour,
-                self.status, self.price, self.cost, self.repairs, self.sold_price, self.deposit, self.payment_method,
+                self.status, self.price, self.cost, self.repairs, self.sold_price,
                 self.buyer_name, self.buyer_contact, self.sale_date]
 
-    def display_info(self, fields=17):
+    def display_info(self, fields=15):
         """ 
         Prints a table containing all car data
         """
         table_fields = ["ID", "Make", "Model", "Year", "Milage", "Engine",
-                        "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Deposit Paid", "Payment Method", "Buyer Name", "Buyer Contact", "Sale Date"]
+                        "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
         table.add_row(self.car_as_list()[:fields])
@@ -264,17 +264,17 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     stock_sheet.update_acell(status_cell, new_status)
     print(f"\nStock sheet information for car ID: {id} has been updated.")
 
-def add_car_to_stock(car_as_list):
+def add_car_to_sheet(car_as_list, sheet_name):
     """ 
     Adds a car to the stock list.
     Requires a list of car details in correct order as per stock sheet.
     [ID, Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs]
     """
     try:
-        stock_sheet = connect_to_sheet("stock")
+        stock_sheet = connect_to_sheet(sheet_name)
         stock_sheet.append_row(car_as_list)
         print(f"Vehicle ({car_as_list[1]} {
-            car_as_list[2]}) successfully added to stock sheet.")
+            car_as_list[2]}) successfully added to {sheet_name} sheet.")
     except:
         print("Error: Could not add vehicle to sheet.")
 
@@ -304,7 +304,7 @@ def delete_car_from_sheet(sheet, car_id=None):
 
     while True:
         answer = input(
-            "Are you sure you would like to delete this car? (y/n): ").lower()
+            f"Are you sure you would like to delete this car from the {sheet} sheet? (y/n): ").lower()
         if answer == "y":
             current_sheet.delete_rows(cell.row)
             print(f"Car ID: {car_id} successfully deleted.\n")
@@ -451,9 +451,9 @@ def create_new_sales_sheet(sheet_name):
     except:
         print("Error: Sheet could not be created.")
         
-def sell_car():
+def sell_car(current_sales_sheet):
     """ 
-    Gets sale deatils from user and moves car from stock sheet to sales sheet.
+    Gets sale details from user and moves car from stock sheet to sales sheet.
     """
     print("- Sell Car Menu -\n")
     
@@ -489,7 +489,9 @@ def sell_car():
         answer = input("Would you like to continue selling this car? (y/n): ").lower()
         if answer == "y":
             get_sales_details()
-            sold_car.display_info()
+            car_as_list = sold_car.car_as_list()
+            add_car_to_sheet(car_as_list, current_sales_sheet)
+            delete_car_from_sheet("stock", sold_car.id)
             return
         elif answer == "n":
             print("Cancelled.")
