@@ -9,6 +9,10 @@ def stock_menu():
     Displays stock menu and runs menu option functions.
     """
     print("- Current Stock Menu -\n")
+    print("Welcome to the stock menu.")
+    print("Here you can view a list of all stock with option number 1,")
+    print("or if you already know the internal ID number then you can view a cars details with option 2.")
+    print("Finally you can search through all stock for key words in option 3.\n")
     print("Please select one of the following options:")
     print("1 - All Stock")
     print("2 - Find By ID")

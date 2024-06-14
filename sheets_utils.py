@@ -58,7 +58,8 @@ class Car:
                 (int(self.cost) + int(self.repairs))
             return profit
         except ValueError as e:
-            print(f"Error converting to int: {e}")
+            print("Error: Cannot convert to int.")
+            print(f"Details: {e}\n")
 
     def request_delivery(self):
         print(f"Creating delivery request for car ID: {
@@ -105,8 +106,8 @@ def open_google_sheet():
         SHEET = GSPREAD_CLIENT.open('vinventory')
         return SHEET
     except Exception as e:
-        print(
-            f"An error occurred while connecting to the Google Sheets API: {e}")
+        print("Error: Cannot connect to the Google Sheets API")
+        print(f"Details: {e}\n")
 
 
 def connect_to_sheet(sheet_name):
@@ -120,7 +121,8 @@ def connect_to_sheet(sheet_name):
         current_sheet = SHEET.worksheet(sheet_name)
         return current_sheet
     except Exception as e:
-        print(f"Error, sheet not found: {e}")
+        print("Error, sheet not found:")
+        print(f"Details: {e}\n")
 
 
 def get_sheet_data(sheet_name):
@@ -134,7 +136,8 @@ def get_sheet_data(sheet_name):
         sheet_data = current_sheet.get_all_values()
         return sheet_data
     except Exception as e:
-        print(f"Error, sheet not found: {e}")
+        print(f"Error, sheet not found.")
+        print(f"Details: {e}\n")
 
 
 def display_sheet_table(sheet_name, columns):
@@ -160,6 +163,7 @@ def display_sheet_table(sheet_name, columns):
             return True
         except Exception as e:
             print("Error: Cannot display table.")
+            print(f"Details: {e}\n")
             return False
 
 
@@ -174,7 +178,7 @@ def find_car_by_id(sheet_name):
         cars_in_stock = create_car_instances(sheet_data[1:])
         car_found = False
         while not car_found:
-            input_id = get_integer_input("Please enter a valid ID number: ")
+            input_id = get_integer_input("Please enter a cars valid internal ID number: ")
             for car in cars_in_stock:
                 if int(car.id) == input_id:
                     car.display_info(11)
@@ -183,7 +187,8 @@ def find_car_by_id(sheet_name):
             print(f"Car ID: {input_id} not found.")
 
     except Exception as e:
-        print("An error occurred: {e}")
+        print("Error: Cannot find car.")
+        print(f"Details: {e}\n")
 
     print("ID not found.")
     return False
@@ -199,7 +204,8 @@ def get_worksheet_names():
         worksheet_names = [worksheet.title for worksheet in worksheets]
         return worksheet_names
     except Exception as e:
-        print(f"An error occurred retrieving worksheet name data: {e}")
+        print("Error: Cannot retrieve worksheet name data")
+        print(f"Details: {e}\n")
 
 
 def generate_unique_id():
@@ -225,7 +231,8 @@ def generate_unique_id():
         return unique_id
 
     except Exception as e:
-        print(f"An error has occurred: {e}")
+        print("Error: Cannot generate unique ID number.")
+        print(f"Details: {e}\n")
 
 
 def create_delivery_request(id, make, model, year, milage, site_from, site_to):
@@ -244,8 +251,9 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
         delivery_sheet.append_row(delivery_request)
         print("Request added to deliveries sheet")
         print(f"Expected delivery date (upon approval): {schedule_date}")
-    except:
+    except Exception as e:
         print("Error: could not add delivery to sheet.")
+        print(f"Details: {e}\n")
 
 
 def update_delivery_status_in_stock_sheet(id, status, delivery=False):
@@ -279,8 +287,9 @@ def add_car_to_sheet(car_as_list, sheet_name):
         stock_sheet.append_row(car_as_list)
         print(f"Vehicle ({car_as_list[1]} {
             car_as_list[2]}) successfully added to {sheet_name} sheet.")
-    except:
+    except Exception as e:
         print("Error: Could not add vehicle to sheet.")
+        print(f"Details: {e}\n")
 
 
 def delete_car_from_sheet(sheet, car_id=None):
@@ -297,8 +306,9 @@ def delete_car_from_sheet(sheet, car_id=None):
             d_cell = deliveries_sheet.find(id)
             deliveries_sheet.delete_rows(d_cell.row)
             print("Car found in deliveries sheet. Delivery request deleted.")
-        except:
+        except Exception as e:
             print("Car not found in deliveries sheet. No deliveries to delete.")
+            print(f"Details: {e}\n")
 
     current_sheet = connect_to_sheet(sheet)
     if car_id == None:
@@ -309,8 +319,12 @@ def delete_car_from_sheet(sheet, car_id=None):
             answer = input(
                 f"Are you sure you would like to delete this car from the {sheet} sheet? (y/n): ").lower()
             if answer == "y":
-                current_sheet.delete_rows(cell.row)
-                print(f"Car ID: {car_id} successfully deleted.\n")
+                try:
+                    current_sheet.delete_rows(cell.row)
+                    print(f"Car ID: {car_id} successfully deleted.\n")
+                except Exception as e:
+                    print("Error: Cannot delete car from sheet.")
+                    print(f"Details: {e}")
                 remove_delivery(car_id)
                 return
             elif answer == "n":
@@ -321,7 +335,11 @@ def delete_car_from_sheet(sheet, car_id=None):
                 continue
     else:
         cell = current_sheet.find(car_id)
-        current_sheet.delete_rows(cell.row)
+        try:
+            current_sheet.delete_rows(cell.row)
+        except Exception as e:
+            print("Error: Cannot delete car from sheet.")
+            print(f"Details: {e}\n")
         remove_delivery(car_id)
 
 
@@ -397,7 +415,7 @@ def edit_car_in_stock():
                 case "0":
                     return
                 case _:
-                    print("Not a valid entry. Please try again.")
+                    print("Invalid input, please try again.\n")
 
     # Connect to the sheet and get the car to edit.
     # Get the cell of the car ID from the sheet to use when editing.
@@ -426,8 +444,9 @@ def edit_car_in_stock():
                             f"A{cell.row}:Q{cell.row}", [car_as_list])
                         print(f"Changes to car ID: {
                               car_to_edit.id} have been saved to the worksheet.\n")
-                    except:
+                    except Exception as e:
                         print("Error, changes not saved.")
+                        print(f"Details: {e}\n")
                         continue
                     return
                 elif confirm == "n":
@@ -457,8 +476,9 @@ def create_new_sales_sheet(sheet_name):
         new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=15)
         new_sheet.append_row(headings)
         print(f"New sales sheet created named '{sheet_name}'")
-    except:
+    except Exception as e:
         print("Error: Sheet could not be created.")
+        print(f"Details: {e}\n")
 
 
 def sell_car(current_sales_sheet):
