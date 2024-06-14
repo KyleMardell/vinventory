@@ -10,8 +10,7 @@ from input_validation import *
 
 class Car:
 
-    def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs,
-                 sold_price=None, deposit=None, payment_method=None, buyer_name=None, buyer_contact=None, sale_date=None):
+    def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
@@ -24,8 +23,6 @@ class Car:
         self.cost = cost
         self.repairs = repairs
         self.sold_price = sold_price if sold_price is not None else "N/A"
-        self.deposit = deposit if deposit is not None else "N/A"
-        self.payment_method = payment_method if payment_method is not None else "N/A"
         self.buyer_name = buyer_name if buyer_name is not None else "N/A"
         self.buyer_contact = buyer_contact if buyer_contact is not None else "N/A"
         self.sale_date = sale_date if sale_date is not None else "N/A"
@@ -35,8 +32,7 @@ class Car:
         Returns car object data values as a list
         """
         return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour,
-                self.status, self.price, self.cost, self.repairs, self.sold_price,
-                self.buyer_name, self.buyer_contact, self.sale_date]
+                self.status, self.price, self.cost, self.repairs, self.sold_price, self.buyer_name, self.buyer_contact, self.sale_date]
 
     def display_info(self, fields=15):
         """ 
@@ -178,7 +174,8 @@ def find_car_by_id(sheet_name):
         cars_in_stock = create_car_instances(sheet_data[1:])
         car_found = False
         while not car_found:
-            input_id = get_integer_input("Please enter a cars valid internal ID number: ")
+            input_id = get_integer_input(
+                "Please enter a cars valid internal ID number: ")
             for car in cars_in_stock:
                 if int(car.id) == input_id:
                     car.display_info(11)
@@ -308,7 +305,8 @@ def delete_car_from_sheet(sheet_name, car_id=None):
             if answer == "y":
                 try:
                     current_sheet.delete_rows(cell.row)
-                    print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
+                    print(f"Car ID: {car_id} successfully deleted from {
+                          sheet_name}.\n")
                 except Exception as e:
                     print("Error: Cannot delete car from sheet.")
                     print(f"Details: {e}")
@@ -323,7 +321,8 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         cell = current_sheet.find(car_id)
         try:
             current_sheet.delete_rows(cell.row)
-            print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
+            print(f"Car ID: {car_id} successfully deleted from {
+                  sheet_name}.\n")
         except Exception as e:
             print("Error: Cannot delete car from sheet.")
             print(f"Details: {e}\n")

@@ -1,4 +1,5 @@
 from sheets_utils import *
+import utils
 from utils import *
 from input_validation import get_integer_input, get_list_input
 from prettytable import PrettyTable
@@ -10,41 +11,38 @@ def stock_menu():
     """
     print("- Current Stock Menu -\n")
     print("Welcome to the stock menu.")
-    print("Here you can view a list of all stock with option number 1,")
-    print("or if you already know the internal ID number then you can view a cars details with option 2.")
-    print("Finally you can search through all stock for key words in option 3.\n")
+    print("Here you can view a list of all stock, see a cars details by entering its internal ID number,")
+    print("or search through all stock for cars with matching entered key words.\n")
     print("Please select one of the following options:")
-    print("1 - All Stock")
-    print("2 - Find By ID")
-    print("3 - Search Stock")
+    print("1 - View List of All Stock")
+    print("2 - View Car Information (ID number required)")
+    print("3 - Search Stock by Key Words")
 
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-3, 0 to quit): ")
-
+        clear_terminal()
         match selected_option:
             case 0:
-                clear_terminal()
                 quit()
             case 1:
-                clear_terminal()
                 print("- All Stock selected -\n")
                 print("Retrieving vehicle information...\n")
                 display_sheet_table("stock", 9)
                 break
             case 2:
-                clear_terminal()
                 print("- Find By ID selected -\n")
                 print("Retrieving vehicle information...\n")
                 find_car_by_id("stock")
                 break
             case 3:
-                clear_terminal()
                 print("- Search Stock selected -\n")
-                print("Here you can search for different terms seperated by commas.")
-                print("Enter search terms such as make (Citroen, BMW), colour (blue, red),")
+                print("Here you can search for different terms separated by commas.")
+                print(
+                    "Enter search terms such as make (Citroen, BMW), colour (blue, red),")
                 print("or year (2012, 2018) to name a few.")
-                print("Each car with a matching attribute will be displayed in a list.\n")
+                print(
+                    "Each car with a matching attribute will be displayed in a list.\n")
                 print("Retrieving vehicle information...\n")
                 search_car_by_criteria()
                 break
@@ -59,7 +57,7 @@ def edit_menu():
     Displays edit menu
     """
     print("- Add/Edit Vehicle Information -\n")
-    print("Here you can change/edit the details of cars in the system.")
+    print("Welcome to the add/edit menu.")
     print("You can add a new car to stock, edit a car currently in stock, sell a car,")
     print("create a delivery request or delete a cars details.\n")
     print("Choose one of the following options:")
@@ -72,42 +70,56 @@ def edit_menu():
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-5, 0 to quit): ")
-
+        clear_terminal()
         match (selected_option):
             case 0:
-                clear_terminal()
                 quit()
             case 1:
-                clear_terminal()
                 print("- Add A New Car To The Stock Sheet -\n")
                 print("You will be asked to enter the cars details one at a time.")
-                print("Please ensure all details are correct, you will be asked to confirm before submitting.\n")
+                print(
+                    "Please ensure all details are correct, you will be asked to confirm before submitting.\n")
                 new_car_details = get_new_car_details()
                 add_car_to_sheet(new_car_details, "stock")
                 break
             case 2:
-                clear_terminal()
                 print("- Edit A Car Currently In Stock-\n")
                 print("Here you can edit the details of a car currently in stock.")
-                print("The cars internal ID is required to find the car in the stock sheet.")
-                print("Once a car has been found, you can enter the name of an attribute to change it.")
-                print("After all changes have been made, they can be confirmed and saved.\n")
+                print(
+                    "The cars internal ID is required to find the car in the stock sheet.")
+                print(
+                    "Once a car has been found, you can enter the name of an attribute to change it.")
+                print(
+                    "After all changes have been made, they can be confirmed and saved.\n")
                 edit_car_in_stock()
                 break
             case 3:
-                clear_terminal()
-                print("- Mark A Car As Sold -\n")
+                print("- Sell a Car -\n")
+                print("To mark a car a sold, please enter the cars internal ID number.")
+                print(
+                    "You will be asked to enter the sale amount, buyers name and phone number.")
+                print(
+                    "Once confirmed, the car will be removed from the stock sheet and the sales")
+                print("information will be added to the current months sales sheet.")
+                print(
+                    "Note, any deliveries requested or scheduled for the car will remain.")
                 current_sales_sheet = get_current_sales_sheet_name()
                 sell_car(current_sales_sheet)
                 break
             case 4:
-                clear_terminal()
                 print("- Request A Delivery -\n")
+                print(
+                    "Here you can enter a cars internal ID number and request a delivery.")
+                print(
+                    "You will be asked to enter a delivery location and a request date will be automatically generated.\n")
                 delivery_request()
                 break
             case 5:
-                clear_terminal()
                 print("- Delete A Car From The Stock Sheet -\n")
+                print(
+                    "WARNING - Once a car has been deleted, it cannot be recovered and must be input as a new entry.")
+                print(
+                    "You will be asked to enter the cars internal ID number and confirm to delete the car from stock.\n")
                 delete_car_from_sheet("stock")
                 break
             case _:
@@ -121,6 +133,12 @@ def sales_menu():
     Displays Sales Menu
     """
     print("- Sales Reports -\n")
+    print("Welcome to the sales report menu.")
+    print("From here you can view a list of all cars sold in the current or a past month.")
+    print("You can also generate a report of a months sales. This will display information")
+    print("such as, number of cars sold, total monthly profit, average profit per car, etc.")
+    print("When viewing sales history data, you must input the year and month you wish to view.")
+    print("Note, earliest sales data sheet is 2/2024 (m/yyyy).\n")
     print("Choose one of the following options:")
     print("1 - Current Month: Sales List")
     print("2 - Current Month: sales Report")
@@ -130,13 +148,11 @@ def sales_menu():
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-4, 0 to quit): ")
-
+        clear_terminal()
         match (selected_option):
             case 0:
-                clear_terminal()
                 quit()
             case 1:
-                clear_terminal()
                 print("- Current Month: Sales List -\n")
                 current_sheet_name = get_current_sales_sheet_name()
                 sheet_exists = display_sheet_table(current_sheet_name, 15)
@@ -144,7 +160,6 @@ def sales_menu():
                     create_new_sales_sheet(current_sheet_name)
                 break
             case 2:
-                clear_terminal()
                 print("- Current Month: Sales Report -\n")
                 current_sheet_name = get_current_sales_sheet_name()
                 sheet_exists = generate_sales_report(current_sheet_name)
@@ -152,7 +167,6 @@ def sales_menu():
                     create_new_sales_sheet(current_sheet_name)
                 break
             case 3:
-                clear_terminal()
                 print("- Sales History: Sales Lists -\n")
                 print("Enter a year and month to display past sales data list.")
                 sheet_name = create_sheet_name()
@@ -161,9 +175,8 @@ def sales_menu():
                 display_sheet_table(sheet_name, 15)
                 break
             case 4:
-                clear_terminal()
                 print("- Sales History: Sales Reports -\n")
-                print("Enter a year and month to display past sales data list.")
+                print("Enter a year and month to display past sales data report.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
@@ -180,6 +193,9 @@ def deliveries_menu():
     Displays deliveries options
     """
     print("- Deliveries Options -\n")
+    print("Welcome to the deliveries menu.")
+    print("Here you can view a full delivery report, or see a list of requested, scheduled")
+    print("and completed deliveries. You can also request a new delivery.\n")
     print("Please select one of the following options:")
     print("1 - Full Delivery Report")
     print("2 - Requested Deliveries")
@@ -190,33 +206,27 @@ def deliveries_menu():
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-5, 0 to quit): ")
-
+        clear_terminal()
         match selected_option:
             case 0:
-                clear_terminal()
                 quit()
             case 1:
-                clear_terminal()
                 print("- Full Delivery Report -\n")
                 display_deliveries_table()
                 break
             case 2:
-                clear_terminal()
                 print("- Requested Deliveries -\n")
                 display_deliveries_table(["requested"])
                 break
             case 3:
-                clear_terminal()
                 print("- Scheduled Deliveries -\n")
                 display_deliveries_table(["scheduled"])
                 break
             case 4:
-                clear_terminal()
                 print("- Completed Deliveries -\n")
                 display_deliveries_table(["delivered"])
                 break
             case 5:
-                clear_terminal()
                 print("- Creating Delivery Request -\n")
                 delivery_request()
                 break
@@ -249,33 +259,28 @@ def main_menu():
     print("- Welcome to VinVentory car management system -\n")
     art()
     print("Please select one of the following options:")
-    print("1 - Current Stock")
-    print("2 - Add/Edit Vehicle Info")
+    print("1 - Current Stock Info")
+    print("2 - Add/Edit/Sell Car")
     print("3 - Sales Reports")
-    print("4 - Deliveries")
+    print("4 - Delivery Reports/Requests")
 
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-4, 0 to quit): ")
-
+        clear_terminal()
         match selected_option:
             case 0:
-                clear_terminal()
                 quit()
             case 1:
-                clear_terminal()
                 stock_menu()
                 break
             case 2:
-                clear_terminal()
                 edit_menu()
                 break
             case 3:
-                clear_terminal()
                 sales_menu()
                 break
             case 4:
-                clear_terminal()
                 deliveries_menu()
                 break
             case _:
@@ -290,11 +295,10 @@ def return_to_main_menu():
         print()
         answer = input(
             'Type "m" to return to the menu or "0" to quit.').lower()
+        clear_terminal()
         if answer == "0":
-            clear_terminal()
             quit()
         elif answer == "m":
-            clear_terminal()
             main_menu()
             return
         else:
