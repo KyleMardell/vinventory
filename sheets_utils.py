@@ -284,12 +284,6 @@ def delete_car_from_sheet(sheet, car_id=None):
     Deletes a car from the stock list.
     Asks user for a valid car id number and to confirm before deleting.
     """
-    current_sheet = connect_to_sheet(sheet)
-    if car_id == None:
-        car_to_delete = find_car_by_id(sheet)
-        car_id = car_to_delete.id
-    cell = current_sheet.find(car_id)
-
     def remove_delivery(id):
         """ 
         Checks if the car id is in the deliveries sheet and remove the entry if found.
@@ -301,21 +295,34 @@ def delete_car_from_sheet(sheet, car_id=None):
             print("Car found in deliveries sheet. Delivery request deleted.")
         except:
             print("Car not found in deliveries sheet. No deliveries to delete.")
+    
+    current_sheet = connect_to_sheet(sheet)
+    if car_id == None:
+        car_to_delete = find_car_by_id(sheet)
+        car_id = car_to_delete.id
+        cell = current_sheet.find(car_id)
+        while True:
+            answer = input(
+                f"Are you sure you would like to delete this car from the {sheet} sheet? (y/n): ").lower()
+            if answer == "y":
+                current_sheet.delete_rows(cell.row)
+                print(f"Car ID: {car_id} successfully deleted.\n")
+                remove_delivery(car_id)
+                return
+            elif answer == "n":
+                print("Cancelled\n")
+                return
+            else:
+                print("Invalid input, please try again.\n")
+                continue
+    else:
+        cell = current_sheet.find(car_id)
+        current_sheet.delete_rows(cell.row)
+        remove_delivery(car_id)
 
-    while True:
-        answer = input(
-            f"Are you sure you would like to delete this car from the {sheet} sheet? (y/n): ").lower()
-        if answer == "y":
-            current_sheet.delete_rows(cell.row)
-            print(f"Car ID: {car_id} successfully deleted.\n")
-            remove_delivery(car_id)
-            return
-        elif answer == "n":
-            print("Cancelled\n")
-            return
-        else:
-            print("Invalid input, please try again.\n")
-            continue
+
+
+
 
 
 def edit_car_in_stock():
@@ -477,6 +484,7 @@ def sell_car(current_sales_sheet):
                     sold_car.buyer_name = buyer_name
                     sold_car.buyer_contact = buyer_contact
                     sold_car.sale_date = sale_date
+                    sold_car.status = "Sold"
                     return sold_car
                 elif confirm == "n":
                     print("Cancelled.")
