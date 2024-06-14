@@ -58,7 +58,6 @@ def edit_menu():
     print("4 - Create Delivery Request (Car ID Required)")
     print("5 - Delete a car from the stock sheet (Car ID Required)")
 
-
     while True:
         selected_option = get_integer_input(
             "\nSelect an option (1-5, 0 to quit): ")
@@ -98,6 +97,7 @@ def edit_menu():
                 print("Not a valid entry. Please try again.\n")
 
     return_to_main_menu()
+
 
 def sales_menu():
     """
@@ -270,6 +270,7 @@ def return_to_main_menu():
     Returns to main menu or quits on user input.
     """
     while True:
+        print()
         answer = input(
             'Type "m" to return to the menu or "0" to quit.').lower()
         if answer == "0":

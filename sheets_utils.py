@@ -68,7 +68,8 @@ class Car:
         destination = get_site_input(self.status)
         create_delivery_request(
             self.id, self.make, self.model, self.year, self.milage, self.status, destination)
-        update_delivery_status_in_stock_sheet(self.id, self.status, delivery=True)
+        update_delivery_status_in_stock_sheet(
+            self.id, self.status, delivery=True)
 
 
 def create_car_instances(car_data):
@@ -161,6 +162,7 @@ def display_sheet_table(sheet_name, columns):
             print("Error: Cannot display table.")
             return False
 
+
 def find_car_by_id(sheet_name):
     """ 
     Displays a single cars info.
@@ -245,6 +247,7 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     except:
         print("Error: could not add delivery to sheet.")
 
+
 def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     """ 
     Updates the delivery status of a car in the stock Google Sheet
@@ -253,16 +256,17 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     stock_sheet = connect_to_sheet("stock")
     id_cell = stock_sheet.find(id)
     status_cell = f"H{id_cell.row}"
-    
+
     suffix = " - Delivery requested"
-    
+
     if delivery:
         new_status = f"{status}{suffix}"
     else:
         new_status = status.removesuffix(suffix)
-        
+
     stock_sheet.update_acell(status_cell, new_status)
     print(f"\nStock sheet information for car ID: {id} has been updated.")
+
 
 def add_car_to_sheet(car_as_list, sheet_name):
     """ 
@@ -295,7 +299,7 @@ def delete_car_from_sheet(sheet, car_id=None):
             print("Car found in deliveries sheet. Delivery request deleted.")
         except:
             print("Car not found in deliveries sheet. No deliveries to delete.")
-    
+
     current_sheet = connect_to_sheet(sheet)
     if car_id == None:
         car_to_delete = find_car_by_id(sheet)
@@ -440,12 +444,14 @@ def edit_car_in_stock():
             print("Invalid input, please try again.\n")
             continue
 
+
 def create_new_sales_sheet(sheet_name):
     """ 
     Creates a new sales sheet.
     """
-    headings = ["ID", "Make", "Model", "Year", "Milage", "Engine", "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
-    
+    headings = ["ID", "Make", "Model", "Year", "Milage", "Engine", "Colour", "Status",
+                "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
+
     try:
         vinv_sheet = open_google_sheet()
         new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=15)
@@ -453,15 +459,16 @@ def create_new_sales_sheet(sheet_name):
         print(f"New sales sheet created named '{sheet_name}'")
     except:
         print("Error: Sheet could not be created.")
-        
+
+
 def sell_car(current_sales_sheet):
     """ 
     Gets sale details from user and moves car from stock sheet to sales sheet.
     """
     print("- Sell Car Menu -\n")
-    
+
     sold_car = find_car_by_id("stock")
-    
+
     def get_sales_details():
         """ 
         Gets the sales details from the user and adds them to the current car.
@@ -469,12 +476,15 @@ def sell_car(current_sales_sheet):
         current_date = datetime.now()
         sale_date = str(current_date)[:10]
         while True:
-            sold_price = get_integer_input("Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
+            sold_price = get_integer_input(
+                "Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
             buyer_name = get_string_input("Enter the buyers name: ")
-            buyer_contact = get_integer_input("Enter the buyers phone number: ")
-            
+            buyer_contact = get_integer_input(
+                "Enter the buyers phone number: ")
+
             while True:
-                confirm = input("Confirm and save new sale details (y/n, enter 0 to exit): ").lower()
+                confirm = input(
+                    "Confirm and save new sale details (y/n, enter 0 to exit): ").lower()
                 if confirm == "y":
                     sold_car.sold_price = sold_price
                     sold_car.buyer_name = buyer_name
@@ -493,7 +503,8 @@ def sell_car(current_sales_sheet):
                     continue
 
     while True:
-        answer = input("Would you like to continue selling this car? (y/n): ").lower()
+        answer = input(
+            "Would you like to continue selling this car? (y/n): ").lower()
         if answer == "y":
             new_sale = get_sales_details()
             if new_sale:
