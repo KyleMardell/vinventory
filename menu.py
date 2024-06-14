@@ -41,6 +41,10 @@ def stock_menu():
             case 3:
                 clear_terminal()
                 print("- Search Stock selected -\n")
+                print("Here you can search for different terms seperated by commas.")
+                print("Enter search terms such as make (Citroen, BMW), colour (blue, red),")
+                print("or year (2012, 2018) to name a few.")
+                print("Each car with a matching attribute will be displayed in a list.\n")
                 print("Retrieving vehicle information...\n")
                 search_car_by_criteria()
                 break
@@ -55,6 +59,9 @@ def edit_menu():
     Displays edit menu
     """
     print("- Add/Edit Vehicle Information -\n")
+    print("Here you can change/edit the details of cars in the system.")
+    print("You can add a new car to stock, edit a car currently in stock, sell a car,")
+    print("create a delivery request or delete a cars details.\n")
     print("Choose one of the following options:")
     print("1 - Add a new car to the stock sheet")
     print("2 - Edit a car currently in stock (Car ID Required)")
@@ -73,12 +80,18 @@ def edit_menu():
             case 1:
                 clear_terminal()
                 print("- Add A New Car To The Stock Sheet -\n")
+                print("You will be asked to enter the cars details one at a time.")
+                print("Please ensure all details are correct, you will be asked to confirm before submitting.\n")
                 new_car_details = get_new_car_details()
                 add_car_to_sheet(new_car_details, "stock")
                 break
             case 2:
                 clear_terminal()
                 print("- Edit A Car Currently In Stock-\n")
+                print("Here you can edit the details of a car currently in stock.")
+                print("The cars internal ID is required to find the car in the stock sheet.")
+                print("Once a car has been found, you can enter the name of an attribute to change it.")
+                print("After all changes have been made, they can be confirmed and saved.\n")
                 edit_car_in_stock()
                 break
             case 3:

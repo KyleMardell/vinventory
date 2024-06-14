@@ -101,9 +101,10 @@ def generate_sales_report(sheet_name):
         print(f"Gross Profit: £{gross_profit}")
         print(f"Net Profit (gross minus repairs): £{net_profit}")
         return True
-    except:
+    except Exception as e:
         # False return is handled when the function is called.
         print("Error: Missing Data")
+        print(f"Details: {e}\n")
         return False
 
 

@@ -292,40 +292,26 @@ def add_car_to_sheet(car_as_list, sheet_name):
         print(f"Details: {e}\n")
 
 
-def delete_car_from_sheet(sheet, car_id=None):
+def delete_car_from_sheet(sheet_name, car_id=None):
     """ 
     Deletes a car from the stock list.
     Asks user for a valid car id number and to confirm before deleting.
     """
-    def remove_delivery(id):
-        """ 
-        Checks if the car id is in the deliveries sheet and remove the entry if found.
-        """
-        deliveries_sheet = connect_to_sheet("deliveries")
-        try:
-            d_cell = deliveries_sheet.find(id)
-            deliveries_sheet.delete_rows(d_cell.row)
-            print("Car found in deliveries sheet. Delivery request deleted.")
-        except Exception as e:
-            print("Car not found in deliveries sheet. No deliveries to delete.")
-            print(f"Details: {e}\n")
-
-    current_sheet = connect_to_sheet(sheet)
+    current_sheet = connect_to_sheet(sheet_name)
     if car_id == None:
-        car_to_delete = find_car_by_id(sheet)
+        car_to_delete = find_car_by_id(sheet_name)
         car_id = car_to_delete.id
         cell = current_sheet.find(car_id)
         while True:
             answer = input(
-                f"Are you sure you would like to delete this car from the {sheet} sheet? (y/n): ").lower()
+                f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): ").lower()
             if answer == "y":
                 try:
                     current_sheet.delete_rows(cell.row)
-                    print(f"Car ID: {car_id} successfully deleted.\n")
+                    print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
                 except Exception as e:
                     print("Error: Cannot delete car from sheet.")
                     print(f"Details: {e}")
-                remove_delivery(car_id)
                 return
             elif answer == "n":
                 print("Cancelled\n")
@@ -337,10 +323,10 @@ def delete_car_from_sheet(sheet, car_id=None):
         cell = current_sheet.find(car_id)
         try:
             current_sheet.delete_rows(cell.row)
+            print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
         except Exception as e:
             print("Error: Cannot delete car from sheet.")
             print(f"Details: {e}\n")
-        remove_delivery(car_id)
 
 
 def edit_car_in_stock():

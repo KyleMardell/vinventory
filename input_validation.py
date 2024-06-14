@@ -18,6 +18,7 @@ def get_integer_input(message):
                 print("Error: Must be a positive number.")
         except ValueError as e:
             print("Error: Not a valid number.")
+            print(f"Details: {e}\n")
 
 
 def get_string_input(message):
@@ -32,7 +33,7 @@ def get_string_input(message):
         if re.fullmatch(letters, user_input):
             return user_input.capitalize()
         else:
-            print("Error: Input must not contain numbers, or special characters.")
+            print("Input must not contain numbers, or special characters.")
 
 
 def get_list_input(message):
