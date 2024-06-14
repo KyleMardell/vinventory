@@ -321,10 +321,6 @@ def delete_car_from_sheet(sheet, car_id=None):
         remove_delivery(car_id)
 
 
-
-
-
-
 def edit_car_in_stock():
     """ 
     Edits a car in stocks information.
@@ -478,7 +474,7 @@ def sell_car(current_sales_sheet):
             buyer_contact = get_integer_input("Enter the buyers phone number: ")
             
             while True:
-                confirm = input("Confirm and save new details (y/n): ").lower()
+                confirm = input("Confirm and save new sale details (y/n, enter 0 to exit): ").lower()
                 if confirm == "y":
                     sold_car.sold_price = sold_price
                     sold_car.buyer_name = buyer_name
@@ -489,6 +485,9 @@ def sell_car(current_sales_sheet):
                 elif confirm == "n":
                     print("Cancelled.")
                     break
+                elif confirm == "0":
+                    print("Exiting.")
+                    return False
                 else:
                     print("Invalid input, please try again.\n")
                     continue
@@ -496,10 +495,11 @@ def sell_car(current_sales_sheet):
     while True:
         answer = input("Would you like to continue selling this car? (y/n): ").lower()
         if answer == "y":
-            get_sales_details()
-            car_as_list = sold_car.car_as_list()
-            add_car_to_sheet(car_as_list, current_sales_sheet)
-            delete_car_from_sheet("stock", sold_car.id)
+            new_sale = get_sales_details()
+            if new_sale:
+                car_as_list = new_sale.car_as_list()
+                add_car_to_sheet(car_as_list, current_sales_sheet)
+                delete_car_from_sheet("stock", new_sale.id)
             return
         elif answer == "n":
             print("Cancelled.")
