@@ -4,12 +4,28 @@ from prettytable import PrettyTable
 from datetime import datetime, timedelta
 from input_validation import get_integer_input, get_site_input
 from input_validation import *
+import os
+import platform
+
+# function to clear the terminal
+
+
+def clear_terminal():
+    """ 
+    Checks the operating system and clears the terminal
+    """
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 # Car class and functions
 
 
 class Car:
 
+    # define minimum values to create a car, values match google sheets columns in order,
+    # with the optional values added when a car is sold.
     def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
@@ -27,6 +43,7 @@ class Car:
         self.buyer_contact = buyer_contact if buyer_contact is not None else "N/A"
         self.sale_date = sale_date if sale_date is not None else "N/A"
 
+    # function to return the cars properties as a list in the same order as the google sheet.
     def car_as_list(self):
         """ 
         Returns car object data values as a list
@@ -34,6 +51,7 @@ class Car:
         return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour,
                 self.status, self.price, self.cost, self.repairs, self.sold_price, self.buyer_name, self.buyer_contact, self.sale_date]
 
+    # function to display the cars properties in a table
     def display_info(self, fields=15):
         """ 
         Prints a table containing all car data
@@ -45,6 +63,7 @@ class Car:
         table.add_row(self.car_as_list()[:fields])
         print(table)
 
+    # function to calculate the cars profit when sold
     def calculate_profit(self):
         """ 
         Calculates profit if car has been sold
@@ -57,6 +76,7 @@ class Car:
             print("Error: Cannot convert to int.")
             print(f"Details: {e}\n")
 
+    # function to create a delivery request for the car
     def request_delivery(self):
         print(f"Creating delivery request for car ID: {
             self.id} ({self.colour} {self.make} {self.model})")
@@ -67,6 +87,10 @@ class Car:
             self.id, self.make, self.model, self.year, self.milage, self.status, destination)
         update_delivery_status_in_stock_sheet(
             self.id, self.status, delivery=True)
+
+# function to create a list of car instances from a given list of cars
+# uses the spread operator to create either cars in stock or
+# sold cars with additional sales information
 
 
 def create_car_instances(car_data):
@@ -81,14 +105,18 @@ def create_car_instances(car_data):
 
 # Sheets functions
 
+# function to open the connection to the 'VinVentory' google sheet
+# Could be made to accept any creds file and sheet name by adding parameters.
+# Not used here as I am only connecting to 1 sheet.
+# returns the full sheet (all worksheets) if found
+
 
 def open_google_sheet():
     """
     Connects to google sheet via api, using gspread.
-    Could be made to accept any creds file and sheet name by adding parameters.
-    Not used here as I am only connecting to 1 sheet.
     Returns SHEET, open sheet data.
     """
+    # the scope defines which google drive and sheets api functions are needed
     SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive.file",
@@ -105,10 +133,12 @@ def open_google_sheet():
         print("Error: Cannot connect to the Google Sheets API")
         print(f"Details: {e}\n")
 
+# function that connects to a worksheet within the 'VinVentory' google sheet
+
 
 def connect_to_sheet(sheet_name):
     """ 
-    Connect to sheet within Google Sheets using provided name,
+    Connect to worksheet within Google Sheets using provided name,
     for editing sheet.
     """
     print("\nRetrieving Worksheet Information...\n")
@@ -119,6 +149,9 @@ def connect_to_sheet(sheet_name):
     except Exception as e:
         print("Error, sheet not found:")
         print(f"Details: {e}\n")
+
+# function to get all the sheet data from a worksheet
+# returns as a list of lists (a list of cars, each car listing its information)
 
 
 def get_sheet_data(sheet_name):
@@ -135,11 +168,15 @@ def get_sheet_data(sheet_name):
         print(f"Error, sheet not found.")
         print(f"Details: {e}\n")
 
+# function to create a table from a worksheet
+# creates a table with the provided number of columns to account
+# for sold and unsold cars
+
 
 def display_sheet_table(sheet_name, columns):
     """
     Displays a worksheet as a table.
-    Requires worksheet name.
+    Requires worksheet name and amount of columns.
     """
     sheet_data = get_sheet_data(sheet_name)
     if sheet_data:
@@ -161,6 +198,11 @@ def display_sheet_table(sheet_name, columns):
             print("Error: Cannot display table.")
             print(f"Details: {e}\n")
             return False
+
+# function to find a car within a worksheet
+# creates a list of cars using create_car_instances and loops through to
+# check for a provided ID number
+# if found, returns car.display_info to show the user the cars information
 
 
 def find_car_by_id(sheet_name):
@@ -190,6 +232,9 @@ def find_car_by_id(sheet_name):
     print("ID not found.")
     return False
 
+# function to get all worksheet names within the 'VinVentory' google sheet
+# returns a list of all the worksheet names
+
 
 def get_worksheet_names():
     """ 
@@ -203,6 +248,11 @@ def get_worksheet_names():
     except Exception as e:
         print("Error: Cannot retrieve worksheet name data")
         print(f"Details: {e}\n")
+
+# function to generate a unique ID number by createing a list of
+# cars called current_cars and looping through each worksheet and adding them to the list
+# once the list of all cars in all worksheets is complete, all ID numbers are checked
+# the highest found ID is incremented by 1 to create and return a unique ID
 
 
 def generate_unique_id():
@@ -231,6 +281,10 @@ def generate_unique_id():
         print("Error: Cannot generate unique ID number.")
         print(f"Details: {e}\n")
 
+# function to add a delivery request to the delivery worksheet
+# creates a request date using the current date and a scheduled date
+# 3 days ahead of the current date.
+
 
 def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     """ 
@@ -252,6 +306,9 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
         print("Error: could not add delivery to sheet.")
         print(f"Details: {e}\n")
 
+# function to update the status of a car in stock when a delivery is requested
+# can be used to remove a delivery status from a car in stock
+
 
 def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     """ 
@@ -272,6 +329,8 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     stock_sheet.update_acell(status_cell, new_status)
     print(f"\nStock sheet information for car ID: {id} has been updated.")
 
+# function to add a car to a sheet using provided sheet name and car as a list
+
 
 def add_car_to_sheet(car_as_list, sheet_name):
     """ 
@@ -288,6 +347,11 @@ def add_car_to_sheet(car_as_list, sheet_name):
         print("Error: Could not add vehicle to sheet.")
         print(f"Details: {e}\n")
 
+# function to delete a car from a sheet
+# uses the find function to check if a car with provided ID exists
+# optional car id parameter deleted the car with provided ID number
+# if no ID is provided, the user is asked to provide one
+
 
 def delete_car_from_sheet(sheet_name, car_id=None):
     """ 
@@ -303,6 +367,7 @@ def delete_car_from_sheet(sheet_name, car_id=None):
             answer = input(
                 f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): ").lower()
             if answer == "y":
+                clear_terminal()
                 try:
                     current_sheet.delete_rows(cell.row)
                     print(f"Car ID: {car_id} successfully deleted from {
@@ -326,6 +391,11 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         except Exception as e:
             print("Error: Cannot delete car from sheet.")
             print(f"Details: {e}\n")
+
+# function to edit a car currently in stock
+# asks the user to enter a cars ID to edit, thens asks which attribute
+# they would like to edit, until they enter 0 to save and exit
+# this functions contains an inner function to get the changes made to a car for better readability
 
 
 def edit_car_in_stock():
@@ -421,6 +491,7 @@ def edit_car_in_stock():
                 confirm = input(
                     "Do you want to save these changes? (y/n): \n").lower()
                 if confirm == "y":
+                    clear_terminal()
                     print("Confirmed...")
                     try:
                         # Get the car as a list and update the Google Sheet
@@ -448,6 +519,8 @@ def edit_car_in_stock():
             print("Invalid input, please try again.\n")
             continue
 
+# function to create a new sales sheet using consistent headings for all sales sheets.
+
 
 def create_new_sales_sheet(sheet_name):
     """ 
@@ -464,6 +537,10 @@ def create_new_sales_sheet(sheet_name):
     except Exception as e:
         print("Error: Sheet could not be created.")
         print(f"Details: {e}\n")
+
+# function to mark a car as sold, adding to the current sales sheet and
+# deleting from the stock sheet.
+# contains an inner function to get the sale details for readability
 
 
 def sell_car(current_sales_sheet):
@@ -491,6 +568,7 @@ def sell_car(current_sales_sheet):
                 confirm = input(
                     "Confirm and save new sale details (y/n, enter 0 to exit): ").lower()
                 if confirm == "y":
+                    clear_terminal()
                     sold_car.sold_price = sold_price
                     sold_car.buyer_name = buyer_name
                     sold_car.buyer_contact = buyer_contact

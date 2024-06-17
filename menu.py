@@ -1,10 +1,9 @@
 from sheets_utils import *
-import utils
 from utils import *
 from input_validation import get_integer_input, get_list_input
 from prettytable import PrettyTable
 
-
+# stock menu
 def stock_menu():
     """
     Displays stock menu and runs menu option functions.
@@ -20,11 +19,11 @@ def stock_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-3, 0 to quit): ")
+            "\nSelect an option (1-3, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
-                quit()
+                break
             case 1:
                 print("- All Stock selected -\n")
                 print("Retrieving vehicle information...\n")
@@ -51,7 +50,7 @@ def stock_menu():
 
     return_to_main_menu()
 
-
+# edit menu
 def edit_menu():
     """ 
     Displays edit menu
@@ -69,11 +68,11 @@ def edit_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-5, 0 to quit): ")
+            "\nSelect an option (1-5, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
-                quit()
+                break
             case 1:
                 print("- Add A New Car To The Stock Sheet -\n")
                 print("You will be asked to enter the cars details one at a time.")
@@ -127,7 +126,7 @@ def edit_menu():
 
     return_to_main_menu()
 
-
+# sales menu
 def sales_menu():
     """
     Displays Sales Menu
@@ -147,11 +146,11 @@ def sales_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-4, 0 to quit): ")
+            "\nSelect an option (1-4, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
-                quit()
+                break
             case 1:
                 print("- Current Month: Sales List -\n")
                 current_sheet_name = get_current_sales_sheet_name()
@@ -187,7 +186,7 @@ def sales_menu():
 
     return_to_main_menu()
 
-
+# deliveries menu
 def deliveries_menu():
     """
     Displays deliveries options
@@ -205,11 +204,11 @@ def deliveries_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-5, 0 to quit): ")
+            "\nSelect an option (1-5, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
-                quit()
+                break
             case 1:
                 print("- Full Delivery Report -\n")
                 display_deliveries_table()
@@ -235,7 +234,7 @@ def deliveries_menu():
 
     return_to_main_menu()
 
-
+# ascii art
 def art():
     art = ['    .---------------.',
            '   /                 \\      - KM Car Sales - ',
@@ -250,7 +249,7 @@ def art():
     for line in art:
         print(line)
 
-
+# main menu
 def main_menu():
     """
     Display welcome message and menu options
@@ -286,7 +285,7 @@ def main_menu():
             case _:
                 print("Not a valid entry, please try again.")
 
-
+# function that asks the user to return to the menu or quit
 def return_to_main_menu():
     """
     Returns to main menu or quits on user input.

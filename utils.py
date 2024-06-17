@@ -1,21 +1,13 @@
 from sheets_utils import *
 from input_validation import *
 from prettytable import PrettyTable
-import os
-import platform
 from datetime import datetime
 
 
-def clear_terminal():
-    """ 
-    Checks the operating system and clears the terminal
-    """
-    if platform.system() == "Windows":
-        os.system("cls")
-    else:
-        os.system("clear")
-
-
+# function to search for a car by provided input terms
+# creates a list of all the cars in the stock sheet and ask
+# the user to enter search criteria.
+# returns a list of all cars with matching criteria
 def search_car_by_criteria():
     """ 
     Search for a car by criteria.
@@ -30,6 +22,7 @@ def search_car_by_criteria():
         search_terms = get_list_input(
             "Enter search terms separated by comma's (E.g. 'Red, Ford,' or '2020, white, volvo'): ")
 
+        # loops through cars and checks if they contain the given criteria/terms
         for car in stock_cars:
             term_found = False
             for term in search_terms:
@@ -39,6 +32,7 @@ def search_car_by_criteria():
             if term_found:
                 matching_cars.append(car)
 
+        # if no cars are found, display a message, else create a table of cars and display to the terminal
         if matching_cars == []:
             print(f"No Matches found for: {search_terms}")
             continue
@@ -50,7 +44,7 @@ def search_car_by_criteria():
                 table.add_row(car.car_as_list()[:11])
             print(table)
 
-
+# function to create and display a sales report from a sheet
 def generate_sales_report(sheet_name):
     """ 
     Calculates all relevant sales data and
@@ -68,21 +62,31 @@ def generate_sales_report(sheet_name):
         highest_profit = (0, 0)
         lowest_profit = (sold_cars[0].id, sold_cars[0].calculate_profit())
 
+        # loops through all the cars in the sheet
         for car in sold_cars:
+            # adds to profit to total profit
             total_profit += car.calculate_profit()
+            # adds repairs to total repairs
             total_repairs += int(car.repairs)
+            # adds cost to total cost
             total_purchase_costs += int(car.cost)
+            # adds sales price to total takings
             total_takings += int(car.sold_price)
 
+            # checks if the current car has the highest or lowest profit in the sheet
             if int(car.calculate_profit()) > highest_profit[1]:
                 highest_profit = (car.id, int(car.calculate_profit()))
             if int(car.calculate_profit()) < lowest_profit[1]:
                 lowest_profit = (car.id, int(car.calculate_profit()))
 
+        # calculates the average profit per car
         average_profit = int(total_profit / number_of_car_sold)
+        # calculates the gross profit, before repair costs
         gross_profit = total_takings - total_purchase_costs
+        # calculates net profit after repair costs
         net_profit = total_takings - (total_purchase_costs + total_repairs)
 
+        # generates the reports and displays the information in an easy to read format to the user
         print(f"Sales Report for {sheet_name}")
         print("----------")
         print(f"Number of car sold: {number_of_car_sold}")
@@ -107,7 +111,7 @@ def generate_sales_report(sheet_name):
         print(f"Details: {e}\n")
         return False
 
-
+# function to get the current months sales sheet name suing datetime
 def get_current_sales_sheet_name():
     """ 
     Returns the current months sales sheet name
@@ -118,7 +122,8 @@ def get_current_sales_sheet_name():
     sheet_name = f"sold-{current_month}-{current_year}"
     return sheet_name
 
-
+# creates a new sheet name using the current month
+# this function is called if a current months sheet does not exist
 def create_sheet_name():
     while True:
         current_year = datetime.now().year
@@ -137,7 +142,8 @@ def create_sheet_name():
 
     return f"sold-{user_month}-{user_year}"
 
-
+# function to display the deliveries sheet as a table
+# can be provided with a single parameter to filter the results
 def display_deliveries_table(delivery_status=["scheduled", "requested", "delivered"]):
     """ 
     Displays deliveries sheet as a table with provided delivery status,
@@ -153,7 +159,9 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
 
     print(table)
 
-
+# function to create a delivery request
+# asks the user to input the ID of the car they want to request a
+# delivery for and confirm the request
 def delivery_request():
     answer = "n"
     while True:
@@ -171,6 +179,8 @@ def delivery_request():
         else:
             print("Not a valid entry, please try again.")
 
+# function to get the details of a new car from the user
+# creates and returns a car instance from the user input
 def get_new_car_details():
     """ 
     Returns car information as a list. In the same order as the Google Sheet.
