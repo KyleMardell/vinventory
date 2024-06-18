@@ -2,6 +2,7 @@ from sheets_utils import *
 from utils import *
 from input_validation import get_integer_input, get_list_input
 from prettytable import PrettyTable
+from help import display_help
 
 # stock menu
 def stock_menu():
@@ -16,6 +17,7 @@ def stock_menu():
     print("1 - View List of All Stock")
     print("2 - View Car Information (ID number required)")
     print("3 - Search Stock by Key Words")
+    print("0 - Return to Main Menu")
 
     while True:
         selected_option = get_integer_input(
@@ -65,6 +67,7 @@ def edit_menu():
     print("3 - Mark a car as sold (Car ID Required)")
     print("4 - Create Delivery Request (Car ID Required)")
     print("5 - Delete a car from the stock sheet (Car ID Required)")
+    print("0 - Return to Main Menu")
 
     while True:
         selected_option = get_integer_input(
@@ -143,6 +146,7 @@ def sales_menu():
     print("2 - Current Month: sales Report")
     print("3 - Sales History: Sales Lists")
     print("4 - Sales History: Sales Reports")
+    print("0 - Return to Main Menu")
 
     while True:
         selected_option = get_integer_input(
@@ -201,6 +205,7 @@ def deliveries_menu():
     print("3 - Scheduled Deliveries")
     print("4 - Completed Deliveries")
     print("5 - Create Delivery Request (Car ID Required)")
+    print("0 - Return to Main Menu")
 
     while True:
         selected_option = get_integer_input(
@@ -262,10 +267,12 @@ def main_menu():
     print("2 - Add/Edit/Sell Car")
     print("3 - Sales Reports")
     print("4 - Delivery Reports/Requests")
+    print("5 - Help")
+    print("0 - Exit Program")
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-4, 0 to quit): ")
+            "\nSelect an option (1-5, 0 to quit): ")
         clear_terminal()
         match selected_option:
             case 0:
@@ -282,6 +289,9 @@ def main_menu():
             case 4:
                 deliveries_menu()
                 break
+            case 5:
+                display_help()
+                return_to_main_menu()
             case _:
                 print("Not a valid entry, please try again.")
 
