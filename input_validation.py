@@ -9,7 +9,7 @@ def get_integer_input(message):
     Returns input as int if valid
     """
     while True:
-        user_input = input(message)
+        user_input = input(message + "\n")
         try:
             number = int(user_input)
             if number >= 0:
@@ -28,7 +28,7 @@ def get_string_input(message):
     """
     letters = r'^[a-z,A-Z]+$'
     while True:
-        user_input = input(message)
+        user_input = input(message + "\n")
 
         if re.fullmatch(letters, user_input):
             return user_input.capitalize()
@@ -41,7 +41,7 @@ def get_list_input(message):
     Returns a list of strings from user input, separated by commas.
     """
     while True:
-        user_input = input(message).lower()
+        user_input = input(message + "\n").lower()
         if user_input == "":
             print("No value entered")
             continue
@@ -63,7 +63,7 @@ def get_site_input(current_site):
             sites_string += site.capitalize() + " "
     while True:
         print(sites_string)
-        site = input("Please enter a site: ").lower()
+        site = input("Please enter a site: " + "\n").lower()
         if site in current_site.lower():
             print(f"Error: {site.capitalize()} is the current site.")
             print("Please enter a different site.")
@@ -79,7 +79,7 @@ def get_continue(clear_terminal, return_to_main_menu):
     if 'n' the user is asked to return to menu or quit.
     """
     while True:
-        answer = input("Would you like to continue (y/n)? ").lower()
+        answer = input("Would you like to continue (y/n)? " + "\n").lower()
         match answer:
             case "y":
                 print("Continuing")
@@ -119,7 +119,7 @@ def get_engine_input(message):
     """
     pattern = '\d.\d'
     while True:
-        user_input = input(message)
+        user_input = input(message + "\n")
 
         if re.match(pattern, user_input):
             user_input = float(user_input)
@@ -145,13 +145,13 @@ def get_colour_input(message):
                    "pink", "orange", "blue", "purple", "green", "yellow"]
 
     while True:
-        user_input = input(message).lower()
+        user_input = input(message + "\n").lower()
 
         if user_input in car_colours:
             return user_input.capitalize()
         else:
             print(f"{user_input}, is not in our common colour list.")
-            answer = input("Would you like to continue (y/n): ").lower()
+            answer = input("Would you like to continue (y/n): " + "\n").lower()
             if answer == "y":
                 return user_input.capitalize()
             else:
@@ -167,7 +167,7 @@ def get_location_input(message):
     locations = ["leeds", "liverpool", "manchester", "preston", "york"]
 
     while True:
-        user_input = input(message).lower()
+        user_input = input(message + "\n").lower()
 
         if user_input in locations:
             return user_input.capitalize()
@@ -189,7 +189,7 @@ def get_price_input(message, cost, repairs):
             return user_input
         elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
             answer = input(f"The price of £{
-                           user_input} is less than 20% calculated profit. Is this correct? (y/n): ").lower()
+                        user_input} is less than 20% calculated profit. Is this correct? (y/n): \n").lower()
             if answer == "y":
                 return user_input
             else:

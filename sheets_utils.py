@@ -365,7 +365,7 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         cell = current_sheet.find(car_id)
         while True:
             answer = input(
-                f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): ").lower()
+                f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): \n").lower()
             if answer == "y":
                 clear_terminal()
                 try:
@@ -415,7 +415,7 @@ def edit_car_in_stock():
         changes = None
         while True:
             changes = input(
-                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: ").lower()
+                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: \n").lower()
             match (changes):
                 case "make":
                     car_to_edit.make = get_string_input(
@@ -424,7 +424,7 @@ def edit_car_in_stock():
                     continue
                 case "model":
                     car_to_edit.model = input(
-                        "Enter new model details: ").capitalize()
+                        "Enter new model details: \n").capitalize()
                     print("Confirmed.\n")
                     continue
                 case "year":
@@ -481,7 +481,7 @@ def edit_car_in_stock():
 
     while True:
         answer = input(f"Are you sure you would like to edit the car, ID: {
-                       car_to_edit.id}? (y/n): ").lower()
+                       car_to_edit.id}? (y/n): \n").lower()
         if answer == "y":
             # Get the changes to the car
             get_changes()
@@ -566,7 +566,7 @@ def sell_car(current_sales_sheet):
 
             while True:
                 confirm = input(
-                    "Confirm and save new sale details (y/n, enter 0 to exit): ").lower()
+                    "Confirm and save new sale details (y/n, enter 0 to exit): \n").lower()
                 if confirm == "y":
                     clear_terminal()
                     sold_car.sold_price = sold_price
@@ -587,7 +587,7 @@ def sell_car(current_sales_sheet):
 
     while True:
         answer = input(
-            "Would you like to continue selling this car? (y/n): ").lower()
+            "Would you like to continue selling this car? (y/n): \n").lower()
         if answer == "y":
             new_sale = get_sales_details()
             if new_sale:

@@ -303,7 +303,7 @@ def return_to_main_menu():
     while True:
         print()
         answer = input(
-            'Type "m" to return to the menu or "0" to quit.').lower()
+            'Type "m" to return to the menu or "0" to quit.\n').lower()
         clear_terminal()
         if answer == "0":
             quit()

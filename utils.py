@@ -168,7 +168,7 @@ def delivery_request():
         if answer == "n":
             car_to_deliver = find_car_by_id("stock")
         
-        answer = input("Would you like to continue? (y/n): ")
+        answer = input("Would you like to continue? (y/n): \n")
         if answer == "y":
             car_to_deliver.request_delivery()
             return
@@ -195,7 +195,7 @@ def get_new_car_details():
         if answer == "n":
             make = get_string_input("Enter the vehicle's make (e.g. Ford, Volvo): ")
             # Vehicles models can contain letters, numbers and special characters. No validation required.
-            model = input("Enter the vehicle's model (e.g. focus, C40): ").capitalize()
+            model = input("Enter the vehicle's model (e.g. focus, C40): \n").capitalize()
             year = get_year_input(
                 "Enter the vehicle's year of production (e.g. 2017, 1999): ")
             milage = get_integer_input(
@@ -224,7 +224,7 @@ def get_new_car_details():
             print(table)
 
         # Asks the user to confirm the input
-        answer = input("Confirm details are correct (y/n): ").lower()
+        answer = input("Confirm details are correct (y/n): \n").lower()
         if answer == "y":
             return car
         elif answer == "n":
