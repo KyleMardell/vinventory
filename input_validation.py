@@ -116,30 +116,6 @@ def get_year_input(message):
             print("Error: Date is out of range.")
 
 
-def get_engine_input(message):
-    # function to get the engine input from a user
-    # must be in a '0.0' format with a max input of 8.0
-    # returns the input suffixed by an L for liters
-    """ 
-    Returns engine size as a float to one decimal point if 
-    user input is within range
-    """
-    pattern = '\d.\d'
-    while True:
-        user_input = input(message + "\n")
-
-        if re.match(pattern, user_input):
-            user_input = float(user_input)
-            if 0.1 <= user_input <= 8.0:
-                return str(user_input) + "L"
-            else:
-                print("Error: Engine size is out of range.")
-        elif user_input.lower() == "e":
-            return "Electric"
-        else:
-            print("Error: Incorrect input.")
-
-
 def get_colour_input(message):
     # function to get a colour input from the user
     # checks the input against a list of common car colours and

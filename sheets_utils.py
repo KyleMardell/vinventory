@@ -23,12 +23,11 @@ class Car:
     # Car class and functions
     # define minimum values to create a car, values match google sheets columns in order,
     # with the optional values added when a car is sold.
-    def __init__(self, id, make, model, year, engine, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
+    def __init__(self, id, make, model, year, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
         self.year = year
-        self.engine = engine
         self.colour = colour
         self.status = status
         self.price = price
@@ -44,15 +43,15 @@ class Car:
         """ 
         Returns car object data values as a list
         """
-        return [self.id, self.make, self.model, self.year, self.engine, self.colour,
+        return [self.id, self.make, self.model, self.year, self.colour,
                 self.status, self.price, self.cost, self.repairs, self.sold_price, self.buyer_name, self.buyer_contact, self.sale_date]
 
     # function to display the cars properties in a table
-    def display_info(self, fields=15):
+    def display_info(self, fields=13):
         """ 
         Prints a table containing all car data
         """
-        table_fields = ["ID", "Make", "Model", "Year", "Engine",
+        table_fields = ["ID", "Make", "Model", "Year",
                         "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
@@ -209,7 +208,7 @@ def find_car_by_id(sheet_name):
                 "Please enter a cars valid internal ID number: ")
             for car in cars_in_stock:
                 if int(car.id) == input_id:
-                    car.display_info(10)
+                    car.display_info(9)
                     car_found = True
                     return car
             print(f"Car ID: {input_id} not found.")
@@ -325,7 +324,7 @@ def add_car_to_sheet(car_as_list, sheet_name):
     try:
         stock_sheet = connect_to_sheet(sheet_name)
         stock_sheet.append_row(car_as_list)
-        print(f"Vehicle ({car_as_list[1]} {car_as_list[2]}) successfully added to {sheet_name} sheet.")
+        print(f"Car ID: {car_as_list[0]} successfully added to {sheet_name} sheet.")
     except Exception as e:
         print("Error: Could not add vehicle to sheet.")
         print(f"Details: {e}\n")
@@ -390,7 +389,7 @@ def edit_car_in_stock():
         edit_car_in_stock inner function only.
         Gets the user input changes and validates each input.
         """
-        car_details = "(Make, Model, Year, Engine, Colour, Status, Price, Cost, Repairs)"
+        car_details = "(Make, Model, Year, Colour, Status, Price, Cost, Repairs)"
         changes_message = f"Enter the name of the attribute you would like to edit {car_details} or enter 0 to finish editing.: \n"
         changes = None
         while True:
@@ -406,10 +405,6 @@ def edit_car_in_stock():
                     continue
                 case "year":
                     car_to_edit.year = get_year_input("Enter new year details: ")
-                    print("Confirmed.\n")
-                    continue
-                case "engine":
-                    car_to_edit.engine = get_engine_input("Enter new engine details: ")
                     print("Confirmed.\n")
                     continue
                 case "colour":
@@ -449,7 +444,7 @@ def edit_car_in_stock():
         if answer == "y":
             # Get the changes to the car
             get_changes()
-            car_to_edit.display_info(11)
+            car_to_edit.display_info(9)
             while True:
                 # Ask the user to confirm the changes and save if yes.
                 confirm = input("Do you want to save these changes? (y/n): \n").lower()
@@ -486,12 +481,12 @@ def create_new_sales_sheet(sheet_name):
     """ 
     Creates a new sales sheet.
     """
-    headings = ["ID", "Make", "Model", "Year", "Engine", "Colour", "Status",
+    headings = ["ID", "Make", "Model", "Year", "Colour", "Status",
                 "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
 
     try:
         vinv_sheet = open_google_sheet()
-        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=14)
+        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=13)
         new_sheet.append_row(headings)
         print(f"New sales sheet created named '{sheet_name}'")
     except Exception as e:
@@ -515,7 +510,7 @@ def sell_car(current_sales_sheet):
         Gets the sales details from the user and adds them to the current car.
         """
         current_date = datetime.now()
-        sale_date = str(current_date)[:10]
+        sale_date = str(current_date)[:9]
         while True:
             sold_price = get_integer_input("Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
             buyer_name = get_string_input("Enter the buyers name: ")
