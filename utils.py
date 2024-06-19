@@ -38,9 +38,9 @@ def search_car_by_criteria():
         else:
             table = PrettyTable()
             table.field_names = table.field_names = [
-                "ID", "Make", "Model", "Year", "Milage", "Engine", "Colour", "Status", "Price", "Cost", "Repairs"]
+                "ID", "Make", "Model", "Year", "Engine", "Colour", "Status", "Price", "Cost", "Repairs"]
             for car in matching_cars:
-                table.add_row(car.car_as_list()[:11])
+                table.add_row(car.car_as_list()[:10])
             print(table)
 
 
@@ -189,7 +189,7 @@ def get_new_car_details():
     # creates and returns a car instance from the user input
     """ 
     Returns car information as a list. In the same order as the Google Sheet.
-    [id, make, model, year, milage, engine, colour, status, price, cost, repairs]
+    [id, make, model, year, engine, colour, status, price, cost, repairs]
     Asks the user to enter all the required information to add a car to
     the stock sheet. 
     """
@@ -202,7 +202,6 @@ def get_new_car_details():
             # Vehicles models can contain letters, numbers and special characters. No validation required.
             model = input("Enter the vehicle's model (e.g. focus, C40): \n").capitalize()
             year = get_year_input("Enter the vehicle's year of production (e.g. 2017, 1999): ")
-            milage = get_integer_input("Enter the vehicles current milage (whole numbers only, e.g. 22500, 45000): ")
             engine = get_engine_input("Enter the vehicle's engine size in litres, or 'e' for electric (e.g. 1.2, 2.0, e): ")
             colour = get_colour_input("Enter the vehicle's colour (e.g. black, orange): ")
             status = get_location_input("Enter the vehicle's current location (leeds, liverpool, manchester, preston, york): ")
@@ -211,13 +210,13 @@ def get_new_car_details():
             price = get_price_input("Enter the vehicle's list price (whole numbers only, e.g. 22000, 12500): £ ", cost, repairs)
             id = generate_unique_id()
 
-            car = [id, make, model, year, milage, engine,
+            car = [id, make, model, year, engine,
                    colour, status, price, cost, repairs]
 
             clear_terminal()
             print("- Entered Details Summary -")
             table = PrettyTable()
-            table.field_names = ["ID", "Make", "Model", "Year", "Milage",
+            table.field_names = ["ID", "Make", "Model", "Year",
                                  "Engine", "Colour", "Status", "Price", "Cost", "Repairs"]
             table.add_row(car)
             print(table)

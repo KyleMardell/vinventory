@@ -23,12 +23,11 @@ class Car:
     # Car class and functions
     # define minimum values to create a car, values match google sheets columns in order,
     # with the optional values added when a car is sold.
-    def __init__(self, id, make, model, year, milage, engine, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
+    def __init__(self, id, make, model, year, engine, colour, status, price, cost, repairs, sold_price=None, buyer_name=None, buyer_contact=None, sale_date=None):
         self.id = id
         self.make = make
         self.model = model
         self.year = year
-        self.milage = milage
         self.engine = engine
         self.colour = colour
         self.status = status
@@ -45,7 +44,7 @@ class Car:
         """ 
         Returns car object data values as a list
         """
-        return [self.id, self.make, self.model, self.year, self.milage, self.engine, self.colour,
+        return [self.id, self.make, self.model, self.year, self.engine, self.colour,
                 self.status, self.price, self.cost, self.repairs, self.sold_price, self.buyer_name, self.buyer_contact, self.sale_date]
 
     # function to display the cars properties in a table
@@ -53,7 +52,7 @@ class Car:
         """ 
         Prints a table containing all car data
         """
-        table_fields = ["ID", "Make", "Model", "Year", "Milage", "Engine",
+        table_fields = ["ID", "Make", "Model", "Year", "Engine",
                         "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
@@ -80,7 +79,7 @@ class Car:
         print("What is the destination site?")
         destination = get_site_input(self.status)
         create_delivery_request(
-            self.id, self.make, self.model, self.year, self.milage, self.status, destination)
+            self.id, self.make, self.model, self.year, self.status, destination)
         update_delivery_status_in_stock_sheet(
             self.id, self.status, delivery=True)
 
@@ -210,7 +209,7 @@ def find_car_by_id(sheet_name):
                 "Please enter a cars valid internal ID number: ")
             for car in cars_in_stock:
                 if int(car.id) == input_id:
-                    car.display_info(11)
+                    car.display_info(10)
                     car_found = True
                     return car
             print(f"Car ID: {input_id} not found.")
@@ -270,7 +269,7 @@ def generate_unique_id():
         print(f"Details: {e}\n")
 
 
-def create_delivery_request(id, make, model, year, milage, site_from, site_to):
+def create_delivery_request(id, make, model, year, site_from, site_to):
     # function to add a delivery request to the delivery worksheet
     # creates a request date using the current date and a scheduled date
     # 3 days ahead of the current date.
@@ -283,7 +282,7 @@ def create_delivery_request(id, make, model, year, milage, site_from, site_to):
     request_date = str(current_date)[:10]
     schedule_date = current_date + timedelta(days=3)
     schedule_date = str(schedule_date)[:10]
-    delivery_request = [id, make, model, year, milage, site_from,
+    delivery_request = [id, make, model, year, site_from,
                         site_to, "requested", request_date, schedule_date]
     try:
         delivery_sheet.append_row(delivery_request)
@@ -391,7 +390,7 @@ def edit_car_in_stock():
         edit_car_in_stock inner function only.
         Gets the user input changes and validates each input.
         """
-        car_details = "(Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs)"
+        car_details = "(Make, Model, Year, Engine, Colour, Status, Price, Cost, Repairs)"
         changes_message = f"Enter the name of the attribute you would like to edit {car_details} or enter 0 to finish editing.: \n"
         changes = None
         while True:
@@ -407,10 +406,6 @@ def edit_car_in_stock():
                     continue
                 case "year":
                     car_to_edit.year = get_year_input("Enter new year details: ")
-                    print("Confirmed.\n")
-                    continue
-                case "milage":
-                    car_to_edit.milage = get_integer_input("Enter new milage details: ")
                     print("Confirmed.\n")
                     continue
                 case "engine":
@@ -491,12 +486,12 @@ def create_new_sales_sheet(sheet_name):
     """ 
     Creates a new sales sheet.
     """
-    headings = ["ID", "Make", "Model", "Year", "Milage", "Engine", "Colour", "Status",
+    headings = ["ID", "Make", "Model", "Year", "Engine", "Colour", "Status",
                 "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
 
     try:
         vinv_sheet = open_google_sheet()
-        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=15)
+        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=14)
         new_sheet.append_row(headings)
         print(f"New sales sheet created named '{sheet_name}'")
     except Exception as e:
