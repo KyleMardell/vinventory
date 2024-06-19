@@ -391,9 +391,11 @@ def edit_car_in_stock():
         edit_car_in_stock inner function only.
         Gets the user input changes and validates each input.
         """
+        car_details = "(Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs)"
+        changes_message = f"Enter the name of the attribute you would like to edit {car_details} or enter 0 to finish editing.: \n"
         changes = None
         while True:
-            changes = input("Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: \n").lower()
+            changes = input(changes_message).lower()
             match (changes):
                 case "make":
                     car_to_edit.make = get_string_input("Enter new make details: ").capitalize()
