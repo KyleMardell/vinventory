@@ -1,35 +1,110 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# VinVentory
+VinVentory is a used car management system. The VinVentory app is aimed at small used car businesses to hold information about their sales and cars in stock. Using the Google Sheets API as a database, VinVentory provides the ability for multiple sites to have an easy way to see what cars are in stock on other sites.
 
-Welcome,
+mockup screenshot here
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+- The deployed site can be found at - [VinVentory Heroku App]()
+- The repository can be found at - [VinVentory Repo]()
 
-## Reminders
+- - - 
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Contents
 
-## Creating the Heroku app
+- - - 
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## User Experience
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### App usage goals
+### First time visitor goals
+### Returning visitor goals
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Design
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Concept
 
-Connect your GitHub repository and deploy as normal.
+### Worksheet / Database
 
-## Constraints
+### Functionality
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Menus
 
----
+### Flowcharts
 
-Happy coding!
+## Features
 
+### Existing Features
 
-https://ascii.co.uk/art/car
+#### Home Menu
+
+#### Stock Menu
+
+##### All Stock
+
+##### Find By ID
+
+##### Search by terms
+
+#### Add/Edit/Sell/Delete Menu
+
+##### Add Car To Stock
+
+##### Edit Car In Stock
+
+##### Sell Car
+
+##### Request Delivery
+
+##### Delete Car In Stock
+
+#### Sales Reports Menu
+
+##### Current Sales Table
+
+##### Current Sales Report
+
+##### Past Sales Table
+
+##### Past Sales Month
+
+#### Deliveries Menu
+
+##### All Deliveries
+
+##### Scheduled Deliveries
+
+##### Requested Deliveries
+
+##### Completed Deliveries
+
+#### Help Menu
+
+### FUture Features
+
+## Deployment
+
+### Fork Repository
+
+- To fork the repository
+    - Login or Sign Up to GitHub
+    - Navigate to the repository for this project [Quiz Crunch](https://github.com/KyleMardell/vinventory)
+    - Click the "Fork" button on the top right of the page
+
+### Clone Repository
+
+- To clone the repository
+    - Login or Sign Up to GitHub
+    - Navigate to the repository for this project [Quiz Crunch](https://github.com/KyleMardell/vinventory)
+    - Click on the "Code" button
+    - Select how you would like to clone (HTTPS, SSH, or GitHub CLI)
+    - Copy your chosen link
+    - Open the terminal of your code editor or IDE
+    - Change the current working directory to the location you want to use for the cloned directory
+    - Type "git clone" into the terminal followed by the copied link and press enter.
+
+## Testing
+
+## Credits
+
+### Ascii Art
+To make the home screen more appealing, I wanted to incorporate the use of ascii art with the business details on the home screen.
+I found an ascii art image of a car that I though fit the theme of the app from [ascii.co.uk/art/car](https://ascii.co.uk/art/car)

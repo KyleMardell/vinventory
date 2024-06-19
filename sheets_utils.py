@@ -305,7 +305,7 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     id_cell = stock_sheet.find(id)
     status_cell = f"H{id_cell.row}"
 
-    suffix = " - Delivery requested"
+    suffix = "-D"
 
     if delivery:
         new_status = f"{status}{suffix}"
@@ -423,7 +423,7 @@ def edit_car_in_stock():
                     continue
                 case "status":
                     print("Status, cannot be manually updated.")
-                    print("To change location, please request a delivery. To mark as reserved or sold, please user previous menu options.\n")
+                    print("To change location, request a delivery. To mark as reserved or sold, use previous options.\n")
                     continue
                 case "price":
                     car_to_edit.price = get_price_input("Enter new vehicle price details: ")
