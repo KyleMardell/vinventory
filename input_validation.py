@@ -1,8 +1,9 @@
-import re
+import re  # regular expressions
 from datetime import datetime
 
-# function to get an integer or whole number input only
+
 def get_integer_input(message):
+    # function to get an integer or whole number input only
     """ 
     Tries to convert user input to int
     Displays error message upon incorrect input
@@ -20,8 +21,9 @@ def get_integer_input(message):
             print("Error: Not a valid number.")
             print(f"Details: {e}\n")
 
-# function to get a string input containing no numbers or special characters
+
 def get_string_input(message):
+    # function to get a string input containing no numbers or special characters
     """ 
     Checks that the user entered characters only. No numbers or special characters.
     Returns input capitalized if true, otherwise repeatedly asks for correct input.
@@ -35,8 +37,9 @@ def get_string_input(message):
         else:
             print("Input must not contain numbers, or special characters.")
 
-# function that returns a list of all entered values separated by commas
+
 def get_list_input(message):
+    # function that returns a list of all entered values separated by commas
     """ 
     Returns a list of strings from user input, separated by commas.
     """
@@ -48,10 +51,11 @@ def get_list_input(message):
         input_list = [word.strip() for word in user_input.split(",")]
         return input_list
 
-# function to get the site input from the user
-# requires a current site input, checked against a list of all sites
-# to stop the current site from being entered
+
 def get_site_input(current_site):
+    # function to get the site input from the user
+    # requires a current site input, checked against a list of all sites
+    # to stop the current site from being entered
     """ 
     Gets the site input from the user, checks that the input is not
     the same as the current site, and exists in a list of all sites.
@@ -72,8 +76,9 @@ def get_site_input(current_site):
             return site.capitalize()
         print("Site not found: please enter a valid site name.")
 
-# function to ask the user if they would like to continue or exit to the main menu
+
 def get_continue(clear_terminal, return_to_main_menu):
+    # function to ask the user if they would like to continue or exit to the main menu
     """ 
     Asks the user if they want to continue y/n input
     if 'n' the user is asked to return to menu or quit.
@@ -93,10 +98,11 @@ def get_continue(clear_terminal, return_to_main_menu):
             case _:
                 print("Not a valid entry, please try again.")
 
-# function to get a year input from the user
-# checks the input date is between the 1910 and the current year
-# :p not that we anticipate any imaginary ford model a or t's :p
+
 def get_year_input(message):
+    # function to get a year input from the user
+    # checks the input date is between the 1910 and the current year
+    # :p not that we anticipate any imaginary ford model a or t's :p
     """ 
     Returns a year as a 4 digit number if user input is in range
     """
@@ -109,10 +115,11 @@ def get_year_input(message):
         else:
             print("Error: Date is out of range.")
 
-# function to get the engine input from a user
-# must be in a '0.0' format with a max input of 8.0
-# returns the input suffixed by an L for liters
+
 def get_engine_input(message):
+    # function to get the engine input from a user
+    # must be in a '0.0' format with a max input of 8.0
+    # returns the input suffixed by an L for liters
     """ 
     Returns engine size as a float to one decimal point if 
     user input is within range
@@ -132,10 +139,11 @@ def get_engine_input(message):
         else:
             print("Error: Incorrect input.")
 
-# function to get a colour input from the user
-# checks the input against a list of common car colours and
-# asks the user to confirm if the input is not in the list
+
 def get_colour_input(message):
+    # function to get a colour input from the user
+    # checks the input against a list of common car colours and
+    # asks the user to confirm if the input is not in the list
     """ 
     Returns a colour, checks is user input is in a list of common colours.
     If user input colour is not in the list, they are asked to confirm the input.
@@ -158,9 +166,10 @@ def get_colour_input(message):
                 print("Cancelled.")
                 continue
 
-# function to get a location input from the user
-# input location must be one of the locations in the list 'locations'
+
 def get_location_input(message):
+    # function to get a location input from the user
+    # input location must be one of the locations in the list 'locations'
     """ 
     Returns a location, confirms user input is a valid location.
     """
@@ -174,10 +183,11 @@ def get_location_input(message):
         else:
             print("Error: Location is invalid.")
 
-# function to get a price input from the user
-# requires the car cost and repair cost as it checks the price amount is above the combined costs
-# if the price indicates a profit of less than 20% then the user is asked to confirm the input
+
 def get_price_input(message, cost, repairs):
+    # function to get a price input from the user
+    # requires the car cost and repair cost as it checks the price amount is above the combined costs
+    # if the price indicates a profit of less than 20% then the user is asked to confirm the input
     """ 
     Returns the price of a vehicle.
     Checks the input is a whole number.
@@ -189,7 +199,7 @@ def get_price_input(message, cost, repairs):
             return user_input
         elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
             answer = input(f"The price of £{
-                        user_input} is less than 20% calculated profit. Is this correct? (y/n): \n").lower()
+                user_input} is less than 20% calculated profit. Is this correct? (y/n): \n").lower()
             if answer == "y":
                 return user_input
             else:

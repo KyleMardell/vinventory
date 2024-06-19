@@ -1,23 +1,25 @@
 from prettytable import PrettyTable
 
+
 def display_help():
+    # function to display a help file with an explanation of how each section of the app works
     """ 
-    
+    displays the help text
     """
     table_fields = ["ID", "Make", "Model", "Year", "Milage", "Engine",
-                        "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
-    table_data = ["123", "Ford", "Fiesta", "2015", "18000", "1.2", "White", "York", "13500", "9000", "250", "12500", "Ken", "07123456789", "2024-04-10"]
+                    "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
+    table_data = ["123", "Ford", "Fiesta", "2015", "18000", "1.2", "White",
+                  "York", "13500", "9000", "250", "12500", "Ken", "07123456789", "2024-04-10"]
     table = PrettyTable()
     table.field_names = table_fields
     table.add_row(table_data)
-    
-        
+
     print("- Help Section -\n")
     print("Welcome to VinVentory, the car sales management system.")
     print("VinVentory has the ability to store, create and edit information about cars for businesses using a simple Google Sheets worksheet.")
     print("This means we can easily add cars in stock, request deliveries and of course sell cars.")
     print("Please see each section for further information about how to use the VinVentory car management system.\n")
-    
+
     print("\n- Home Menu - \n")
     print("From the home menu, you can navigate to each of the sub menus or exit the program.")
     print("Each sub menu is labelled and numbered for ease of navigation.")
@@ -32,7 +34,7 @@ def display_help():
     print("4 - Delivery Reports/Requests")
     print("5 - Help")
     print("0 - Exit Program")
-    
+
     print("\n- Stock Menu -\n")
     print("The stock menu gives you the option to see all cars in stock in a table format,")
     print("view the information of a car in stock, or search for cars matching input terms.")
@@ -49,7 +51,7 @@ def display_help():
     print("Using the example input, you will be given a list of all white and silver cars, as well as all Fords.")
     print("Using the search, if you know there is a ford in stock but need to find the ID number, you can do it this way.")
     print("Note: You will often need the ID number of a car to edit, delete, mark as sold, etc.")
-    
+
     print("\n- Sales Reports Menu -\n")
     print("There are 4 options in the sales reports menu, 2 displaying tables of sold cars, and 2 displaying profit reports.")
     print("When choosing the current months sales table or report, if the current sales sheet does not already exist,")
@@ -60,7 +62,7 @@ def display_help():
     print("In order to display a past sales sheet table or report, you must enter the")
     print("year and month of the sheet you wish to view.")
     print("If the sales sheet you are trying to access does not exist, an error will be shown.")
-    
+
     print("\n- Add/Edit Menu -\n")
     print("From here you can do many functions, such as add, edit or delete a car in stock,")
     print("mark a car as sold and request a delivery.")
@@ -88,7 +90,7 @@ def display_help():
     print("and deleted from the stock sheet, with message to confirm both actions.")
     print("\nRequest delivery")
     print("Details shown below.")
-    
+
     print("\n- Delivery Menu -\n")
     print("The delivery menu displays different delivery reports, and can be used to request a delivery.")
     print("Delivery reports can be viewed by selecting one of the options, all, delivered, scheduled and requested.")

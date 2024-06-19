@@ -4,8 +4,9 @@ from input_validation import get_integer_input, get_list_input
 from prettytable import PrettyTable
 from help import display_help
 
-# stock menu
+
 def stock_menu():
+    # stock menu - options to view cars in stock
     """
     Displays stock menu and runs menu option functions.
     """
@@ -52,8 +53,9 @@ def stock_menu():
 
     return_to_main_menu()
 
-# edit menu
+
 def edit_menu():
+    # edit menu - options to add/edit/delete/sell a car
     """ 
     Displays edit menu
     """
@@ -129,8 +131,9 @@ def edit_menu():
 
     return_to_main_menu()
 
-# sales menu
+
 def sales_menu():
+    # sales menu - options to view sales reports
     """
     Displays Sales Menu
     """
@@ -190,8 +193,9 @@ def sales_menu():
 
     return_to_main_menu()
 
-# deliveries menu
+
 def deliveries_menu():
+    # deliveries menu - options to view delivery reports & request a delivery
     """
     Displays deliveries options
     """
@@ -239,8 +243,9 @@ def deliveries_menu():
 
     return_to_main_menu()
 
-# ascii art
+
 def art():
+    # ascii art
     art = ['    .---------------.',
            '   /                 \\      - KM Car Sales - ',
            ' O/_____/________/____\O      Leeds',
@@ -254,8 +259,9 @@ def art():
     for line in art:
         print(line)
 
-# main menu
+
 def main_menu():
+    # main menu - welcome and main navigation
     """
     Display welcome message and menu options
     """
@@ -295,8 +301,9 @@ def main_menu():
             case _:
                 print("Not a valid entry, please try again.")
 
-# function that asks the user to return to the menu or quit
+
 def return_to_main_menu():
+    # function that asks the user to return to the menu or quit
     """
     Returns to main menu or quits on user input.
     """

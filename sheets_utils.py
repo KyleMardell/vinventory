@@ -347,13 +347,14 @@ def add_car_to_sheet(car_as_list, sheet_name):
         print("Error: Could not add vehicle to sheet.")
         print(f"Details: {e}\n")
 
-# function to delete a car from a sheet
-# uses the find function to check if a car with provided ID exists
-# optional car id parameter deleted the car with provided ID number
-# if no ID is provided, the user is asked to provide one
+
 
 
 def delete_car_from_sheet(sheet_name, car_id=None):
+    # function to delete a car from a sheet
+    # uses the find function to check if a car with provided ID exists
+    # optional car id parameter deleted the car with provided ID number
+    # if no ID is provided, the user is asked to provide one
     """ 
     Deletes a car from the stock list.
     Asks user for a valid car id number and to confirm before deleting.
@@ -392,13 +393,11 @@ def delete_car_from_sheet(sheet_name, car_id=None):
             print("Error: Cannot delete car from sheet.")
             print(f"Details: {e}\n")
 
-# function to edit a car currently in stock
-# asks the user to enter a cars ID to edit, thens asks which attribute
-# they would like to edit, until they enter 0 to save and exit
-# this functions contains an inner function to get the changes made to a car for better readability
-
-
 def edit_car_in_stock():
+    # function to edit a car currently in stock
+    # asks the user to enter a cars ID to edit, thens asks which attribute
+    # they would like to edit, until they enter 0 to save and exit
+    # this functions contains an inner function to get the changes made to a car for better readability
     """ 
     Edits a car in stocks information.
     Asks the user to enter a car ID, once confirmed then asks the user to
@@ -519,10 +518,8 @@ def edit_car_in_stock():
             print("Invalid input, please try again.\n")
             continue
 
-# function to create a new sales sheet using consistent headings for all sales sheets.
-
-
 def create_new_sales_sheet(sheet_name):
+    # function to create a new sales sheet using consistent headings for all sales sheets.
     """ 
     Creates a new sales sheet.
     """
@@ -538,12 +535,10 @@ def create_new_sales_sheet(sheet_name):
         print("Error: Sheet could not be created.")
         print(f"Details: {e}\n")
 
-# function to mark a car as sold, adding to the current sales sheet and
-# deleting from the stock sheet.
-# contains an inner function to get the sale details for readability
-
-
 def sell_car(current_sales_sheet):
+    # function to mark a car as sold, adding to the current sales sheet and
+    # deleting from the stock sheet.
+    # contains an inner function to get the sale details for readability
     """ 
     Gets sale details from user and moves car from stock sheet to sales sheet.
     """
