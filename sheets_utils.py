@@ -326,8 +326,7 @@ def add_car_to_sheet(car_as_list, sheet_name):
     try:
         stock_sheet = connect_to_sheet(sheet_name)
         stock_sheet.append_row(car_as_list)
-        print(f"Vehicle ({car_as_list[1]} {
-            car_as_list[2]}) successfully added to {sheet_name} sheet.")
+        print(f"Vehicle ({car_as_list[1]} {car_as_list[2]}) successfully added to {sheet_name} sheet.")
     except Exception as e:
         print("Error: Could not add vehicle to sheet.")
         print(f"Details: {e}\n")
@@ -353,8 +352,7 @@ def delete_car_from_sheet(sheet_name, car_id=None):
                 clear_terminal()
                 try:
                     current_sheet.delete_rows(cell.row)
-                    print(f"Car ID: {car_id} successfully deleted from {
-                          sheet_name}.\n")
+                    print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
                 except Exception as e:
                     print("Error: Cannot delete car from sheet.")
                     print(f"Details: {e}")
@@ -369,8 +367,7 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         cell = current_sheet.find(car_id)
         try:
             current_sheet.delete_rows(cell.row)
-            print(f"Car ID: {car_id} successfully deleted from {
-                  sheet_name}.\n")
+            print(f"Car ID: {car_id} successfully deleted from {sheet_name}.\n")
         except Exception as e:
             print("Error: Cannot delete car from sheet.")
             print(f"Details: {e}\n")
@@ -396,8 +393,7 @@ def edit_car_in_stock():
         """
         changes = None
         while True:
-            changes = input(
-                "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: \n").lower()
+            changes = input("Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: \n").lower()
             match (changes):
                 case "make":
                     car_to_edit.make = get_string_input("Enter new make details: ").capitalize()
