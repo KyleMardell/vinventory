@@ -23,7 +23,7 @@ def stock_menu():
 
     while True:
         selected_option = get_integer_input(
-            "Select an option (1-3, 0 to main menu/quit): \n")
+            "\nSelect an option (1-3, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
