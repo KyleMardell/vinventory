@@ -6,10 +6,8 @@ def display_help():
     """ 
     displays the help text
     """
-    table_fields = ["ID", "Make", "Model", "Year", "Milage", "Engine",
-                    "Colour", "Status", "Price", "Cost", "Repairs", "Sold Price", "Buyer Name", "Buyer Contact", "Sale Date"]
-    table_data = ["123", "Ford", "Fiesta", "2015", "18000", "1.2", "White",
-                  "York", "13500", "9000", "250", "12500", "Ken", "07123456789", "2024-04-10"]
+    table_fields = ["ID", "Make", "Model", "Year", "Colour", "Status", "Price"]
+    table_data = ["123", "Ford", "Fiesta", "2015", "White", "York", "13500"]
     table = PrettyTable()
     table.field_names = table_fields
     table.add_row(table_data)
@@ -44,6 +42,8 @@ def display_help():
     print("\nSearching By ID")
     print("In order to view a cars information such as in the example, you can search for a car by its ID number.")
     print("If you already know the ID number of a car in stock then you can enter it to view the information.")
+    print("When viewing by ID, the cost and repair information of a car is displayed.")
+    print("This can be used to calculate if any adjustments in sale price can be made.")
     print("If yo do not know the ID number of a car, you can find it using the all stock table, or search using entered terms.")
     print("\nSearching By Terms")
     print("To search cars by terms, you can simply enter the terms you wish to search for, separated by commas.")

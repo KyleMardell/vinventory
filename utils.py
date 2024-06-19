@@ -38,9 +38,9 @@ def search_car_by_criteria():
         else:
             table = PrettyTable()
             table.field_names = table.field_names = [
-                "ID", "Make", "Model", "Year", "Colour", "Status", "Price", "Cost", "Repairs"]
+                "ID", "Make", "Model", "Year", "Colour", "Status", "Price"]
             for car in matching_cars:
-                table.add_row(car.car_as_list()[:9])
+                table.add_row(car.car_as_list()[:7])
             print(table)
 
 

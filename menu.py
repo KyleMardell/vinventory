@@ -30,7 +30,7 @@ def stock_menu():
             case 1:
                 print("- All Stock selected -\n")
                 print("Retrieving vehicle information...\n")
-                display_sheet_table("stock", 9)
+                display_sheet_table("stock", 7)
                 break
             case 2:
                 print("- Find By ID selected -\n")
