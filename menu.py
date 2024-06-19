@@ -3,7 +3,8 @@ from utils import *
 from input_validation import get_integer_input, get_list_input
 from prettytable import PrettyTable
 from help import display_help
-
+import os
+import platform
 
 def stock_menu():
     # stock menu - options to view cars in stock
@@ -22,7 +23,7 @@ def stock_menu():
 
     while True:
         selected_option = get_integer_input(
-            "\nSelect an option (1-3, 0 to main menu/quit): ")
+            "Select an option (1-3, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
