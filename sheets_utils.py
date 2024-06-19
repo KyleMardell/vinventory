@@ -348,8 +348,7 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         car_id = car_to_delete.id
         cell = current_sheet.find(car_id)
         while True:
-            answer = input(
-                f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): \n").lower()
+            answer = input(f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): \n").lower()
             if answer == "y":
                 clear_terminal()
                 try:
@@ -401,53 +400,43 @@ def edit_car_in_stock():
                 "Enter the name of the attribute you would like to edit (Make, Model, Year, Milage, Engine, Colour, Status, Price, Cost, Repairs) or enter 0 to finish editing.: \n").lower()
             match (changes):
                 case "make":
-                    car_to_edit.make = get_string_input(
-                        "Enter new make details: ").capitalize()
+                    car_to_edit.make = get_string_input("Enter new make details: ").capitalize()
                     print("Confirmed.\n")
                     continue
                 case "model":
-                    car_to_edit.model = input(
-                        "Enter new model details: \n").capitalize()
+                    car_to_edit.model = input("Enter new model details: \n").capitalize()
                     print("Confirmed.\n")
                     continue
                 case "year":
-                    car_to_edit.year = get_year_input(
-                        "Enter new year details: ")
+                    car_to_edit.year = get_year_input("Enter new year details: ")
                     print("Confirmed.\n")
                     continue
                 case "milage":
-                    car_to_edit.milage = get_integer_input(
-                        "Enter new milage details: ")
+                    car_to_edit.milage = get_integer_input("Enter new milage details: ")
                     print("Confirmed.\n")
                     continue
                 case "engine":
-                    car_to_edit.engine = get_engine_input(
-                        "Enter new engine details: ")
+                    car_to_edit.engine = get_engine_input("Enter new engine details: ")
                     print("Confirmed.\n")
                     continue
                 case "colour":
-                    car_to_edit.colour = get_colour_input(
-                        "Enter new colour details: ")
+                    car_to_edit.colour = get_colour_input("Enter new colour details: ")
                     print("Confirmed.\n")
                     continue
                 case "status":
                     print("Status, cannot be manually updated.")
-                    print(
-                        "To change location, please request a delivery. To mark as reserved or sold, please user previous menu options.\n")
+                    print("To change location, please request a delivery. To mark as reserved or sold, please user previous menu options.\n")
                     continue
                 case "price":
-                    car_to_edit.price = get_price_input(
-                        "Enter new vehicle price details: ")
+                    car_to_edit.price = get_price_input("Enter new vehicle price details: ")
                     print("Confirmed.\n")
                     continue
                 case "cost":
-                    car_to_edit.cost = get_integer_input(
-                        "Enter new vehicle cost details: ")
+                    car_to_edit.cost = get_integer_input("Enter new vehicle cost details: ")
                     print("Confirmed.\n")
                     continue
                 case "repairs":
-                    car_to_edit.repairs = get_integer_input(
-                        "Enter new repair cost details: ")
+                    car_to_edit.repairs = get_integer_input("Enter new repair cost details: ")
                     print("Confirmed.\n")
                     continue
                 case "0":
@@ -463,26 +452,22 @@ def edit_car_in_stock():
     cell = stock_sheet.find(car_id)
 
     while True:
-        answer = input(f"Are you sure you would like to edit the car, ID: {
-                       car_to_edit.id}? (y/n): \n").lower()
+        answer = input(f"Are you sure you would like to edit the car, ID: {car_to_edit.id}? (y/n): \n").lower()
         if answer == "y":
             # Get the changes to the car
             get_changes()
             car_to_edit.display_info(11)
             while True:
                 # Ask the user to confirm the changes and save if yes.
-                confirm = input(
-                    "Do you want to save these changes? (y/n): \n").lower()
+                confirm = input("Do you want to save these changes? (y/n): \n").lower()
                 if confirm == "y":
                     clear_terminal()
                     print("Confirmed...")
                     try:
                         # Get the car as a list and update the Google Sheet
                         car_as_list = car_to_edit.car_as_list()
-                        stock_sheet.update(
-                            f"A{cell.row}:Q{cell.row}", [car_as_list])
-                        print(f"Changes to car ID: {
-                              car_to_edit.id} have been saved to the worksheet.\n")
+                        stock_sheet.update(f"A{cell.row}:Q{cell.row}", [car_as_list])
+                        print(f"Changes to car ID: {car_to_edit.id} have been saved to the worksheet.\n")
                     except Exception as e:
                         print("Error, changes not saved.")
                         print(f"Details: {e}\n")
@@ -539,15 +524,12 @@ def sell_car(current_sales_sheet):
         current_date = datetime.now()
         sale_date = str(current_date)[:10]
         while True:
-            sold_price = get_integer_input(
-                "Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
+            sold_price = get_integer_input("Enter the vehicle's sold price (i.e. 15000, 22500): £ ")
             buyer_name = get_string_input("Enter the buyers name: ")
-            buyer_contact = get_integer_input(
-                "Enter the buyers phone number: ")
+            buyer_contact = get_integer_input("Enter the buyers phone number: ")
 
             while True:
-                confirm = input(
-                    "Confirm and save new sale details (y/n, enter 0 to exit): \n").lower()
+                confirm = input("Confirm and save new sale details (y/n, enter 0 to exit): \n").lower()
                 if confirm == "y":
                     clear_terminal()
                     sold_car.sold_price = sold_price

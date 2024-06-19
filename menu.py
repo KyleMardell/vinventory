@@ -22,8 +22,7 @@ def stock_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input(
-            "\nSelect an option (1-3, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option (1-3, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
@@ -73,8 +72,7 @@ def edit_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input(
-            "\nSelect an option (1-5, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option (1-5, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
@@ -82,49 +80,38 @@ def edit_menu():
             case 1:
                 print("- Add A New Car To The Stock Sheet -\n")
                 print("You will be asked to enter the cars details one at a time.")
-                print(
-                    "Please ensure all details are correct, you will be asked to confirm before submitting.\n")
+                print("Please ensure all details are correct, you will be asked to confirm before submitting.\n")
                 new_car_details = get_new_car_details()
                 add_car_to_sheet(new_car_details, "stock")
                 break
             case 2:
                 print("- Edit A Car Currently In Stock-\n")
                 print("Here you can edit the details of a car currently in stock.")
-                print(
-                    "The cars internal ID is required to find the car in the stock sheet.")
-                print(
-                    "Once a car has been found, you can enter the name of an attribute to change it.")
-                print(
-                    "After all changes have been made, they can be confirmed and saved.\n")
+                print("The cars internal ID is required to find the car in the stock sheet.")
+                print("Once a car has been found, you can enter the name of an attribute to change it.")
+                print("After all changes have been made, they can be confirmed and saved.\n")
                 edit_car_in_stock()
                 break
             case 3:
                 print("- Sell a Car -\n")
                 print("To mark a car a sold, please enter the cars internal ID number.")
-                print(
-                    "You will be asked to enter the sale amount, buyers name and phone number.")
-                print(
-                    "Once confirmed, the car will be removed from the stock sheet and the sales")
+                print("You will be asked to enter the sale amount, buyers name and phone number.")
+                print("Once confirmed, the car will be removed from the stock sheet and the sales")
                 print("information will be added to the current months sales sheet.")
-                print(
-                    "Note, any deliveries requested or scheduled for the car will remain.")
+                print("Note, any deliveries requested or scheduled for the car will remain.")
                 current_sales_sheet = get_current_sales_sheet_name()
                 sell_car(current_sales_sheet)
                 break
             case 4:
                 print("- Request A Delivery -\n")
-                print(
-                    "Here you can enter a cars internal ID number and request a delivery.")
-                print(
-                    "You will be asked to enter a delivery location and a request date will be automatically generated.\n")
+                print("Here you can enter a cars internal ID number and request a delivery.")
+                print("You will be asked to enter a delivery location and a request date will be automatically generated.\n")
                 delivery_request()
                 break
             case 5:
                 print("- Delete A Car From The Stock Sheet -\n")
-                print(
-                    "WARNING - Once a car has been deleted, it cannot be recovered and must be input as a new entry.")
-                print(
-                    "You will be asked to enter the cars internal ID number and confirm to delete the car from stock.\n")
+                print("WARNING - Once a car has been deleted, it cannot be recovered and must be input as a new entry.")
+                print("You will be asked to enter the cars internal ID number and confirm to delete the car from stock.\n")
                 delete_car_from_sheet("stock")
                 break
             case _:
@@ -153,8 +140,7 @@ def sales_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input(
-            "\nSelect an option (1-4, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option (1-4, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
@@ -213,8 +199,7 @@ def deliveries_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input(
-            "\nSelect an option (1-5, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option (1-5, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
@@ -278,8 +263,7 @@ def main_menu():
     print("0 - Exit Program")
 
     while True:
-        selected_option = get_integer_input(
-            "\nSelect an option (1-5, 0 to quit): ")
+        selected_option = get_integer_input("\nSelect an option (1-5, 0 to quit): ")
         clear_terminal()
         match selected_option:
             case 0:
@@ -310,8 +294,7 @@ def return_to_main_menu():
     """
     while True:
         print()
-        answer = input(
-            'Type "m" to return to the menu or "0" to quit.\n').lower()
+        answer = input('Type "m" to return to the menu or "0" to quit.\n').lower()
         clear_terminal()
         if answer == "0":
             quit()
