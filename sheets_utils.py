@@ -418,17 +418,19 @@ def edit_car_in_stock():
                     continue
                 case "price":
                     message = "Enter new vehicle price details: "
-                    car_to_edit.price = get_price_input(message)
+                    cost = int(car_to_edit.cost)
+                    repairs = int(car_to_edit.repairs)
+                    car_to_edit.price = get_price_input(message, cost, repairs)
                     print("Confirmed.\n")
                     continue
                 case "cost":
                     message = "Enter new vehicle cost details: "
-                    car_to_edit.cost = get_integer_input()
+                    car_to_edit.cost = get_integer_input(message)
                     print("Confirmed.\n")
                     continue
                 case "repairs":
                     message = "Enter new repair cost details: "
-                    car_to_edit.repairs = get_integer_input()
+                    car_to_edit.repairs = get_integer_input(message)
                     print("Confirmed.\n")
                     continue
                 case "0":
