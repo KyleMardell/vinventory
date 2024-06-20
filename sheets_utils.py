@@ -170,7 +170,7 @@ def display_sheet_table(sheet_name, columns):
             # Check if the sheet is a sales sheet
             if "sold" in sheet_name:
                 sales_headers = ["ID", "Make", "Model", "Cost",
-                                 "Repairs", "Sold Price", "Profit",
+                                 "Repairs", "Sold", "Profit",
                                  "Sale Date"]
                 table.field_names = sales_headers
             else:
