@@ -163,19 +163,19 @@ def display_sheet_table(sheet_name, columns):
             data_rows = sheet_data[1:]
 
             cars_in_stock = create_car_instances(data_rows)
-            
-            #Create table
+
+            # Create table
             table = PrettyTable()
-            
+
             # Check if the sheet is a sales sheet
             if "sold" in sheet_name:
                 sales_headers = ["ID", "Make", "Model", "Cost",
-                               "Repairs", "Sold Price", "Profit",
-                               "Sale Date"]
+                                 "Repairs", "Sold Price", "Profit",
+                                 "Sale Date"]
                 table.field_names = sales_headers
             else:
                 table.field_names = headers[:columns]
-                
+
             for car in cars_in_stock:
                 # check if the sheet is a sales sheet
                 if "sold" in sheet_name:
@@ -187,10 +187,11 @@ def display_sheet_table(sheet_name, columns):
                     sold_price = car.sold_price
                     profit = car.calculate_profit()
                     sale_date = car.sale_date
-                    car_to_add = [id, make, model, cost, repairs,sold_price, profit, sale_date]
+                    car_to_add = [id, make, model, cost, repairs,
+                                  sold_price, profit, sale_date]
                 else:
                     car_to_add = car.car_as_list()[:columns]
-                
+
                 table.add_row(car_to_add)
 
             print(table)
@@ -382,8 +383,8 @@ def edit_car_in_stock():
         """
         car_details = "(Make, Model, Year, Colour, "
         car_details += "Status, Price, Cost, Repairs)"
-        changes_message = "Enter the name of the attribute you would "
-        changes_message += f"like to edit {car_details} or enter 0 to finish editing.: \n"
+        changes_message = "Enter the name of the attribute you would like to "
+        changes_message += f"edit {car_details} or 0 to finish editing.: \n"
 
         changes = None
         while True:
