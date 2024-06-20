@@ -5,13 +5,10 @@ from datetime import datetime
 
 
 def search_car_by_criteria():
-    # function to search for a car by provided input terms
-    # creates a list of all the cars in the stock sheet and ask
-    # the user to enter search criteria.
-    # returns a list of all cars with matching criteria
-    """ 
+    """
     Search for a car by criteria.
-    Gets the list of cars in stock and asks the user to input a list of desired criteria. 
+    Gets the list of cars in stock and asks
+    the user to input a list of desired criteria.
     Creates a table of cars with matching criteria.
     """
     data = get_sheet_data("stock")
@@ -19,9 +16,12 @@ def search_car_by_criteria():
     matching_cars = []
 
     while matching_cars == []:
-        search_terms = get_list_input("Enter search terms separated by comma's (E.g. 'Red, Ford,' or '2020, white, volvo'): ")
+        search_terms = get_list_input("Enter search terms separated " +
+                                      "by comma's (E.g. 'Red, Ford,' " +
+                                      "or '2020, white, volvo'): ")
 
-        # loops through cars and checks if they contain the given criteria/terms
+        # loops through cars and checks if they
+        # contain the given criteria/terms
         for car in stock_cars:
             term_found = False
             for term in search_terms:
@@ -31,7 +31,8 @@ def search_car_by_criteria():
             if term_found:
                 matching_cars.append(car)
 
-        # if no cars are found, display a message, else create a table of cars and display to the terminal
+        # if no cars are found, display a message
+        # else create a table of cars and display to the terminal
         if matching_cars == []:
             print(f"No Matches found for: {search_terms}")
             continue
@@ -46,7 +47,7 @@ def search_car_by_criteria():
 
 def generate_sales_report(sheet_name):
     # function to create and display a sales report from a sheet
-    """ 
+    """
     Calculates all relevant sales data and
     displays in a report.
     """
@@ -73,7 +74,8 @@ def generate_sales_report(sheet_name):
             # adds sales price to total takings
             total_takings += int(car.sold_price)
 
-            # checks if the current car has the highest or lowest profit in the sheet
+            # checks if the current car has the
+            # highest or lowest profit in the sheet
             if int(car.calculate_profit()) > highest_profit[1]:
                 highest_profit = (car.id, int(car.calculate_profit()))
             if int(car.calculate_profit()) < lowest_profit[1]:
@@ -86,15 +88,18 @@ def generate_sales_report(sheet_name):
         # calculates net profit after repair costs
         net_profit = total_takings - (total_purchase_costs + total_repairs)
 
-        # generates the reports and displays the information in an easy to read format to the user
+        # generates the reports and displays the information
+        # in an easy to read format to the user
         print(f"Sales Report for {sheet_name}")
         print("----------")
         print(f"Number of car sold: {number_of_car_sold}")
         print(f"Total Months Profit: £{total_profit}")
         print("")
         print(f"Average Profit: £{average_profit} per car")
-        print(f"Highest Profit Car: ID - {highest_profit[0]}, Profit - £{highest_profit[1]}")
-        print(f"Lowest Profit Car: ID - {lowest_profit[0]}, Profit - £{lowest_profit[1]}")
+        print(f"Highest Profit Car: ID - {highest_profit[0]}," +
+              "Profit - £{highest_profit[1]}")
+        print(f"Lowest Profit Car: ID - {lowest_profit[0]}, " +
+              "Profit - £{lowest_profit[1]}")
         print("")
         print(f"Total Takings: £{total_takings}")
         print(f"Total car purchase costs: £{total_purchase_costs}")
@@ -111,8 +116,7 @@ def generate_sales_report(sheet_name):
 
 
 def get_current_sales_sheet_name():
-    # function to get the current months sales sheet name suing datetime
-    """ 
+    """
     Returns the current months sales sheet name
     """
     current_date = datetime.now()
@@ -123,9 +127,7 @@ def get_current_sales_sheet_name():
 
 
 def create_sheet_name():
-    # creates a new sheet name using the current month
-    # this function is called if a current months sheet does not exist
-    """ 
+    """
     Returns a new sheet name using the current month and year
     """
     while True:
@@ -136,7 +138,8 @@ def create_sheet_name():
             print("Invalid year.")
             continue
 
-        user_month = get_integer_input("Enter the month number (e.g. '2' for feb): ")
+        user_month = get_integer_input("Enter the month number " +
+                                       "(e.g. '2' for feb): ")
         if not (1 <= user_month <= 12):
             print("Invalid month.")
             continue
@@ -145,10 +148,9 @@ def create_sheet_name():
     return f"sold-{user_month}-{user_year}"
 
 
-def display_deliveries_table(delivery_status=["scheduled", "requested", "delivered"]):
-    # function to display the deliveries sheet as a table
-    # can be provided with a single parameter to filter the results
-    """ 
+def display_deliveries_table(delivery_status=[
+        "scheduled", "requested", "delivered"]):
+    """
     Displays deliveries sheet as a table with provided delivery status,
     requires list of delivery status (can contain only 1 element).
     """
@@ -164,9 +166,10 @@ def display_deliveries_table(delivery_status=["scheduled", "requested", "deliver
 
 
 def delivery_request():
-    # function to create a delivery request
-    # asks the user to input the ID of the car they want to request a
-    # delivery for and confirm the request
+    """
+    Creates delivery request for a car, asks the user to enter
+    the car ID and confirm delivery request
+    """
     answer = "n"
     while True:
         if answer == "n":
@@ -185,28 +188,40 @@ def delivery_request():
 
 
 def get_new_car_details():
-    # function to get the details of a new car from the user
-    # creates and returns a car instance from the user input
-    """ 
+    """
     Returns car information as a list. In the same order as the Google Sheet.
-    [id, make, model, year, engine, colour, status, price, cost, repairs]
+    [id, make, model, year, colour, status, price, cost, repairs]
     Asks the user to enter all the required information to add a car to
-    the stock sheet. 
+    the stock sheet.
     """
     answer = "n"
 
     while True:
 
         if answer == "n":
-            make = get_string_input("Enter the vehicle's make (e.g. Ford, Volvo): ")
-            # Vehicles models can contain letters, numbers and special characters. No validation required.
-            model = input("Enter the vehicle's model (e.g. focus, C40): \n").capitalize()
-            year = get_year_input("Enter the vehicle's year of production (e.g. 2017, 1999): ")
-            colour = get_colour_input("Enter the vehicle's colour (e.g. black, orange): ")
-            status = get_location_input("Enter the vehicle's current location (leeds, liverpool, manchester, preston, york): ")
-            cost = get_integer_input("Enter the vehicle's cost / price paid (whole numbers only, e.g. 15000, 7500): £ ")
-            repairs = get_integer_input("Enter the vehicle's cost of repairs, 0 if none (whole numbers only, e.g. 250, 400): £ ")
-            price = get_price_input("Enter the vehicle's list price (whole numbers only, e.g. 22000, 12500): £ ", cost, repairs)
+            make = get_string_input("Enter the vehicle's make " +
+                                    "(e.g. Ford, Volvo): ")
+            # Vehicles models can contain letters,
+            # numbers and special characters. No validation required.
+            model = input("Enter the vehicle's model " +
+                          "(e.g. focus, C40): \n").capitalize()
+            year = get_year_input("Enter the vehicle's year of production " +
+                                  "(e.g. 2017, 1999): ")
+            colour = get_colour_input("Enter the vehicle's colour " +
+                                      "(e.g. black, orange): ")
+            status = get_location_input("Enter the vehicle's current " +
+                                        "location (leeds, liverpool, " +
+                                        "manchester, preston, york): ")
+            cost = get_integer_input("Enter the vehicle's cost / price " +
+                                     "paid (whole numbers only, " +
+                                     "e.g. 15000, 7500): £ ")
+            repairs = get_integer_input("Enter the vehicle's " +
+                                        "cost of repairs, 0 if none " +
+                                        "(whole numbers only, " +
+                                        "e.g. 250, 400): £ ")
+            price = get_price_input("Enter the vehicle's list " +
+                                    "price (whole numbers only, " +
+                                    "e.g. 22000, 12500): £ ", cost, repairs)
             id = generate_unique_id()
 
             car = [id, make, model, year,
@@ -216,7 +231,8 @@ def get_new_car_details():
             print("- Entered Details Summary -")
             table = PrettyTable()
             table.field_names = ["ID", "Make", "Model", "Year",
-                                 "Colour", "Status", "Price", "Cost", "Repairs"]
+                                 "Colour", "Status", "Price",
+                                 "Cost", "Repairs"]
             table.add_row(car)
             print(table)
 

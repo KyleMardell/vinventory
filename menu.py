@@ -6,15 +6,16 @@ from help import display_help
 import os
 import platform
 
+
 def stock_menu():
-    # stock menu - options to view cars in stock
     """
     Displays stock menu and runs menu option functions.
     """
     print("- Current Stock Menu -\n")
     print("Welcome to the stock menu.")
-    print("Here you can view a list of all stock, see a cars details by entering its internal ID number,")
-    print("or search through all stock for cars with matching entered key words.\n")
+    print("Here you can view a list of all stock,")
+    print("see a cars details by entering its internal ID number, or search")
+    print("through all stock for cars with matching entered key words.\n")
     print("Please select one of the following options:")
     print("1 - View List of All Stock")
     print("2 - View Car Information (ID number required)")
@@ -22,10 +23,12 @@ def stock_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-3, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option " +
+                                            "(1-3, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
+                main_menu()
                 break
             case 1:
                 print("- All Stock selected -\n")
@@ -39,12 +42,10 @@ def stock_menu():
                 break
             case 3:
                 print("- Search Stock selected -\n")
-                print("Here you can search for different terms separated by commas.")
-                print(
-                    "Enter search terms such as make (Citroen, BMW), colour (blue, red),")
+                print("Here you can search for terms separated by commas.")
+                print("E.g. Make (Citroen, BMW) or colour (blue, red),")
                 print("or year (2012, 2018) to name a few.")
-                print(
-                    "Each car with a matching attribute will be displayed in a list.\n")
+                print("All matching cars will be displayed in a list.\n")
                 print("Retrieving vehicle information...\n")
                 search_car_by_criteria()
                 break
@@ -55,13 +56,13 @@ def stock_menu():
 
 
 def edit_menu():
-    # edit menu - options to add/edit/delete/sell a car
-    """ 
+    """
     Displays edit menu
     """
     print("- Add/Edit Vehicle Information -\n")
     print("Welcome to the add/edit menu.")
-    print("You can add a new car to stock, edit a car currently in stock, sell a car,")
+    print("You can add a new car to stock,")
+    print("edit a car currently in stock, sell a car,")
     print("create a delivery request or delete a cars details.\n")
     print("Choose one of the following options:")
     print("1 - Add a new car to the stock sheet")
@@ -72,46 +73,59 @@ def edit_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-5, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option" +
+                                            "(1-5, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
+                main_menu()
                 break
             case 1:
                 print("- Add A New Car To The Stock Sheet -\n")
-                print("You will be asked to enter the cars details one at a time.")
-                print("Please ensure all details are correct, you will be asked to confirm before submitting.\n")
+                print("You will be asked to enter details one at a time.")
+                print("Please ensure all details are correct,")
+                print("you will be asked to confirm before submitting.\n")
                 new_car_details = get_new_car_details()
                 add_car_to_sheet(new_car_details, "stock")
                 break
             case 2:
                 print("- Edit A Car Currently In Stock-\n")
-                print("Here you can edit the details of a car currently in stock.")
-                print("The cars internal ID is required to find the car in the stock sheet.")
-                print("Once a car has been found, you can enter the name of an attribute to change it.")
-                print("After all changes have been made, they can be confirmed and saved.\n")
+                print("Here you can edit the details of a car in stock.")
+                print("The car ID is required to find the car in the" +
+                      "stock sheet.")
+                print("Once a car has been found," +
+                      "you can enter the name of an attribute to change it.")
+                print("After all changes have been made, " +
+                      "they can be confirmed and saved.\n")
                 edit_car_in_stock()
                 break
             case 3:
                 print("- Sell a Car -\n")
-                print("To mark a car a sold, please enter the cars internal ID number.")
-                print("You will be asked to enter the sale amount, buyers name and phone number.")
-                print("Once confirmed, the car will be removed from the stock sheet and the sales")
-                print("information will be added to the current months sales sheet.")
-                print("Note, any deliveries requested or scheduled for the car will remain.")
+                print("To mark a car a sold, enter the car ID number.")
+                print("You will be asked to enter the sale amount, " +
+                      "buyers name and phone number.")
+                print("Once confirmed, the car will be removed from the " +
+                      "stock sheet and the sales")
+                print("information will be added to the current months " +
+                      "sales sheet.")
+                print("Note, any deliveries requested or scheduled for the " +
+                      "car will remain.")
                 current_sales_sheet = get_current_sales_sheet_name()
                 sell_car(current_sales_sheet)
                 break
             case 4:
                 print("- Request A Delivery -\n")
-                print("Here you can enter a cars internal ID number and request a delivery.")
-                print("You will be asked to enter a delivery location and a request date will be automatically generated.\n")
+                print("You can enter a cars ID number to request a delivery.")
+                print("You will be asked to enter a delivery location and a " +
+                      "request date will be automatically generated.\n")
                 delivery_request()
                 break
             case 5:
                 print("- Delete A Car From The Stock Sheet -\n")
-                print("WARNING - Once a car has been deleted, it cannot be recovered and must be input as a new entry.")
-                print("You will be asked to enter the cars internal ID number and confirm to delete the car from stock.\n")
+                print("WARNING - Once a car has been deleted, it cannot be " +
+                      "recovered and must be input as a new entry.")
+                print("You will be asked to enter the cars ID number and " +
+                      "confirm to delete the car from stock.\n")
                 delete_car_from_sheet("stock")
                 break
             case _:
@@ -121,16 +135,19 @@ def edit_menu():
 
 
 def sales_menu():
-    # sales menu - options to view sales reports
     """
     Displays Sales Menu
     """
     print("- Sales Reports -\n")
     print("Welcome to the sales report menu.")
-    print("From here you can view a list of all cars sold in the current or a past month.")
-    print("You can also generate a report of a months sales. This will display information")
-    print("such as, number of cars sold, total monthly profit, average profit per car, etc.")
-    print("When viewing sales history data, you must input the year and month you wish to view.")
+    print("From here you can view a list of all cars " +
+          "sold in the current or a past month.")
+    print("You can also generate a report of a months sales. " +
+          "This will display information")
+    print("such as, number of cars sold, total monthly profit, " +
+          "average profit per car, etc.")
+    print("When viewing sales history data, you must input the year " +
+          "and month you wish to view.")
     print("Note, earliest sales data sheet is 2/2024 (m/yyyy).\n")
     print("Choose one of the following options:")
     print("1 - Current Month: Sales List")
@@ -140,10 +157,12 @@ def sales_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-4, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option " +
+                                            "(1-4, 0 to main menu/quit): ")
         clear_terminal()
         match (selected_option):
             case 0:
+                main_menu()
                 break
             case 1:
                 print("- Current Month: Sales List -\n")
@@ -161,7 +180,8 @@ def sales_menu():
                 break
             case 3:
                 print("- Sales History: Sales Lists -\n")
-                print("Enter a year and month to display past sales data list.")
+                print("Enter a year and month to display " +
+                      "past sales data list.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
@@ -169,7 +189,8 @@ def sales_menu():
                 break
             case 4:
                 print("- Sales History: Sales Reports -\n")
-                print("Enter a year and month to display past sales data report.")
+                print("Enter a year and month to display " +
+                      "past sales data report.")
                 sheet_name = create_sheet_name()
                 clear_terminal()
                 print(f"Searching for sheet name: {sheet_name}...")
@@ -182,14 +203,15 @@ def sales_menu():
 
 
 def deliveries_menu():
-    # deliveries menu - options to view delivery reports & request a delivery
     """
     Displays deliveries options
     """
     print("- Deliveries Options -\n")
     print("Welcome to the deliveries menu.")
-    print("Here you can view a full delivery report, or see a list of requested, scheduled")
-    print("and completed deliveries. You can also request a new delivery.\n")
+    print("Here you can view a full delivery report, "
+          "or see a list of requested, scheduled")
+    print("and completed deliveries. You can also request " +
+          "a new delivery.\n")
     print("Please select one of the following options:")
     print("1 - Full Delivery Report")
     print("2 - Requested Deliveries")
@@ -199,10 +221,12 @@ def deliveries_menu():
     print("0 - Return to Main Menu")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-5, 0 to main menu/quit): ")
+        selected_option = get_integer_input("\nSelect an option " +
+                                            "(1-5, 0 to main menu/quit): ")
         clear_terminal()
         match selected_option:
             case 0:
+                main_menu()
                 break
             case 1:
                 print("- Full Delivery Report -\n")
@@ -231,14 +255,13 @@ def deliveries_menu():
 
 
 def art():
-    # ascii art
     art = ['    .---------------.',
            '   /                 \\      - KM Car Sales - ',
-           ' O/_____/________/____\O      Leeds',
+           ' O/_____/________/____\0      Leeds',
            ' /__________+__________\\      Liverpool',
            '/    (#############)   \\      Manchester',
            '|[**](#############)[**]|     Preston',
-           '\_______________________/     York',
+           '\\ ____________________//     York',
            '|_""__|_,------,__|__""_|',
            "|_|     '.VinV.'      |_|  www.kmcarsales.co.uk", '']
 
@@ -247,7 +270,6 @@ def art():
 
 
 def main_menu():
-    # main menu - welcome and main navigation
     """
     Display welcome message and menu options
     """
@@ -263,7 +285,8 @@ def main_menu():
     print("0 - Exit Program")
 
     while True:
-        selected_option = get_integer_input("\nSelect an option (1-5, 0 to quit): ")
+        selected_option = get_integer_input("\nSelect an option " +
+                                            "(1-5, 0 to quit): ")
         clear_terminal()
         match selected_option:
             case 0:
@@ -288,13 +311,13 @@ def main_menu():
 
 
 def return_to_main_menu():
-    # function that asks the user to return to the menu or quit
     """
     Returns to main menu or quits on user input.
     """
     while True:
         print()
-        answer = input('Type "m" to return to the menu or "0" to quit.\n').lower()
+        answer = input('Type "m" to return to the menu ' +
+                       'or "0" to quit.\n').lower()
         clear_terminal()
         if answer == "0":
             quit()

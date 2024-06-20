@@ -3,8 +3,7 @@ from datetime import datetime
 
 
 def get_integer_input(message):
-    # function to get an integer or whole number input only
-    """ 
+    """
     Tries to convert user input to int
     Displays error message upon incorrect input
     Returns input as int if valid
@@ -23,10 +22,11 @@ def get_integer_input(message):
 
 
 def get_string_input(message):
-    # function to get a string input containing no numbers or special characters
-    """ 
-    Checks that the user entered characters only. No numbers or special characters.
-    Returns input capitalized if true, otherwise repeatedly asks for correct input.
+    """
+    Checks that the user entered characters only.
+    No numbers or special characters.
+    Returns input capitalized if true,
+    otherwise repeatedly asks for correct input.
     """
     letters = r'^[a-z,A-Z]+$'
     while True:
@@ -39,8 +39,7 @@ def get_string_input(message):
 
 
 def get_list_input(message):
-    # function that returns a list of all entered values separated by commas
-    """ 
+    """
     Returns a list of strings from user input, separated by commas.
     """
     while True:
@@ -53,17 +52,14 @@ def get_list_input(message):
 
 
 def get_site_input(current_site):
-    # function to get the site input from the user
-    # requires a current site input, checked against a list of all sites
-    # to stop the current site from being entered
-    """ 
+    """
     Gets the site input from the user, checks that the input is not
     the same as the current site, and exists in a list of all sites.
     """
     all_sites = ["liverpool", "leeds", "manchester", "preston", "york"]
     sites_string = f"Available sites: "
     for site in all_sites:
-        if not site in current_site.lower():
+        if site not in current_site.lower():
             sites_string += site.capitalize() + " "
     while True:
         print(sites_string)
@@ -78,8 +74,7 @@ def get_site_input(current_site):
 
 
 def get_continue(clear_terminal, return_to_main_menu):
-    # function to ask the user if they would like to continue or exit to the main menu
-    """ 
+    """
     Asks the user if they want to continue y/n input
     if 'n' the user is asked to return to menu or quit.
     """
@@ -100,10 +95,7 @@ def get_continue(clear_terminal, return_to_main_menu):
 
 
 def get_year_input(message):
-    # function to get a year input from the user
-    # checks the input date is between the 1910 and the current year
-    # :p not that we anticipate any imaginary ford model a or t's :p
-    """ 
+    """
     Returns a year as a 4 digit number if user input is in range
     """
     current_date = datetime.now()
@@ -117,12 +109,11 @@ def get_year_input(message):
 
 
 def get_colour_input(message):
-    # function to get a colour input from the user
-    # checks the input against a list of common car colours and
-    # asks the user to confirm if the input is not in the list
-    """ 
-    Returns a colour, checks is user input is in a list of common colours.
-    If user input colour is not in the list, they are asked to confirm the input.
+    """
+    Returns a colour, checks is user input is
+    in a list of common colours.
+    If user input colour is not in the list,
+    they are asked to confirm the input.
     """
 
     car_colours = ["black", "white", "grey", "silver", "red",
@@ -144,9 +135,7 @@ def get_colour_input(message):
 
 
 def get_location_input(message):
-    # function to get a location input from the user
-    # input location must be one of the locations in the list 'locations'
-    """ 
+    """
     Returns a location, confirms user input is a valid location.
     """
     locations = ["leeds", "liverpool", "manchester", "preston", "york"]
@@ -161,10 +150,7 @@ def get_location_input(message):
 
 
 def get_price_input(message, cost, repairs):
-    # function to get a price input from the user
-    # requires the car cost and repair cost as it checks the price amount is above the combined costs
-    # if the price indicates a profit of less than 20% then the user is asked to confirm the input
-    """ 
+    """
     Returns the price of a vehicle.
     Checks the input is a whole number.
     """
@@ -174,11 +160,14 @@ def get_price_input(message, cost, repairs):
         if user_input > (cost + repairs) * 1.2:
             return user_input
         elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
-            answer = input(f"The price of £{user_input} is less than 20% calculated profit. Is this correct? (y/n): \n").lower()
+            answer = input(f"The price of £{user_input} is less than " +
+                           "20% calculated profit. " +
+                           "Is this correct? (y/n): \n").lower()
             if answer == "y":
                 return user_input
             else:
                 print("Cancelled.")
                 continue
         else:
-            print("Error: Price must be larger than total cost including repairs.")
+            print("Error: Price must be larger than " +
+                  "total cost including repairs.")
