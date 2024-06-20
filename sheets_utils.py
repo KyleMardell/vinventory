@@ -27,7 +27,7 @@ class Car:
     """
     def __init__(self, id, make, model, year, colour,
                  status, price, cost, repairs, sold_price=None,
-                 buyer_name=None, buyer_contact=None, sale_date=None):
+                 sale_date=None):
         self.id = id
         self.make = make
         self.model = model
@@ -38,9 +38,6 @@ class Car:
         self.cost = cost
         self.repairs = repairs
         self.sold_price = sold_price if sold_price is not None else "N/A"
-        self.buyer_name = buyer_name if buyer_name is not None else "N/A"
-        self.buyer_contact = buyer_contact if buyer_contact is not None
-        else "N/A"
         self.sale_date = sale_date if sale_date is not None else "N/A"
 
     def car_as_list(self):
@@ -49,8 +46,7 @@ class Car:
         """
         return [self.id, self.make, self.model, self.year, self.colour,
                 self.status, self.price, self.cost, self.repairs,
-                self.sold_price, self.buyer_name,
-                self.buyer_contact, self.sale_date]
+                self.sold_price, self.sale_date]
 
     def display_info(self, fields=13):
         """
@@ -58,8 +54,7 @@ class Car:
         """
         table_fields = ["ID", "Make", "Model", "Year",
                         "Colour", "Status", "Price", "Cost",
-                        "Repairs", "Sold Price", "Buyer Name",
-                        "Buyer Contact", "Sale Date"]
+                        "Repairs", "Sold Price", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
         table.add_row(self.car_as_list()[:fields])
@@ -362,10 +357,10 @@ def edit_car_in_stock():
         edit_car_in_stock inner function only.
         Gets the user input changes and validates each input.
         """
-        car_details = "(Make, Model, Year, Colour, " +
-        "Status, Price, Cost, Repairs)"
-        changes_message = "Enter the name of the attribute you would " +
-        f"like to edit {car_details} or enter 0 to finish editing.: \n"
+        car_details = "(Make, Model, Year, Colour, "
+        car_details += "Status, Price, Cost, Repairs)"
+        changes_message = "Enter the name of the attribute you would "
+        changes_message += f"like to edit {car_details} or enter 0 to finish editing.: \n"
 
         changes = None
         while True:
@@ -471,11 +466,11 @@ def create_new_sales_sheet(sheet_name):
     """
     headings = ["ID", "Make", "Model", "Year", "Colour", "Status",
                 "Price", "Cost", "Repairs", "Sold Price",
-                "Buyer Name", "Buyer Contact", "Sale Date"]
+                "Sale Date"]
 
     try:
         vinv_sheet = open_google_sheet()
-        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=13)
+        new_sheet = vinv_sheet.add_worksheet(title=sheet_name, rows=0, cols=11)
         new_sheet.append_row(headings)
         print(f"New sales sheet created named '{sheet_name}'")
     except Exception as e:
@@ -500,9 +495,6 @@ def sell_car(current_sales_sheet):
         while True:
             sold_price = get_integer_input("Enter the vehicle's sold " +
                                            "price (i.e. 15000, 22500): £ ")
-            buyer_name = get_string_input("Enter the buyers name: ")
-            buyer_contact = get_integer_input("Enter the buyers " +
-                                              "phone number: ")
 
             while True:
                 confirm = input("Confirm and save new sale details " +
@@ -510,8 +502,6 @@ def sell_car(current_sales_sheet):
                 if confirm == "y":
                     clear_terminal()
                     sold_car.sold_price = sold_price
-                    sold_car.buyer_name = buyer_name
-                    sold_car.buyer_contact = buyer_contact
                     sold_car.sale_date = sale_date
                     sold_car.status = "Sold"
                     return sold_car
