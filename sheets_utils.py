@@ -345,7 +345,8 @@ def delete_car_from_sheet(sheet_name, car_id=None):
         car_id = car_to_delete.id
         cell = current_sheet.find(car_id)
         while True:
-            answer = input(f"Would you would like to delete the car (ID:{car_id}) from the {sheet_name} sheet? (y/n): \n").lower()
+            answer = input(f"Do you want to delete the car (ID:{car_id})" +
+                           f" from the {sheet_name} sheet? (y/n): \n").lower()
             if answer == "y":
                 clear_terminal()
                 try:
