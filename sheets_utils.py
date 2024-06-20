@@ -48,13 +48,13 @@ class Car:
                 self.status, self.price, self.cost, self.repairs,
                 self.sold_price, self.sale_date]
 
-    def display_info(self, fields=13):
+    def display_info(self, fields=11):
         """
         Prints a table containing all car data
         """
         table_fields = ["ID", "Make", "Model", "Year",
                         "Colour", "Status", "Price", "Cost",
-                        "Repairs", "Sold Price", "Sale Date"]
+                        "Repair", "Sold Price", "Sale Date"]
         table = PrettyTable()
         table.field_names = table_fields[:fields]
         table.add_row(self.car_as_list()[:fields])
@@ -170,7 +170,7 @@ def display_sheet_table(sheet_name, columns):
             # Check if the sheet is a sales sheet
             if "sold" in sheet_name:
                 sales_headers = ["ID", "Make", "Model", "Cost",
-                                 "Repairs", "Sold", "Profit",
+                                 "Repair", "Sold", "Profit",
                                  "Sale Date"]
                 table.field_names = sales_headers
             else:
@@ -299,7 +299,7 @@ def update_delivery_status_in_stock_sheet(id, status, delivery=False):
     """
     stock_sheet = connect_to_sheet("stock")
     id_cell = stock_sheet.find(id)
-    status_cell = f"H{id_cell.row}"
+    status_cell = f"F{id_cell.row}"
 
     suffix = "-D"
 
