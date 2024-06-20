@@ -162,12 +162,35 @@ def display_sheet_table(sheet_name, columns):
             headers = sheet_data[0]
             data_rows = sheet_data[1:]
 
-            table = PrettyTable()
-            table.field_names = headers[:columns]
-
             cars_in_stock = create_car_instances(data_rows)
+            
+            #Create table
+            table = PrettyTable()
+            
+            # Check if the sheet is a sales sheet
+            if "sold" in sheet_name:
+                sales_headers = ["ID", "Make", "Model", "Cost",
+                               "Repairs", "Sold Price", "Profit",
+                               "Sale Date"]
+                table.field_names = sales_headers
+            else:
+                table.field_names = headers[:columns]
+                
             for car in cars_in_stock:
-                car_to_add = car.car_as_list()[:columns]
+                # check if the sheet is a sales sheet
+                if "sold" in sheet_name:
+                    id = car.id
+                    make = car.make
+                    model = car.model
+                    cost = car.cost
+                    repairs = car.repairs
+                    sold_price = car.sold_price
+                    profit = car.calculate_profit()
+                    sale_date = car.sale_date
+                    car_to_add = [id, make, model, cost, repairs,sold_price, profit, sale_date]
+                else:
+                    car_to_add = car.car_as_list()[:columns]
+                
                 table.add_row(car_to_add)
 
             print(table)

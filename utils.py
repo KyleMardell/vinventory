@@ -96,10 +96,10 @@ def generate_sales_report(sheet_name):
         print(f"Total Months Profit: £{total_profit}")
         print("")
         print(f"Average Profit: £{average_profit} per car")
-        print(f"Highest Profit Car: ID - {highest_profit[0]}," +
-              "Profit - £{highest_profit[1]}")
+        print(f"Highest Profit Car: ID - {highest_profit[0]}, " +
+              f"Profit - £{highest_profit[1]}")
         print(f"Lowest Profit Car: ID - {lowest_profit[0]}, " +
-              "Profit - £{lowest_profit[1]}")
+              f"Profit - £{lowest_profit[1]}")
         print("")
         print(f"Total Takings: £{total_takings}")
         print(f"Total car purchase costs: £{total_purchase_costs}")
