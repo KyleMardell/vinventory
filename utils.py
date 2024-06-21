@@ -155,12 +155,13 @@ def display_deliveries_table(delivery_status=[
     requires list of delivery status (can contain only 1 element).
     """
     sheet_data = get_sheet_data("deliveries")
+    headings = ["ID", "Make", "Model", "From", "To", "Status", "Scheduled"]
     table = PrettyTable()
-    table.field_names = sheet_data[0]
+    table.field_names = headings
     for data in sheet_data[1:]:
         for status in delivery_status:
             if status in data:
-                table.add_row(data)
+                table.add_row([data[0], data[1], data[2], data[4], data[5], data[6], data[7]])
 
     print(table)
 
