@@ -1,14 +1,37 @@
 # VinVentory
 VinVentory is a used car management system. The VinVentory app is aimed at small used car businesses to hold information about their sales and cars in stock. Using the Google Sheets API as a database, VinVentory provides the ability for multiple sites to have an easy way to see what cars are in stock on other sites.
 
-mockup screenshot here
+![VinVentory Responsive Image](/media/images/screenshots/responsive.png)
 
-- The deployed site can be found at - [VinVentory Heroku App]()
-- The repository can be found at - [VinVentory Repo]()
+- The deployed site can be found at - [VinVentory Heroku App](https://vinventory-5fcb36a00949.herokuapp.com/)
+- The repository can be found at - [VinVentory Repo](https://github.com/KyleMardell/vinventory)
 
 - - - 
 
 ## Contents
+
+- [User Experience](#user-experience)
+    - [First Time Visitor Goals](#first-time-visitor-goals)
+    - [Returning Visitor Goals](#returning-visitor-goals)
+    - [App Use Goals](#app-use-goals)
+- [Design](#design)
+    - [Concept](#concept)
+    - [Google Sheets](#worksheet--database)
+    - [Functionality](#functionality)
+    - [Menus](#menus)
+    - [Flowcharts](#flowcharts)
+- [Features](#features)
+    - [Existing Features](#existing-features)
+        - [Home Menu](#home-menu)
+        - [Stock Menu](#stock-menu)
+        - [Add/Edit Menu](#addeditselldelete-menu)
+        - [Sales Reports Menu](#sales-reports-menu)
+        - [Deliveries Menu](#deliveries-menu)
+        - [Help Menu](#help-menu)
+    - [Future Features]
+- [Deployment](#deployment)
+- [Testing](#testing)
+- [Credits](#credits)
 
 - - - 
 
@@ -20,7 +43,7 @@ First time visitors to the app are expected to be potential customers/clients of
 ### Returning visitor goals
 Returning visitors to the app will usually be businesses with the VinVentory system deployed. Therefore the returning visitor goals are to provide an easy to use and navigate vehicle management system. Data should be quickly accessible and easy to understand.
 
-### App usage goals
+### App use goals
 The goals for app usage are to provide a solution to a real-world problem through an effective online car management system. The app should provide an effective tool for small businesses with either a single or multiple sites, with the ability to track vehicle stock, mark cars as sold, see sales data, and request internal vehicle deliveries.
 
 ## Design
@@ -232,7 +255,7 @@ Finally, I would like to include a more detailed status for each car, displaying
 ## Credits
 
 ### Google Sheets API
-I learned the use of the Google Sheets API through the [Code Institute]() project "Love Sandwiches". I used the same API connection methods (creds, scope), expanding on the use of gspread to create the worksheet functions required for the VinVentory app. 
+I learned the use of the Google Sheets API through the [Code Institute](https://codeinstitute.net/) project "Love Sandwiches". I used the same API connection methods (creds, scope), expanding on the use of gspread to create the worksheet functions required for the VinVentory app. 
 
 ### Ascii Art
 To make the home screen more appealing, I wanted to incorporate the use of ascii art with the business details on the home screen.
