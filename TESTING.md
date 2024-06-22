@@ -46,6 +46,7 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Find car by ID | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
 | Find car by ID | Error message displayed | Entered numbers and letters | Error displayed - 'Car ID: # not found.' | Pass |
 | 'Return to main menu or quit' | Main menu displayed | Entered 'm' as input | Main menu displayed | Pass |
+| 'Return to main menu or quit' | Main menu displayed | Entered 'M' as input | Main menu displayed | Pass |
 | 'Return to main menu or quit' | Program is exited | Entered '0' as input | Program is exited | Pass |
 | 'Return to main menu or quit' | Error message displayed | Entered a word as input(hello) | Error displayed - 'Not a valid input. Please try again' | Pass |
 | 'Return to main menu or quit' | Error message displayed | Entered a '1' | Error displayed - 'Not a valid input. Please try again' | Pass |
@@ -58,6 +59,7 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Search stock by terms | Error message displayed | Entered no input | Error displayed - 'Error: No value entered' | Pass |
 | Search stock by terms | Error message displayed | Entered '8gb-ef' as input (numbers, letters and symbols) | Error displayed - 'No Matches found for: ['8gb-ef']' | Pass |
 | 'Return to main menu or quit' | Main menu displayed | Entered 'm' as input | Main menu displayed | Pass |
+| 'Return to main menu or quit' | Main menu displayed | Entered 'M' as input | Main menu displayed | Pass |
 | 'Return to main menu or quit' | Program is exited | Entered '0' as input | Program is exited | Pass |
 | 'Return to main menu or quit' | Error message displayed | Entered a word as input (hello) | Error displayed - 'Not a valid input. Please try again' | Pass |
 | 'Return to main menu or quit' | Error message displayed | Entered '1' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
@@ -72,22 +74,31 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | 'Menu' option | Error message displayed | Entered '5' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
 | 'Menu' option | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
 | Add car to stock |
-| Enter car 'make' (manufacturer) | Value entered, next input displayed | Entered 'citroen' as input | Value entered, next input displayed | Pass |
-| Enter car 'make' (manufacturer) | Value entered, next input displayed | Entered 'Ford' as input | Value entered, next input displayed | Pass |
-| Enter car 'make' (manufacturer) | Error message displayed | Entered '867' as input | Error displayed - 'Input must not contain numbers, or special characters.' | Pass |
-| Enter car 'model' | Value entered, next input displayed | Entered 'C1' as input | Value entered, next input displayed | Pass |
-| Enter car 'model' | Value entered, next input displayed | Entered 'Fiesta' as input | Value entered, next input displayed | Pass |
-| Enter car 'year' | Value entered, next input displayed | Entered '2018' as input | Value entered, next input displayed | Pass |
-| Enter car 'year' | Value entered, next input displayed | Entered '1988' as input | Value entered, next input displayed | Pass |
-| Enter car 'year' | Error message displayed | Entered '1909' as input | Error displayed - 'Error: Date is out of range.' | Pass |
-| Enter car 'year' | Error message displayed | Entered '2025' as input | Error displayed - 'Error: Date is out of range.' | Pass |
-| Enter car 'year' | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
-| Enter car 'colour' | Value entered, next input displayed | Entered 'red' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' | Value entered, next input displayed | Entered 'Silver' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' | Confirmation message displayed (*input* is not in our common colour list. Would you like to continue? (y/n)) | Entered 'hello' as input | Confirmation message displayed | Pass |
-| Enter car 'colour' | Confirm uncommon colour value input entered | Entered 'y' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' | Confirm uncommon colour value input entered | Entered 'Y' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' | Confirm uncommon colour value input cancelled | Entered 'n' as input | Value input cancelled, colour input re-displayed | Pass |
-| Enter car 'colour' | Confirm uncommon colour value input cancelled | Entered 'N' as input | Value input cancelled, colour input re-displayed | Pass |
-| Enter car 'colour' | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
-| Enter car 'colour' | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'make' (manufacturer) input | Value entered, next input displayed | Entered 'citroen' as input | Value entered, next input displayed | Pass |
+| Enter car 'make' (manufacturer) input | Value entered, next input displayed | Entered 'Ford' as input | Value entered, next input displayed | Pass |
+| Enter car 'make' (manufacturer) input | Error message displayed | Entered '867' as input | Error displayed - 'Input must not contain numbers, or special characters.' | Pass |
+| Enter car 'model' input | Value entered, next input displayed | Entered 'C1' as input | Value entered, next input displayed | Pass |
+| Enter car 'model' input | Value entered, next input displayed | Entered 'Fiesta' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' input | Value entered, next input displayed | Entered '2018' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' input | Value entered, next input displayed | Entered '1988' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' input | Error message displayed | Entered '1909' as input | Error displayed - 'Error: Date is out of range.' | Pass |
+| Enter car 'year' input | Error message displayed | Entered '2025' as input | Error displayed - 'Error: Date is out of range.' | Pass |
+| Enter car 'year' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'colour' input | Value entered, next input displayed | Entered 'red' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' input | Value entered, next input displayed | Entered 'Silver' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' input | Confirmation message displayed ('*input* is not in our common colour list. Would you like to continue? (y/n)') | Entered 'hello' as input | Confirmation message displayed | Pass |
+| Enter car 'colour' input | Confirm uncommon colour value input entered | Entered 'y' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' input | Confirm uncommon colour value input entered | Entered 'Y' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' input | Confirm uncommon colour value input cancelled | Entered 'n' as input | Value input cancelled, colour input re-displayed | Pass |
+| Enter car 'colour' input | Confirm uncommon colour value input cancelled | Entered 'N' as input | Value input cancelled, colour input re-displayed | Pass |
+| Enter car 'colour' input | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'colour' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Leeds' as input | Value entered, next input displayed | Pass |
+| Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Liverpool' as input | Value entered, next input displayed | Pass |
+| Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Manchester' as input | Value entered, next input displayed | Pass |
+| Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Preston' as input | Value entered, next input displayed | Pass |
+| Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Leeds' as input | Value entered, next input displayed | Pass |
+| Enter car 'status' (location) input | Error message displayed | Entered 'London' as input | Error displayed - 'Error: Location is invalid.' | Pass |
+| Enter car 'status' (location) input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Location is invalid.' | Pass |
+| Enter car 'status' (location) input | Error message displayed | Entered '1234' as input | Error displayed - 'Error: Location is invalid.' | Pass |
+| Enter car 'status' (location) input | Error message displayed | Entered 'Liverpol' (misspelling) as input | Error displayed - 'Error: Location is invalid.' | Pass |
