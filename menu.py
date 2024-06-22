@@ -36,7 +36,7 @@ def stock_menu():
                 display_sheet_table("stock", 7)
                 break
             case 2:
-                print("- Find By ID selected -\n")
+                print("- View Car Information selected -\n")
                 print("Retrieving vehicle information...\n")
                 find_car_by_id("stock")
                 break

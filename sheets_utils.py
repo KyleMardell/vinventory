@@ -219,7 +219,6 @@ def find_car_by_id(sheet_name):
 
     except Exception as e:
         print("Error: Cannot find car.")
-        print(f"Details: {e}\n")
 
     print("ID not found.")
     return False
@@ -340,7 +339,6 @@ def delete_car_from_sheet(sheet_name, car_id=None):
                           f"{sheet_name}.\n")
                 except Exception as e:
                     print("Error: Cannot delete car from sheet.")
-                    print(f"Details: {e}")
                 return
             elif answer == "n":
                 print("Cancelled\n")
