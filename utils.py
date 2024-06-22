@@ -111,7 +111,6 @@ def generate_sales_report(sheet_name):
     except Exception as e:
         # False return is handled when the function is called.
         print("Error: Missing Data")
-        print(f"Details: {e}\n")
         return False
 
 
@@ -161,7 +160,8 @@ def display_deliveries_table(delivery_status=[
     for data in sheet_data[1:]:
         for status in delivery_status:
             if status in data:
-                table.add_row([data[0], data[1], data[2], data[4], data[5], data[6], data[7]])
+                table.add_row([data[0], data[1], data[2],
+                               data[4], data[5], data[6], data[7]])
 
     print(table)
 

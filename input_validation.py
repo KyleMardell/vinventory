@@ -18,7 +18,6 @@ def get_integer_input(message):
                 print("Error: Must be a positive number.")
         except ValueError as e:
             print("Error: Not a valid number.")
-            print(f"Details: {e}\n")
 
 
 def get_string_input(message):

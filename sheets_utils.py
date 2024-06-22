@@ -70,7 +70,6 @@ class Car:
             return profit
         except ValueError as e:
             print("Error: Cannot convert to int.")
-            print(f"Details: {e}\n")
 
     def request_delivery(self):
         print(f"Creating delivery request for car ID: " +
@@ -118,7 +117,6 @@ def open_google_sheet():
         return SHEET
     except Exception as e:
         print("Error: Cannot connect to the Google Sheets API")
-        print(f"Details: {e}\n")
 
 
 def connect_to_sheet(sheet_name):
@@ -133,7 +131,6 @@ def connect_to_sheet(sheet_name):
         return current_sheet
     except Exception as e:
         print("Error, sheet not found:")
-        print(f"Details: {e}\n")
 
 
 def get_sheet_data(sheet_name):
@@ -148,7 +145,6 @@ def get_sheet_data(sheet_name):
         return sheet_data
     except Exception as e:
         print(f"Error, sheet not found.")
-        print(f"Details: {e}\n")
 
 
 def display_sheet_table(sheet_name, columns):
@@ -198,7 +194,6 @@ def display_sheet_table(sheet_name, columns):
             return True
         except Exception as e:
             print("Error: Cannot display table.")
-            print(f"Details: {e}\n")
             return False
 
 
@@ -241,7 +236,6 @@ def get_worksheet_names():
         return worksheet_names
     except Exception as e:
         print("Error: Cannot retrieve worksheet name data")
-        print(f"Details: {e}\n")
 
 
 def generate_unique_id():
@@ -268,7 +262,6 @@ def generate_unique_id():
 
     except Exception as e:
         print("Error: Cannot generate unique ID number.")
-        print(f"Details: {e}\n")
 
 
 def create_delivery_request(id, make, model, year, site_from, site_to):
@@ -289,7 +282,6 @@ def create_delivery_request(id, make, model, year, site_from, site_to):
         print(f"Expected delivery date (upon approval): {schedule_date}")
     except Exception as e:
         print("Error: could not add delivery to sheet.")
-        print(f"Details: {e}\n")
 
 
 def update_delivery_status_in_stock_sheet(id, status, delivery=False):
@@ -325,7 +317,6 @@ def add_car_to_sheet(car_as_list, sheet_name):
               f"{sheet_name} sheet.")
     except Exception as e:
         print("Error: Could not add vehicle to sheet.")
-        print(f"Details: {e}\n")
 
 
 def delete_car_from_sheet(sheet_name, car_id=None):
@@ -365,7 +356,6 @@ def delete_car_from_sheet(sheet_name, car_id=None):
                   f"{sheet_name}.\n")
         except Exception as e:
             print("Error: Cannot delete car from sheet.")
-            print(f"Details: {e}\n")
 
 
 def edit_car_in_stock():
@@ -468,7 +458,6 @@ def edit_car_in_stock():
                               "have been saved to the worksheet.\n")
                     except Exception as e:
                         print("Error, changes not saved.")
-                        print(f"Details: {e}\n")
                         continue
                     return
                 elif confirm == "n":
@@ -501,7 +490,6 @@ def create_new_sales_sheet(sheet_name):
         print(f"New sales sheet created named '{sheet_name}'")
     except Exception as e:
         print("Error: Sheet could not be created.")
-        print(f"Details: {e}\n")
 
 
 def sell_car(current_sales_sheet):
