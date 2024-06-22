@@ -44,7 +44,7 @@ def get_list_input(message):
     while True:
         user_input = input(message + "\n").lower()
         if user_input == "":
-            print("No value entered")
+            print("Error: No value entered")
             continue
         input_list = [word.strip() for word in user_input.split(",")]
         return input_list
@@ -125,12 +125,16 @@ def get_colour_input(message):
             return user_input.capitalize()
         else:
             print(f"{user_input}, is not in our common colour list.")
-            answer = input("Would you like to continue (y/n): " + "\n").lower()
-            if answer == "y":
-                return user_input.capitalize()
-            else:
-                print("Cancelled.")
-                continue
+            answer = input("Would you like to continue? (y/n): " + "\n").lower()
+            while True:
+                if answer == "y":
+                    return user_input.capitalize()
+                elif answer == "n":
+                    print("Cancelled.")
+                    break
+                else:
+                    print("Not a valid entry, please try again.")
+                    continue
 
 
 def get_location_input(message):

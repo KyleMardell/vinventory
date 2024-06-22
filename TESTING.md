@@ -23,21 +23,71 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Feature | Expected Outcome | Test Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
 | Home Menu |
-| Select 'Current Stock Info' menu option | Stock menu displayed | Enter '1' as input| Stock menu displayed | Pass |
-| Select 'Add/Edit/Sell Car' menu option | Add/Edit menu displayed | Enter '2' as input | Add/Edit menu displayed | Pass |
-| Select 'Sales Reports' menu option | Sales Reports menu displayed | Enter '3' as input | Sales Reports menu displayed | Pass |
-| Select 'Delivery Reports/Requests' menu option | Delivery menu displayed | Enter '4' as input | Delivery menu displayed | Pass |
-| Select 'Help' menu option | Help menu displayed | Enter '5' as input | Help menu displayed | Pass |
-| Select 'Exit Program' option | Program is exited | Enter '0' as input | Program is exited | Pass |
+| 'Current Stock Info' menu option | Stock menu displayed | Enter '1' as input| Stock menu displayed | Pass |
+| 'Add/Edit/Sell Car' menu option | Add/Edit menu displayed | Enter '2' as input | Add/Edit menu displayed | Pass |
+| 'Sales Reports' menu option | Sales Reports menu displayed | Enter '3' as input | Sales Reports menu displayed | Pass |
+| 'Delivery Reports/Requests' menu option | Delivery menu displayed | Enter '4' as input | Delivery menu displayed | Pass |
+| 'Help' menu option | Help menu displayed | Enter '5' as input | Help menu displayed | Pass |
+| 'Exit Program' option | Program is exited | Enter '0' as input | Program is exited | Pass |
+| 'Menu' option | Error message displayed | Entered '6' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Menu' option | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
 | Stock Menu |
-| Select 'View List of All Stock' option | Table of all stock is displayed | Enter '1' as input| All stock displayed | Pass |
-| Select 'View Car Information' option | View car info option displayed, user asked to enter ID number | Enter '2' as input | Option displayed, user asked to enter ID number | Pass |
-| Select 'Search Stock by Key Words' option | Search stock displayed, user asked to enter terms | Enter '3' as input | Search stock displayed, user asked to enter terms | Pass |
-| Select 'Return to Main Menu' option | Main menu displayed | Enter '0' as input | Main menu displayed | Pass |
+| 'View List of All Stock' option | Table of all stock is displayed | Enter '1' as input| All stock displayed | Pass |
+| 'View Car Information' option | View car info option displayed, user asked to enter ID number | Enter '2' as input | Option displayed, user asked to enter ID number | Pass |
+| 'Search Stock by Key Words' option | Search stock displayed, user asked to enter terms | Enter '3' as input | Search stock displayed, user asked to enter terms | Pass |
+| 'Return to Main Menu' option | Main menu displayed | Enter '0' as input | Main menu displayed | Pass |
+| 'Menu' option | Error message displayed | Entered '4' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Menu' option | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
 | View car information (ID required)|
-| Display car information | A table of car information displayed | Entered a valid ID number | Table of car information displayed | Pass |
-| Display car information | Error message displayed | Entered an invalid ID number (from a sold car) | Error displayed - 'Car ID: # not found.' | Pass |
-| Display car information | Error message displayed | Entered a negative number | Error displayed - 'Error: Must be a positive number' | Pass |
-| Display car information | Error message displayed | Entered a word | Error displayed - 'Error: Not a valid number.' | Pass |
-| Display car information | Error message displayed | Entered numbers and letters | Error displayed - 'Car ID: # not found.' | Pass |
+| Find car by ID | A table of car information displayed | Entered a valid ID number | Table of car information displayed | Pass |
+| Find car by ID | Error message displayed | Entered an invalid ID number (from a sold car) | Error displayed - 'Car ID: # not found.' | Pass |
+| Find car by ID | Error message displayed | Entered a negative number | Error displayed - 'Error: Must be a positive number' | Pass |
+| Find car by ID | Error message displayed | Entered a word | Error displayed - 'Error: Not a valid number.' | Pass |
+| Find car by ID | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Find car by ID | Error message displayed | Entered numbers and letters | Error displayed - 'Car ID: # not found.' | Pass |
+| 'Return to main menu or quit' | Main menu displayed | Entered 'm' as input | Main menu displayed | Pass |
+| 'Return to main menu or quit' | Program is exited | Entered '0' as input | Program is exited | Pass |
+| 'Return to main menu or quit' | Error message displayed | Entered a word as input(hello) | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Return to main menu or quit' | Error message displayed | Entered a '1' | Error displayed - 'Not a valid input. Please try again' | Pass |
 | Search Stock (ID required) |
+| Search stock by terms | Table of cars displayed | Entered 'ReD' as input | Table of cars with colour 'red' displayed | Pass |
+| Search stock by terms | Table of cars displayed | Entered '2017' as input | Table of cars with year '2017' displayed | Pass |
+| Search stock by terms | Table of cars displayed | Entered 'red, Blue' as input | Table of cars with colour 'red' or 'blue' displayed | Pass |
+| Search stock by terms | Table of cars displayed | Entered 'Ford, volvo' as input | Table of 'Volvo' and 'Ford displayed | Pass |
+| Search stock by terms | Error message displayed | Entered 'red blue' as input | Error displayed - 'No Matches found for: ['red blue']' | Pass |
+| Search stock by terms | Error message displayed | Entered no input | Error displayed - 'Error: No value entered' | Pass |
+| Search stock by terms | Error message displayed | Entered '8gb-ef' as input (numbers, letters and symbols) | Error displayed - 'No Matches found for: ['8gb-ef']' | Pass |
+| 'Return to main menu or quit' | Main menu displayed | Entered 'm' as input | Main menu displayed | Pass |
+| 'Return to main menu or quit' | Program is exited | Entered '0' as input | Program is exited | Pass |
+| 'Return to main menu or quit' | Error message displayed | Entered a word as input (hello) | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Return to main menu or quit' | Error message displayed | Entered '1' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Return to main menu or quit' | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
+| Add/Edit Menu |
+| 'Add a new car to the stock sheet' menu option | Add car option displayed, user asked for input | Entered '1' as input | Add car option and input message displayed | Pass |
+| 'Edit a car currently in stock' menu option | Edit car option displayed, user asked for car ID input | Entered '2' as input | Edit car option and ID input displayed | Pass |
+| 'Mark a car as sold' menu option | Sell car option displayed, user asked for car ID input | Entered '3' as input | Sell car option and ID input displayed | Pass |
+| 'Create delivery request' menu option | Delivery request option displayed, user asked for car ID input | Entered '4' as input | Delivery request option and ID input displayed | Pass |
+| 'Delete a car from the stock sheet' menu option | Delete car option displayed, user asked for car ID input | Entered '5' as input | Delete car option and ID input displayed | Pass |
+| 'Return to Main Menu' option | Main menu displayed | Entered '0' as input | Main menu displayed | Pass |
+| 'Menu' option | Error message displayed | Entered '5' as input | Error displayed - 'Not a valid input. Please try again' | Pass |
+| 'Menu' option | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
+| Add car to stock |
+| Enter car 'make' (manufacturer) | Value entered, next input displayed | Entered 'citroen' as input | Value entered, next input displayed | Pass |
+| Enter car 'make' (manufacturer) | Value entered, next input displayed | Entered 'Ford' as input | Value entered, next input displayed | Pass |
+| Enter car 'make' (manufacturer) | Error message displayed | Entered '867' as input | Error displayed - 'Input must not contain numbers, or special characters.' | Pass |
+| Enter car 'model' | Value entered, next input displayed | Entered 'C1' as input | Value entered, next input displayed | Pass |
+| Enter car 'model' | Value entered, next input displayed | Entered 'Fiesta' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' | Value entered, next input displayed | Entered '2018' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' | Value entered, next input displayed | Entered '1988' as input | Value entered, next input displayed | Pass |
+| Enter car 'year' | Error message displayed | Entered '1909' as input | Error displayed - 'Error: Date is out of range.' | Pass |
+| Enter car 'year' | Error message displayed | Entered '2025' as input | Error displayed - 'Error: Date is out of range.' | Pass |
+| Enter car 'year' | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'colour' | Value entered, next input displayed | Entered 'red' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' | Value entered, next input displayed | Entered 'Silver' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' | Confirmation message displayed (*input* is not in our common colour list. Would you like to continue? (y/n)) | Entered 'hello' as input | Confirmation message displayed | Pass |
+| Enter car 'colour' | Confirm uncommon colour value input entered | Entered 'y' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' | Confirm uncommon colour value input entered | Entered 'Y' as input | Value entered, next input displayed | Pass |
+| Enter car 'colour' | Confirm uncommon colour value input cancelled | Entered 'n' as input | Value input cancelled, colour input re-displayed | Pass |
+| Enter car 'colour' | Confirm uncommon colour value input cancelled | Entered 'N' as input | Value input cancelled, colour input re-displayed | Pass |
+| Enter car 'colour' | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'colour' | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |

@@ -68,7 +68,7 @@ def edit_menu():
     print("1 - Add a new car to the stock sheet")
     print("2 - Edit a car currently in stock (Car ID Required)")
     print("3 - Mark a car as sold (Car ID Required)")
-    print("4 - Create Delivery Request (Car ID Required)")
+    print("4 - Create delivery request (Car ID Required)")
     print("5 - Delete a car from the stock sheet (Car ID Required)")
     print("0 - Return to Main Menu")
 
