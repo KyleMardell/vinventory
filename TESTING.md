@@ -77,8 +77,10 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Enter car 'make' (manufacturer) input | Value entered, next input displayed | Entered 'citroen' as input | Value entered, next input displayed | Pass |
 | Enter car 'make' (manufacturer) input | Value entered, next input displayed | Entered 'Ford' as input | Value entered, next input displayed | Pass |
 | Enter car 'make' (manufacturer) input | Error message displayed | Entered '867' as input | Error displayed - 'Input must not contain numbers, or special characters.' | Pass |
+| Enter car 'make' (manufacturer) input | Error message displayed | Entered no input | Error displayed - 'Input must not contain numbers, or special characters.' | Pass |
 | Enter car 'model' input | Value entered, next input displayed | Entered 'C1' as input | Value entered, next input displayed | Pass |
 | Enter car 'model' input | Value entered, next input displayed | Entered 'Fiesta' as input | Value entered, next input displayed | Pass |
+| Enter car 'model' | Error message displayed | Entered no input | Error displayed - 'Error: No value entered.' | Pass |
 | Enter car 'year' input | Value entered, next input displayed | Entered '2018' as input | Value entered, next input displayed | Pass |
 | Enter car 'year' input | Value entered, next input displayed | Entered '1988' as input | Value entered, next input displayed | Pass |
 | Enter car 'year' input | Error message displayed | Entered '1909' as input | Error displayed - 'Error: Date is out of range.' | Pass |
@@ -102,3 +104,6 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Enter car 'status' (location) input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Location is invalid.' | Pass |
 | Enter car 'status' (location) input | Error message displayed | Entered '1234' as input | Error displayed - 'Error: Location is invalid.' | Pass |
 | Enter car 'status' (location) input | Error message displayed | Entered 'Liverpol' (misspelling) as input | Error displayed - 'Error: Location is invalid.' | Pass |
+| Enter car 'cost' input | Value entered, next input displayed | Entered '10000' as input | Value entered, next input displayed | Pass |
+| Enter car 'cost' input | Value entered, next input displayed | Entered '50' as input | Value entered, next input displayed | Pass |
+| Enter car 'cost' input | Error message displayed | Entered '0' as input | Error displayed:  | Pass |

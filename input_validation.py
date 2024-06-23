@@ -163,14 +163,18 @@ def get_price_input(message, cost, repairs):
         if user_input > (cost + repairs) * 1.2:
             return user_input
         elif cost + repairs <= user_input <= (cost + repairs) * 1.2:
-            answer = input(f"The price of £{user_input} is less than " +
-                           "20% calculated profit. " +
-                           "Is this correct? (y/n): \n").lower()
-            if answer == "y":
-                return user_input
-            else:
-                print("Cancelled.")
-                continue
+            while True:
+                answer = input(f"The price of £{user_input} is less than " +
+                               "20% calculated profit. " +
+                               "Is this correct? (y/n): \n").lower()
+                if answer == "y":
+                    return user_input
+                elif answer == "n":
+                    print("Cancelled.")
+                    break
+                else:
+                    print("Not a valid entry, please try again.")
+                    continue
         else:
             print("Error: Price must be larger than " +
                   "total cost including repairs.")
