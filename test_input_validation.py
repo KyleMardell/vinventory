@@ -1,6 +1,7 @@
 import pytest
 from input_validation import get_integer_input, get_integer_input_mock
 from input_validation import get_string_input, get_list_input
+from input_validation import get_site_input
 
 
 def test_get_integer_input(monkeypatch):
@@ -41,6 +42,31 @@ def test_get_list_input(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "hello, world")
     # check the expected outcome
     assert get_list_input("message") == ["hello", "world"]
+
+
+def test_get_site_input_leeds(monkeypatch):
+    """
+    Test get_site_input function.
+    """
+    # set the input attribute to "leeds"
+    monkeypatch.setattr('builtins.input', lambda _: "leeds")
+    # input "liverpool" as current site to function
+    result = get_site_input("liverpool")
+    # check expected result
+    assert result == "Leeds"
+
+
+def test_get_site_input_liverpool(monkeypatch):
+    """
+    Test get_site_input function.
+    """
+    # set the input attribute to "liverpool"
+    monkeypatch.setattr('builtins.input', lambda _: "liverpool")
+    # input "york" as current site to function
+    result = get_site_input("york")
+    # check expected result
+    assert result == "Liverpool"
+
 
 # Mock function tests
 
