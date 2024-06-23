@@ -295,6 +295,8 @@ Finally, I would like to include a more detailed status for each car, displaying
 
 ## Testing
 
+Testing can be found at, [Testing](/TESTING.md)
+
 ## Credits
 
 ### Google Sheets API

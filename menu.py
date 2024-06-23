@@ -151,7 +151,7 @@ def sales_menu():
     print("Note, earliest sales data sheet is 2/2024 (m/yyyy).\n")
     print("Choose one of the following options:")
     print("1 - Current Month: Sales List")
-    print("2 - Current Month: sales Report")
+    print("2 - Current Month: Sales Report")
     print("3 - Sales History: Sales Lists")
     print("4 - Sales History: Sales Reports")
     print("0 - Return to Main Menu")
