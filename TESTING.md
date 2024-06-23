@@ -2,7 +2,7 @@
 
 Testing in development was done using the terminal in the IDE, Visual Studio Code. When developing the VinVentory app, I referenced the flowcharts I had created, and used the 'print' function to track the flow of data throughout each process. I would manually test each function or menu option with correct and incorrect inputs multiple times once I though the function to be complete. Once I was confident a function was operating correctly, I removed the print statements used to track variables, inputs and outputs.
 
-The site was deployed to Heroku after the main bulk of development was complete and due to the Heroku terminal width limits i had to remove some information, to better display tables in screen. Once I had made the necessary changes for Heroku deployment, I tested all functions with correct, incorrect and edge case values.
+The site was deployed to Heroku after the main bulk of development was complete and due to the Heroku terminal width limits I had to remove some information, to better display tables in screen. Once I had made the necessary changes for Heroku deployment, I tested all functions with correct, incorrect and edge case values.
 
 ![VinVentory Responsive Image](/media/images/screenshots/responsive.png)
 
@@ -13,15 +13,29 @@ The site was deployed to Heroku after the main bulk of development was complete 
 
 ## Contents
 
+- [Validator](#validator)
+- [Unit Testing](#unit-testing)
+- [Manual Testing](#manual-testing)
+
 - - -
 
 ## Validator
 
-In order to validate the python code to pep8 standards, I used the Code Institute Python Linter. I ran each module through the CI Python Linter and made the necessary changes to produce no errors or warnings. These were usually trailing whitespace or lines too long, which were both easily rectifiable by removing trailing spaces and splitting long lines into multiple shorter lines.
+In order to validate the python code to pep8 standards, I used the Code Institute Python Linter. I ran each module through the CI Python Linter and made the necessary changes to produce no errors or warnings. These were usually trailing whitespace or lines too long, which were both easily rectifiable by removing trailing spaces and splitting long lines into multiple shorter lines. Once all changes had been made, all modules pass through the CI Python Linter with no errors.
 
 - [Code Institute Python Linter](https://pep8ci.herokuapp.com/#) 
 
-## Unit Tests
+## Unit Testing
+
+Unit tests can be found in the file [test_input_validation.py](/test_input_validation.py)
+
+In order to further test my functions, I wanted to create my first unit test in python using pytest, as I had not done unit testing before. I had researched how to create unit tests using pytest and some of the IO or sys modules and made some simple tests to check for correct input. When trying to test for incorrect input, i came across and issue linked to the while loops when checking input values. 
+
+The input validation functions asks the user for input until a correct input is received, and each time an incorrect input is received an error message is printed to the screen. Once a valid input is entered, the function returns the value. This is the only return of each function, and although when using the app, this stops the user from entering an incorrect value, when testing an error is never returned and the function does not exit., causing it to be stuck in an endless loop.
+
+With this in mind, I created a mock version of my get_integer_input function, that returns the error messages instead of printing them. This meant I could create some tests for cases that returned error messages, using the test and mock function as a learning tool to better understand unit testing.
+
+I created some unit tests for a handful of the input validation functions as well as the mock function tests which helped me to gain a better understanding of unit testing using pytest. I feel comfortable that through extensive manual testing, each function works as intended, although in the future, I will keep unit tests in mind when creating functions in python or similar.
 
 ## Testing GIFs
 
