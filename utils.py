@@ -176,7 +176,7 @@ def delivery_request():
         if answer == "n":
             car_to_deliver = find_car_by_id("stock")
 
-        answer = input("Would you like to continue? (y/n): \n")
+        answer = input("Would you like to continue? (y/n): \n").lower()
         if answer == "y":
             car_to_deliver.request_delivery()
             return

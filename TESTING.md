@@ -23,6 +23,32 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 
 ## Unit Tests
 
+## Testing GIFs
+
+I have included some short GIFs of my input validation testing. As many functions are re-used I did not include GIFs for all functions, but tried to include at least one occurrence of each bit of validation.
+
+- Find ID
+    - [GIF](/media/gifs/tests/find-id-valid.gif)
+- Search stock
+    - [GIF](/media/gifs/tests/search-stock-valid.gif)
+- Add car
+    - [GIF 1](/media/gifs/tests/new-car-valid1.gif)
+    - [GIF 2](/media/gifs/tests/new-car-valid2.gif)
+    - [GIF 3](/media/gifs/tests/new-car-valid3.gif)
+    - [GIF 4](/media/gifs/tests/new-car-valid4.gif)
+- Edit car
+    - [GIF 1](/media/gifs/tests/edit-valid1.gif)
+    - [GIF 2](/media/gifs/tests/edit-valid2.gif)
+    - [GIF 3](/media/gifs/tests/edit-valid3.gif)
+    - [GIF 4](/media/gifs/tests/edit-valid4.gif)
+    - [GIF 5](/media/gifs/tests/edit-valid5.gif)
+- Sell car
+    - [GIF](/media/gifs/tests/sell-car-valid1.gif)
+- Sales report
+    - [GIF](/media/gifs/tests/sales-report-valid.gif)
+- Delivery request
+    - [GIF](/media/gifs/tests/delivery-request-valid.gif)
+
 ## Manual Testing
 
 | Feature | Expected Outcome | Test Performed | Result | Pass/Fail |
@@ -302,4 +328,4 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | 'Menu' option | Error message displayed | Entered '-1' as input | Error displayed - 'Error: Must be a positive number' | Pass |
 | 'Menu' option | Error message displayed | Entered no input | Error displayed - 'Not a valid input. Please try again' | Pass |
 | Help Menu |
-| Help is displayed as a single text file that is separated by section and can be scrolled through to find the help required. A return to menu option is displayed and testing is the same as above. |
+| Help is displayed as a single text file that is separated by section and can be scrolled through to find the help required. A 'return to menu or quit' option is displayed and testing is the same as above. |
