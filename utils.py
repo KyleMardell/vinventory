@@ -204,8 +204,14 @@ def get_new_car_details():
                                     "(e.g. Ford, Volvo): ")
             # Vehicles models can contain letters,
             # numbers and special characters. No validation required.
-            model = input("Enter the vehicle's model " +
-                          "(e.g. focus, C40): \n").capitalize()
+            while True:
+                model = input("Enter the vehicle's model " +
+                              "(e.g. focus, C40): \n").capitalize()
+                if model == "":
+                    print("Error: No value entered")
+                    continue
+                else:
+                    break
             year = get_year_input("Enter the vehicle's year of production " +
                                   "(e.g. 2017, 1999): ")
             colour = get_colour_input("Enter the vehicle's colour " +

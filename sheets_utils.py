@@ -385,7 +385,14 @@ def edit_car_in_stock():
                     continue
                 case "model":
                     message = "Enter new model details: \n"
-                    car_to_edit.model = input(message).capitalize()
+                    while True:
+                        model = input(message).capitalize()
+                        if model == "":
+                            print("Error: No value entered")
+                            continue
+                        else:
+                            break
+                    car_to_edit.model = model
                     print("Confirmed.\n")
                     continue
                 case "year":

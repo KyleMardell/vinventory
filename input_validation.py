@@ -125,7 +125,7 @@ def get_colour_input(message):
             return user_input.capitalize()
         else:
             print(f"{user_input}, is not in our common colour list.")
-            answer = input("Would you like to continue? (y/n): " + "\n").lower()
+            answer = input("Do you want to continue? (y/n): " + "\n").lower()
             while True:
                 if answer == "y":
                     return user_input.capitalize()
