@@ -305,3 +305,9 @@ I learned the use of the Google Sheets API through the [Code Institute](https://
 ### Ascii Art
 To make the home screen more appealing, I wanted to incorporate the use of ascii art with the business details on the home screen.
 I found an ascii art image of a car that I though fit the theme of the app from [ascii.co.uk/art/car](https://ascii.co.uk/art/car)
+
+### Python Unit testing
+In order to learn about python unit testing, I followed a YouTube course on pytest by [Free Code Camp](https://www.youtube.com/watch?v=cHYq1MRoyI0&t=1787s) and referenced the [pytest documentation](https://docs.pytest.org/en/8.2.x/getting-started.html).
+
+### Sheet data
+Once i had created the headings or columns for my worksheets in Google sheets and committed to the designs, I used [Chat-GPT](https://chatgpt.com/) to generate the data for each car. I then copied the created table data into the stock worksheet. I then distributed that data over sales sheets both manually and when testing during development. I used a prompt such as "generate a table of random car data with 30 cars. There should be columns for the data id, make, model, year, colour, cost, repair cost and price".
