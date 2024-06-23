@@ -178,3 +178,25 @@ def get_price_input(message, cost, repairs):
         else:
             print("Error: Price must be larger than " +
                   "total cost including repairs.")
+
+# Mock function for learning unit testing
+
+
+def get_integer_input_mock(message):
+    """
+    Tries to convert user input to int
+    Displays error message upon incorrect input
+    Returns input as int if valid
+    """
+    while True:
+        user_input = input(message + "\n")
+        try:
+            number = int(user_input)
+            if number >= 0:
+                return number
+            else:
+                # return message instead of print as above
+                return "Error: Must be a positive number."
+        except ValueError as e:
+            # return message instead of print as above
+            return "Error: Not a valid number."
