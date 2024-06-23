@@ -86,15 +86,17 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Enter car 'year' input | Error message displayed | Entered '1909' as input | Error displayed - 'Error: Date is out of range.' | Pass |
 | Enter car 'year' input | Error message displayed | Entered '2025' as input | Error displayed - 'Error: Date is out of range.' | Pass |
 | Enter car 'year' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'year' | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
 | Enter car 'colour' input | Value entered, next input displayed | Entered 'red' as input | Value entered, next input displayed | Pass |
 | Enter car 'colour' input | Value entered, next input displayed | Entered 'Silver' as input | Value entered, next input displayed | Pass |
 | Enter car 'colour' input | Confirmation message displayed ('*input* is not in our common colour list. Would you like to continue? (y/n)') | Entered 'hello' as input | Confirmation message displayed | Pass |
-| Enter car 'colour' input | Confirm uncommon colour value input entered | Entered 'y' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' input | Confirm uncommon colour value input entered | Entered 'Y' as input | Value entered, next input displayed | Pass |
-| Enter car 'colour' input | Confirm uncommon colour value input cancelled | Entered 'n' as input | Value input cancelled, colour input re-displayed | Pass |
-| Enter car 'colour' input | Confirm uncommon colour value input cancelled | Entered 'N' as input | Value input cancelled, colour input re-displayed | Pass |
-| Enter car 'colour' input | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
-| Enter car 'colour' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'colour' input | Confirmation message displayed ('*input* is not in our common colour list. Would you like to continue? (y/n)') | Entered no input | Confirmation message displayed | Pass |
+| Confirm uncommon colour value | input confirmed | Entered 'y' as input | Value entered, next input displayed | Pass |
+| Confirm uncommon colour value | input confirmed | Entered 'Y' as input | Value entered, next input displayed | Pass |
+| Confirm uncommon colour value | input cancelled | Entered 'n' as input | Value input cancelled, colour input re-displayed | Pass |
+| Confirm uncommon colour value | input cancelled | Entered 'N' as input | Value input cancelled, colour input re-displayed | Pass |
+| Confirm uncommon colour value | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Confirm uncommon colour value | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
 | Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Leeds' as input | Value entered, next input displayed | Pass |
 | Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Liverpool' as input | Value entered, next input displayed | Pass |
 | Enter car 'status' (location) input | Value entered, next input displayed | Entered 'Manchester' as input | Value entered, next input displayed | Pass |
@@ -104,6 +106,36 @@ In order to validate the python code to pep8 standards, I used the Code Institut
 | Enter car 'status' (location) input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Location is invalid.' | Pass |
 | Enter car 'status' (location) input | Error message displayed | Entered '1234' as input | Error displayed - 'Error: Location is invalid.' | Pass |
 | Enter car 'status' (location) input | Error message displayed | Entered 'Liverpol' (misspelling) as input | Error displayed - 'Error: Location is invalid.' | Pass |
+| Enter car 'status' (location) input | Error message displayed | Entered no input | Error displayed - 'Error: Location is invalid.' | Pass |
 | Enter car 'cost' input | Value entered, next input displayed | Entered '10000' as input | Value entered, next input displayed | Pass |
 | Enter car 'cost' input | Value entered, next input displayed | Entered '50' as input | Value entered, next input displayed | Pass |
-| Enter car 'cost' input | Error message displayed | Entered '0' as input | Error displayed:  | Pass |
+| Enter car 'cost' input | Value entered, next input displayed | Entered '0' as input | Value entered, next input displayed | Pass |
+| Enter car 'cost' input | Error message displayed | Entered '-5' as input | Error displayed - 'Error: Must be a positive number.' | Pass |
+| Enter car 'cost' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'cost' input | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'repairs' input | Value entered, next input displayed | Entered '10000' as input | Value entered, next input displayed | Pass |
+| Enter car 'repairs' input | Value entered, next input displayed | Entered '50' as input | Value entered, next input displayed | Pass |
+| Enter car 'repairs' input | Value entered, next input displayed | Entered '0' as input | Value entered, next input displayed | Pass |
+| Enter car 'repairs' input | Error message displayed | Entered '-5' as input | Error displayed - 'Error: Must be a positive number.' | Pass |
+| Enter car 'repairs' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'repairs' input | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'price' input | Value entered, next input displayed | Entered '12500' as input | Value entered, next input displayed | Pass |
+| Enter car 'price' input | Value entered, next input displayed | Entered '50' as input | Value entered, next input displayed | Pass |
+| Enter car 'price' input | Value entered, next input displayed | Entered '0' as input | Value entered, next input displayed | Pass |
+| Enter car 'price' input | Confirmation message displayed ('The price of *price* is less than 20% calculated profit. Is this correct?') | Entered price value (cost + repairs + 10) as input | Confirmation message displayed | Pass |
+| Confirm price value | Input Confirmed | Entered 'y' as input | Value entered, next input displayed | Pass |
+| Confirm price value | Input Confirmed | Entered 'Y' as input | Value entered, next input displayed | Pass |
+| Confirm price value | Input cancelled | Entered 'n' as input | Value input cancelled, price input re-displayed | Pass |
+| Confirm price value | Input cancelled | Entered 'N' as input | Value input cancelled, price input re-displayed | Pass |
+| Confirm price value | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Confirm price value | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Enter car 'price' input | Error message displayed | Entered price value (<= cost + repairs) as input | Error displayed - 'Error: Price must be larger than total cost including repairs.' | Pass |
+| Enter car 'price' input | Error message displayed | Entered '-5' as input | Error displayed - 'Error: Must be a positive number.' | Pass |
+| Enter car 'price' input | Error message displayed | Entered 'hello' as input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Enter car 'price' input | Error message displayed | Entered no input | Error displayed - 'Error: Not a valid number.' | Pass |
+| Confirm new car details | Input Confirmed, save sar to stock sheet | Entered 'y' as input | Car saved to stock sheet | Pass |
+| Confirm new car details | Input Confirmed, save sar to stock sheet | Entered 'Y' as input | Car saved to stock sheet | Pass |
+| Confirm new car details | Input cancelled | Entered 'n' as input | Input cancelled, enter make input displayed | Pass |
+| Confirm new car details | Input cancelled | Entered 'N' as input | Input cancelled, enter make input displayed | Pass |
+| Confirm new car details | Error message displayed | Entered '0' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
+| Confirm new car details | Error message displayed | Entered 'hello' as input | Error displayed - 'Not a valid entry, please try again.' | Pass |
