@@ -41,10 +41,10 @@ VinVentory is a used car management system. The VinVentory app is aimed at small
 First time visitors to the app are expected to be potential customers/clients of the VinVentory app. With this in mind, first time visitor goals are to provide a look at our solution to an existing problem, through a centralized vehicle stock, sales and delivery management system. First time visitors should be impressed by the usability and features of the VinVentory app, to help better manage vehicle stock and sales data.
 
 ### Returning visitor goals
-Returning visitors to the app will usually be businesses with the VinVentory system deployed. Therefore the returning visitor goals are to provide an easy to use and navigate vehicle management system. Data should be quickly accessible and easy to understand.
+Returning visitors to the app will usually be businesses with the VinVentory system deployed. Therefore the returning visitor goals are to provide an easy to use and navigate vehicle management system. Data should be quickly accessible and easy to understand, and the app should provide all the functionality a business requires.
 
 ### App use goals
-The goals for app usage are to provide a solution to a real-world problem through an effective online car management system. The app should provide an effective tool for small businesses with either a single or multiple sites, with the ability to track vehicle stock, mark cars as sold, see sales data, and request internal vehicle deliveries.
+The goals for app usage are to provide a solution to a real-world problem through an effective online car management system. The app should provide an effective tool for small businesses with either a single or multiple sites, with the ability to track vehicle stock, mark cars as sold, see sales data, and request internal vehicle deliveries. The app should be simple to use and a helpful tool to any small used car business.
 
 ## Design
 
@@ -272,7 +272,17 @@ I would also like to add colour to the app's text in all areas. The use of colou
 For sales reports, I would like to expand on the information shown by adding things such as location-specific data, giving the user the ability to see the performance of each site.
 Finally, I would like to include a more detailed status for each car, displaying delivery information or deposit reservations.
 
+Below I have included some screenshots of the tables before I removed additional data for Heroku deployment.
+    - [Add car](/media/images/screenshots/features/add-car-screen1.png)
+    - [All Stock](/media/images/screenshots/features/all-stock-screen.png)
+    - [Find ID](/media/images/screenshots/features/find-id-screen.png)
+    - [Sales Report](/media/images/screenshots/features/search-sales-table2.png)
+    - [Delivery Report](/media/images/screenshots/features/requested-delivery-report.png)
+
 ## Deployment
+
+When deploying locally there are multiple steps you need to take to ensure all elements are working correctly. To summarize, you must first clone the repo, create a Google Sheet and connect via the API, and finally create and deploy the app to Heroku. 
+Each step is detailed below.
 
 ### Fork Repository
 
@@ -292,6 +302,78 @@ Finally, I would like to include a more detailed status for each car, displaying
     - Open the terminal of your code editor or IDE
     - Change the current working directory to the location you want to use for the cloned directory
     - Type "git clone" into the terminal followed by the copied link and press enter.
+
+### Google Sheets
+
+- To set up the Google worksheet
+    - Login or Sign up to your [Google](https://google.com) account
+    - Navigate to Google Sheets
+    - Click on the "Blank Spreadsheet" option to create a new spreadsheet
+    - Name the spreadsheet (Note the name)
+    - Enter headings as found in the [worksheets section](#worksheet--database)
+    - Enter car data
+- To activate the Google Sheets API
+    - Navigate to Google Cloud
+    - Click on the project drop down and create new project
+    - Click on the menu dropdown and select "APIs & Services"
+    - Search for "Google Sheets API" and enable to activate
+    - Search for "Google Drive API" and enable to activate
+    - Navigate to "Google Drive API" overview page
+    - Click "Create Credentials"
+    - Select "Google Drive API" for "Which API are you using?"
+    - Select "Application Data" for "Which sata will you be accessing?"
+    - Select "No, I'm not using them" for "... App engine or Cloud Functions?"
+    - Click "Done"
+    - Enter a "service account name" (I used "vinventory")
+    - Click the "Grant this service account access to project" dropdown
+    - Select "Editor" as the role
+    - Click "Done"
+    - Click on the account (vinventory) under "Service Accounts"
+    - Navigate to the "keys" tab
+    - Click the "Add key" dropdown, select "Create new key"
+    - Select JSON, and click "Create"
+    - API Credentials should be saved to "downloads" folder
+    - Rename saved file to "creds.json"
+- Link API to worksheet
+    - Open "creds.json" file (add to project if deploying locally, ensure "creds.json" is added to gitignore file so not to add to repo)
+    - Copy the email address from key "client_email"
+    - Navigate to Google Sheets spreadsheet (vinventory)
+    - Click the "Share" button
+    - Paste in the "client_email" address
+    - Select "Editor" from the dropdown option, un-tick "Notify people"
+    - Click "Share"
+
+## Heroku
+
+- Deploy to Heroku
+    - Login or sign up with your [Heroku[(https://heroku.com)] account
+    - Navigate to the dashboard
+    - Click "New" at the top right of the screen, select "Create new app"
+    - Enter a unique name (I used vinventory)
+    - Choose a region
+    - Click "Create app"
+    - Navigate to the "Settings" tab
+    - Navigate to "Buildpacks"
+    - Click "Add buildpack"
+    - Add "Python" and "Node.js" as buildpacks
+    - Click "Reveal Config Vars"
+    - Add a new config var with key "PORT" and value "8000"
+    - Add a new config var with key "CREDS" and add the contents of your creds.json file
+    - Navigate to the "Deploy" tab
+    - Select GitHub as deployment method
+    - Authenticate with GitHub account
+    - Search for repo name (vinventory), click "Connect"
+    - Optionally enable "Automatic deploys"
+    - Click "Deploy branch" under "Manual Deploy" ensuring main branch is selected
+
+## Python Packages
+
+In order to run the VinVentory app locally, you will need to make sure python is installed and install the following packages. This can usually be done using either "pip install 'package_name'" or "pip3 install 'package_name'" depending on which operating system you are using.
+
+- Packages
+    - "gspread google-auth"
+    - "prettytable"
+    - "pytest" (if running the test_input_validation.py file)
 
 ## Testing
 

@@ -72,6 +72,10 @@ class Car:
             print("Error: Cannot convert to int.")
 
     def request_delivery(self):
+        """
+        Adds a delivery request to the delivery worksheet,
+        updates the stock worksheet car status.
+        """
         print(f"Creating delivery request for car ID: " +
               f"{self.id} ({self.colour} {self.make} {self.model})")
         print(f"Current site: {self.status}")
