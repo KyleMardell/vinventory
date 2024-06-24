@@ -30,6 +30,9 @@ VinVentory is a used car management system. The VinVentory app is aimed at small
         - [Help Menu](#help-menu)
     - [Future Features](#future-features)
 - [Deployment](#deployment)
+    - [GitHub](#fork-repository)
+    - [Google Sheets](#google-sheets)
+    - [Heroku](#heroku)
 - [Testing](#testing)
 - [Credits](#credits)
 

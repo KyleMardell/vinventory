@@ -343,3 +343,11 @@ I have included some short GIFs of my input validation testing. As many function
 | 'Menu' option | Error message displayed | Entered no input | Error displayed - 'Not a valid input. Please try again' | Pass |
 | Help Menu |
 | Help is displayed as a single text file that is separated by section and can be scrolled through to find the help required. A 'return to menu or quit' option is displayed and testing is the same as above. |
+
+## Bugs
+
+During development some minor bug occurred, but were relatively easy to rectify, especially as I would thoroughly test each bit of functionality while building. I also feel as though having a notepad to write functions in pseudo code helped to reduce the amount of bug I needed to deal with. 
+
+I did not record all bugs during development but had some issues such as, incorrect values saving to the Google sheet, caused by forgetting to capitalize strings, or change functions to match the sheets once the sheet was updated. I also had issues with string variable checks, caused by forgetting to add .lower() to input functions.
+
+The main bug I encountered was when trying to create test cases for my input validation functions. This bug is caused by printing error messages for incorrect input and using a while loop to ask for input until a valid value is received. The test was getting stuck in the while loop when testing for invalid input, although this is not part of the VinVentory app, and did not affect its performance. In this case, if I used a test driven development mentality, i would have coded each function differently, but in this case each function operates as it should.
