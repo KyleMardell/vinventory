@@ -79,6 +79,8 @@ There are multiple sales reports and tables that the user can view through each 
 
 Similarly, delivery reports can be viewed in table format, with the option to filter deliveries by status.
 
+As I wanted to display tables of information on screen to make data easier to read, i found the PrettyTable module. This module meant I could easily create tables to display in the terminal, for things such as stock car data, sales data and delivery data. I found PrettyTable to be a very helpful tool in displaying easy to read car information.
+
 ### Menus
 The menu system in the VinVentory app uses a simple number system, with the user inputting a number to navigate through the menus. There is a home menu welcoming the user to the app and displaying the sub-menu options. The sub-menus are where the functionality of the app is contained. 
 
